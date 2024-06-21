@@ -127,8 +127,12 @@ function displayServantsPerClass(processedData, sheetName) {
     document.getElementById('classTitle').innerHTML = `${sheetName}`;
     
     processedData.forEach(row => {
+        // Get the servant info
+        let servant = servantData.filter((svt) => svt[0] === row[0])[0];
+        
         // Create HTML display table elements
         const servantContainer = document.createElement('div');
+        servantContainer.addEventListener('click', () => displayServantByID(servant[0]));
         servantContainer.setAttribute('class', 'td');
         const servantImg = document.createElement('img');
         servantImg.setAttribute('class', 'svtImg');
@@ -136,7 +140,6 @@ function displayServantsPerClass(processedData, sheetName) {
         const servantName = document.createElement('span');
         servantName.setAttribute('class', 'svtName');
         
-        let servant = servantData.filter((svt) => svt[0] === row[0])[0];
         servantName.innerHTML = servant[1];
         servantImg.setAttribute('src', servant[2]);
         servantContainer.setAttribute('aria-servantId', servant[0]);
@@ -145,6 +148,17 @@ function displayServantsPerClass(processedData, sheetName) {
         servantContainer.appendChild(servantName);
         container.appendChild(servantContainer);
     });
+}
+
+function displayServantByID(id) {
+    const container = document.getElementById('data-container');
+    const childNodes = container.childNodes;
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+        const child = childNodes[i];
+        if (child.nodeType === 1 && child.getAttribute('aria-servantId') != id) {
+            container.removeChild(child);
+        }
+    }
 }
 
 // this function is kept temporarily as a reference of how to fetch data from the sheet
