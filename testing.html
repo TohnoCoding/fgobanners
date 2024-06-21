@@ -109,10 +109,10 @@
                         span.textContent = cell + ' ';
                         rowDiv.appendChild(span);
                     }
-                    const divider = document.createElement('hr');
-                    rowDiv.appendChild(divider);
                 });
                 sheetDiv.appendChild(rowDiv);
+                const divider = document.createElement('hr');
+                rowDiv.appendChild(divider);
             });
             container.appendChild(sheetDiv);
         }
