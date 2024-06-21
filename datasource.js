@@ -131,8 +131,10 @@ function displayServantsPerClass(processedData, sheetName) {
         const servantContainer = document.createElement('div');
         servantContainer.setAttribute('class', 'td');
         const servantImg = document.createElement('img');
+        servantImg.setAttribute('class', 'svtImg');
         const linebreak = document.createElement('br');
         const servantName = document.createElement('span');
+        servantName.setAttribute('class', 'svtName');
         
         let servant = servantData.filter((svt) => svt[0] === row[0])[0];
         servantName.innerHTML = servant[1];
