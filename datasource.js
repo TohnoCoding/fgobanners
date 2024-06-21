@@ -40,10 +40,7 @@ function fetchSpreadsheetData(sheetName) {
 // Fill up Servant Data for later use
 function handleServantCall(response) {
     if (servantData !== null) { return; }
-    
     const dataTable = response.getDataTable();
-    //console.log('Datatable: ', dataTable['Wf']);
-
     servantData = filterSheetData(dataTable, [0, 1, 4]);
 }
 
@@ -63,7 +60,6 @@ function filterSheetData(dataTable, columnIndices) {
         });
         filteredData.push(rowData);
     }
-    console.log(filteredData);
     return filteredData;
 }
 
@@ -73,7 +69,6 @@ function handleQueryResponse(response, sheetName) {
         return;
     }
     
-    console.log('Class response:', response);
     const dataTable = response.getDataTable();
     if (!dataTable) {
         console.error('Invalid dataTable object for class', sheetName);
@@ -147,20 +142,10 @@ function displayServantsPerClass(processedData, sheetName) {
         servantContainer.appendChild(linebreak);
         servantContainer.appendChild(servantName);
         container.appendChild(servantContainer);
-        /* const rowDiv = document.createElement('div');
-        row.forEach(cell => {
-            if(cell !== null) {
-                const span = document.createElement('span');
-                span.innerHTML = cell;
-                span.setAttribute('class', 'dataCell');
-                rowDiv.appendChild(span);              
-            }
-            sheetDiv.appendChild(rowDiv);
-        }); */
     });
-    //container.appendChild(sheetDiv);
 }
 
+// this function is kept temporarily as a reference of how to fetch data from the sheet
 function genericDisplayData(processedData, sheetName) {
     const container = document.getElementById('data-container');
     container.innerHTML = ''; // Clear previous data
@@ -172,7 +157,6 @@ function genericDisplayData(processedData, sheetName) {
     processedData.forEach(row => {
         const rowDiv = document.createElement('div');
         row.forEach(cell => {
-            console.log(cell);
             if(cell !== null) {
                 if (typeof cell === 'object' && Object.hasOwn(cell, 'url') && Object.hasOwn(cell, 'displayText')) {
                     const hyperlink = document.createElement('a');
