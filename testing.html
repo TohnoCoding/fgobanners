@@ -3,20 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>FGO Banners</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <style type="text/css">
-    html, body { margin: 0; padding: 20px; font-family: sans-serif; margin-top: 3px; text-align: center; }
+    body { padding: 20px; font-family: sans-serif; text-align: center; overflow-wrap: break-word; }
     div { padding: 5px; }
-    table { border: 3px solid; width: 80%!important; }
-    td { padding:3px; border: 1px solid; }
-    .header { margin-top: 5px!important; }
-    span { margin: 5px; }
-    .td { display: table-cell; border: 1px dashed; margin: 10px; }
-    #data-container { display: table; }
+    .td { display: inline-block; border: 1px dashed; margin: 10px; }
     </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="./datasource.js"></script>
 </head>
 <body>
+    <input type="hidden" value="" />
     <button id="fetchSaber">Saber</button>
     <button id="fetchLancer">Lancer</button>
     <button id="fetchArcher">Archer</button>
