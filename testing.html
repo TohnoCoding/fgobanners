@@ -6,12 +6,12 @@
     <style type="text/css">
     html, body { margin: 0; padding: 20px; font-family: sans-serif; margin-top: 3px; text-align: center; }
     div { padding: 5px; }
-    a { text-decoration: none; margin: 0; padding: 0; }
-    table { border: 3px solid; width: 100%; }
+    table { border: 3px solid; width: 80%!important; }
     td { padding:3px; border: 1px solid; }
     .header { margin-top: 5px!important; }
     span { margin: 5px; }
-    .dataCell { background-color: gray; }
+    .td { display: table-cell; border: 1px dashed; margin: 10px; }
+    #data-container { display: table; }
     </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="./js/datasourcing.js"></script>
@@ -24,18 +24,9 @@
     <button id="fetchCaster">Caster</button>
     <button id="fetchAssassin">Assassin</button>
     <button id="fetchBerserker">Berserker</button>
-    <button id="fetchExtra">EXTRA</button>
-    <table>
-        <thead>
-            <tr>
-                <th id="classTitle">Table</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td id="data-container">&nbsp;</td>
-            </tr>
-        </tbody>
-    </table>
+    <button id="fetchExtra">EXTRA</button> |
+    <button id="resetForm">Reset page</button><br /><br />
+    <h2 id="classTitle">Servant Class</h2>
+    <div id="data-container">&nbsp;</div>
 </body>
 </html>
