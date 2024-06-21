@@ -105,8 +105,12 @@
                         rowDiv.appendChild(span);
                     }*/
                     const span = document.createElement('span');
-                    span.textContent = cell + ' ';
-                    rowDiv.appendChild(span);
+                    if (cell !== null && cell != "null") {
+                        span.textContent = cell + ' ';
+                        rowDiv.appendChild(span);
+                    }
+                    const divider = document.createElement('hr');
+                    rowDiv.appendChild(divider);
                 });
                 sheetDiv.appendChild(rowDiv);
             });
