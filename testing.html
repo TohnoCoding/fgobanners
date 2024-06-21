@@ -93,7 +93,7 @@
             processedData.forEach(row => {
                 const rowDiv = document.createElement('div');
                 row.forEach(cell => {
-                    if (typeof cell === 'object' && cell.hasOwn('url') && cell.hasOwn('displayText')) {
+                    if (typeof cell === 'object' && Object.hasOwn(cell, 'url') && Object.hasOwn(cell, 'displayText')) {
                         const link = document.createElement('a');
                         link.href = cell.url;
                         link.textContent = cell.displayText;
