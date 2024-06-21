@@ -75,8 +75,10 @@ function displayData(processedData, sheetName) {
     const container = document.getElementById('data-container');
     container.innerHTML = ''; // Clear previous data
     const sheetDiv = document.createElement('div');
-    sheetDiv.innerHTML = `<h3>${sheetName}</h3>`;
+    sheetDiv.innerHTML = "";
+    document.getElementById('classTitle').innerHTML = `${sheetName}`;
     processedData.forEach(row => {
+        if(row[1] != "Carmilla") { return; }
         console.log(row);
         const rowDiv = document.createElement('div');
         const spanName = document.createElement('span');
