@@ -27,7 +27,7 @@ function initialize() {
 
 function resetAll() {
     document.getElementById('data-container').innerHTML = '&nbsp;';
-    document.getElementById('classTitle').innerHTML = 'Servant Class';
+    document.getElementById('classTitle').innerHTML = '&nbsp;';
 }
 
 function fetchSpreadsheetData(sheetName) {
