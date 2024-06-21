@@ -7,8 +7,9 @@
     html, body { height: 99%; margin: 0; padding: 20px; font-family: sans-serif; margin-top: 3px; text-align: center; }
     a { text-decoration: none; margin: 0; padding: 0; }
     table { border: 3px solid; width: 100%; }
-    td { border: 1px solid; }
+    td { padding:3px; border: 1px solid; }
     .header { margin-top: 5px!important; }
+    span { border: 1px solid; }
     </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -45,11 +46,11 @@
             }
 
             const data = response.getDataTable();
-            console.log(`Data from ${sheetName}:`, data);
+            console.log(`Data from ${sheetName}:`, data); // Data from sheet
 
             // Process the data to extract both hyperlink target and display text
             const processedData = processData(data);
-            console.log(`Processed data from ${sheetName}:`, processedData);
+            console.log(`Processed data from ${sheetName}:`, processedData); // Processed data from sheet
 
             // Display the processed data
             displayData(processedData, sheetName);
@@ -93,7 +94,7 @@
             processedData.forEach(row => {
                 const rowDiv = document.createElement('div');
                 row.forEach(cell => {
-                    if (typeof cell === 'object' && Object.hasOwn(cell, 'url') && Object.hasOwn(cell, 'displayText')) {
+                    /*if (typeof cell === 'object' && Object.hasOwn(cell, 'url') && Object.hasOwn(cell, 'displayText')) {
                         const link = document.createElement('a');
                         link.href = cell.url;
                         link.textContent = cell.displayText;
@@ -102,7 +103,10 @@
                         const span = document.createElement('span');
                         span.textContent = cell + ' ';
                         rowDiv.appendChild(span);
-                    }
+                    }*/
+                    const span = document.createElement('span');
+                    span.textContent = cell + ' ';
+                    rowDiv.appendChild(span);
                 });
                 sheetDiv.appendChild(rowDiv);
             });
