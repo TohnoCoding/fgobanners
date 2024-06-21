@@ -17,11 +17,17 @@ function initialize() {
     document.getElementById('fetchAssassin').addEventListener('click', () => fetchSpreadsheetData('Assassin'));
     document.getElementById('fetchBerserker').addEventListener('click', () => fetchSpreadsheetData('Berserker'));
     document.getElementById('fetchExtra').addEventListener('click', () => fetchSpreadsheetData('EXTRA'));
+    document.getElementById('resetForm').addEventListener('click', () => resetAll());
     if (servantData === null) {
         const servantQuery = new google.visualization.Query(`https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq?sheet=Servants`);
         // Query Servant names, IDs and profile images with a callback function
         servantQuery.send(response => handleServantCall(response));
     }
+}
+
+function resetAll() {
+    document.getElementById('data-container').innerHTML = '&nbsp;';
+    document.getElementById('classTitle').innerHTML = 'Servant Class';
 }
 
 function fetchSpreadsheetData(sheetName) {
@@ -85,7 +91,7 @@ function handleQueryResponse(response, sheetName) {
     //const processedData = processData(classData);
     
     // Display the processed data
-    displayData(classData, sheetName);
+    displayServantsPerClass(classData, sheetName);
 }
 
 function processData(dataTable) {
@@ -120,30 +126,65 @@ function processData(dataTable) {
     return processedRows;
 }
 
-function displayData(processedData, sheetName) {
+function displayServantsPerClass(processedData, sheetName) {
+    const container = document.getElementById('data-container');
+    container.innerHTML = ''; // Clear previous data
+    document.getElementById('classTitle').innerHTML = `${sheetName}`;
+    
+    processedData.forEach(row => {
+        // Create HTML display table elements
+        const servantContainer = document.createElement('div');
+        servantContainer.setAttribute('class', 'td');
+        const servantImg = document.createElement('img');
+        const linebreak = document.createElement('br');
+        const servantName = document.createElement('span');
+        
+        let servant = servantData.filter((svt) => svt[0] === row[0])[0];
+        servantName.innerHTML = servant[1];
+        servantImg.setAttribute('src', servant[2]);
+        servantContainer.setAttribute('aria-servantId', servant[0]);
+        servantContainer.appendChild(servantImg);
+        servantContainer.appendChild(linebreak);
+        servantContainer.appendChild(servantName);
+        container.appendChild(servantContainer);
+        /* const rowDiv = document.createElement('div');
+        row.forEach(cell => {
+            if(cell !== null) {
+                const span = document.createElement('span');
+                span.innerHTML = cell;
+                span.setAttribute('class', 'dataCell');
+                rowDiv.appendChild(span);              
+            }
+            sheetDiv.appendChild(rowDiv);
+        }); */
+    });
+    //container.appendChild(sheetDiv);
+}
+
+function genericDisplayData(processedData, sheetName) {
     const container = document.getElementById('data-container');
     container.innerHTML = ''; // Clear previous data
     const sheetDiv = document.createElement('div');
     sheetDiv.innerHTML = "";
     const divider = document.createElement('hr');
     document.getElementById('classTitle').innerHTML = `${sheetName}`;
+    
     processedData.forEach(row => {
-        console.log(row);
         const rowDiv = document.createElement('div');
         row.forEach(cell => {
+            console.log(cell);
             if(cell !== null) {
-                // if (typeof cell === 'object' && Object.hasOwn(cell, 'url') && Object.hasOwn(cell, 'displayText')) {
-                    // const link = document.createElement('a');
-                    // link.href = cell.url;
-                    // link.textContent = cell.displayText;
-                    // rowDiv.appendChild(link);
-                // } else {
-                    //console.log(cell); return;
+                if (typeof cell === 'object' && Object.hasOwn(cell, 'url') && Object.hasOwn(cell, 'displayText')) {
+                    const hyperlink = document.createElement('a');
+                    hyperlink.href = cell.url;
+                    hyperlink.textContent = cell.displayText;
+                    rowDiv.appendChild(hyperlink);
+                } else {
                     const span = document.createElement('span');
                     span.innerHTML = cell;
                     span.setAttribute('class', 'dataCell');
                     rowDiv.appendChild(span);
-                // }
+                }
             }
             sheetDiv.appendChild(rowDiv);
         });
