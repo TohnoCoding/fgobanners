@@ -9,14 +9,14 @@ let servantData = null;
 
 function initialize() {
     // Add event listeners to buttons
-    document.getElementById('fetchSaber').addEventListener('click', () => fetchSpreadsheetData('Saber'));
-    document.getElementById('fetchLancer').addEventListener('click', () => fetchSpreadsheetData('Lancer'));
-    document.getElementById('fetchArcher').addEventListener('click', () => fetchSpreadsheetData('Archer'));
-    document.getElementById('fetchRider').addEventListener('click', () => fetchSpreadsheetData('Rider'));
-    document.getElementById('fetchCaster').addEventListener('click', () => fetchSpreadsheetData('Caster'));
-    document.getElementById('fetchAssassin').addEventListener('click', () => fetchSpreadsheetData('Assassin'));
-    document.getElementById('fetchBerserker').addEventListener('click', () => fetchSpreadsheetData('Berserker'));
-    document.getElementById('fetchExtra').addEventListener('click', () => fetchSpreadsheetData('EXTRA'));
+    document.getElementById('fetchSaber').addEventListener('click', () => fetchAllServantsInClass('Saber'));
+    document.getElementById('fetchLancer').addEventListener('click', () => fetchAllServantsInClass('Lancer'));
+    document.getElementById('fetchArcher').addEventListener('click', () => fetchAllServantsInClass('Archer'));
+    document.getElementById('fetchRider').addEventListener('click', () => fetchAllServantsInClass('Rider'));
+    document.getElementById('fetchCaster').addEventListener('click', () => fetchAllServantsInClass('Caster'));
+    document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
+    document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
+    document.getElementById('fetchExtra').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
     document.getElementById('resetForm').addEventListener('click', () => resetAll());
     if (servantData === null) {
         const servantQuery = new google.visualization.Query(`https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq?sheet=Servants`);
@@ -30,11 +30,12 @@ function resetAll() {
     document.getElementById('classTitle').innerHTML = '&nbsp;';
 }
 
-function fetchSpreadsheetData(sheetName) {
-    const classQuery = new google.visualization.Query(`https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq?sheet=${sheetName}`);
+// Button trigger function to load all units in a class
+function fetchAllServantsInClass(className) {
+    const classQuery = new google.visualization.Query(`https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq?sheet=${className}`);
     
     // Send the query with a callback function
-    classQuery.send(response => handleQueryResponse(response, sheetName));
+    classQuery.send(response => fetchClass(response, className));
 }
 
 // Fill up Servant Data for later use
@@ -44,12 +45,12 @@ function handleServantCall(response) {
     servantData = filterSheetData(dataTable, [0, 1, 4]);
 }
 
+// Get specific columns only from specified sheet in spreadsheet
 function filterSheetData(dataTable, columnIndices) {
     if (!dataTable) {
         console.error('Invalid dataTable passed to filterSheetData');
         return [];
     }
-
     const numRows = dataTable.getNumberOfRows();
     const filteredData = [];
 
@@ -63,30 +64,23 @@ function filterSheetData(dataTable, columnIndices) {
     return filteredData;
 }
 
-function handleQueryResponse(response, sheetName) {
+// Fetch spreadsheet data for all unit in specified class
+function fetchClass(response, className) {
     if (response.isError()) {
         console.error('Error fetching class data: ', response.getMessage());
         return;
     }
-    
     const dataTable = response.getDataTable();
     if (!dataTable) {
-        console.error('Invalid dataTable object for class', sheetName);
+        console.error('Invalid dataTable object for class', className);
         return;
     }
-    
     if (servantData === null) {
         console.error('Error loading Servant list');
         return;
     }
-
     const classData = filterSheetData(dataTable, [0, 1]);
-    
-    // Process the data to extract both hyperlink target and display text
-    //const processedData = processData(classData);
-    
-    // Display the processed data
-    displayServantsPerClass(classData, sheetName);
+    displayServantsPerClass(classData, className);
 }
 
 function processData(dataTable) {
@@ -161,8 +155,8 @@ function displayServantByID(id) {
     }
 }
 
-// this function is kept temporarily as a reference of how to fetch data from the sheet
-function genericDisplayData(processedData, sheetName) {
+// this code is kept temporarily as a reference of how to fetch complex data from the sheet
+/*function genericDisplayData(processedData, sheetName) {
     const container = document.getElementById('data-container');
     container.innerHTML = ''; // Clear previous data
     const sheetDiv = document.createElement('div');
@@ -190,4 +184,4 @@ function genericDisplayData(processedData, sheetName) {
         });
     });
     container.appendChild(sheetDiv);
-}
+}*/
