@@ -45,9 +45,9 @@ function initialize() {
 
 // Clean out the form
 function resetAll() {
-    document.getElementById('servant-container').innerHTML = '';
-    document.getElementById('banner-container').innerHTML = '';
-    document.getElementById('classTitle').innerHTML = '';
+    document.getElementById('servant-container').innerHTML = '&nbsp;';
+    document.getElementById('banner-container').innerHTML = '&nbsp;';
+    document.getElementById('classTitle').innerHTML = '&nbsp;';
 }
 
 
