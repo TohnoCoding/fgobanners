@@ -88,10 +88,5 @@ function displaySingleServantByID(id) {
             child.remove();
         }
     }
-    const btnQueryBanners = document.createElement('button');
-    btnQueryBanners.textContent = "View banners";
-    btnQueryBanners.style.display = "block";
-    const clickHandler = displayBanners.bind(null)
-    btnQueryBanners.addEventListener('click', clickHandler);
-    servantContainer.appendChild(btnQueryBanners);
+    displayBanners(id);
 }

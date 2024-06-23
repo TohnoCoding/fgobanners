@@ -9,6 +9,8 @@
     let servantData = null;
     const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
     const bannerOffset = 385;
+    let bannersDataTable = [];
+    let bannerRelationships = [];
 // }
 
 

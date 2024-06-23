@@ -23,26 +23,74 @@ function formatBanners(bannerData) {
 }
 
 
-function displayBanners() {
-    let dataTable = null;
-    let bannerData = null;
+function fetchBanners() {
+    bannersDataTable.length = 0;
     const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerOffset}`);
     
     bannerQuery.send(function(response) {
         if (response.isError()) {
-            console.error('Error fetching class data: ', response.getMessage());
+            console.error('Error fetching banners data: ', response.getMessage());
             return;
         }
-        dataTable = response.getDataTable();
+        const dataTable = response.getDataTable();
         if (!dataTable) {
-            console.error('Invalid dataTable object for class', this.className);
+            console.error('Invalid dataTable object for banners list');
+            return;
+        }
+        bannersDataTable = filterSheetData(dataTable, [0, 1, 2, 4]);
+        
+        /*
+        // testing displaying the banners here; ideally all we want is
+        // to fetch the datatable and pass it to a new function that will
+        // collate and correlate it to the units
+        bannersDataTable.unshift(['Banner Title', 'Start Date', 'End Date', 'Banner ID']);
+        const bannersTable = formatBanners(bannersDataTable[0]);
+        const bannersArea = document.getElementById('banner-container');
+        bannersArea.appendChild(bannersTable);
+        */
+    });
+}
+
+
+
+function displayBanners(servantID) {
+    fetchBanners();
+    fetchBannerRelationships();
+    
+    if (!bannersDataTable || !bannerRelationships ) {
+        console.error('Main tables empty!');
+        alert('Main tables empty!');
+        return;
+    }
+    
+    console.log(bannersDataTable);
+    console.log(bannerRelationships);
+    
+    const bannersByServant = bannerRelationships.filter(rels => rels[0] == servantID);
+    
+}
+
+
+
+function fetchBannerRelationships() {
+    let dataTable = null;
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
+    bannerQuery.send(function(response) {
+        if (response.isError()) {
+            console.error('Error fetching banner relationship data: ', response.getMessage());
             return;
         }
         
-        bannerData = filterSheetData(dataTable, [0, 1, 2, 4]);
-        bannerData.unshift(['Banner Title', 'Start Date', 'End Date', 'Banner ID']);
-        const bannersTable = formatBanners(bannerData);
-        const bannersArea = document.getElementById('banner-container');
-        bannersArea.appendChild(bannersTable);
+        dataTable = response.getDataTable();
+        if (!dataTable) {
+            console.error('Invalid dataTable object for banner relationships');
+            return;
+        }
+        
+        const cols = [];
+        for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
+        { cols.push(i); }
+        
+        bannerRelationships = filterSheetData(dataTable, cols);
     });
 }
