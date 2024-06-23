@@ -1,3 +1,28 @@
+function formatBanners(bannerData) {
+    const table = document.createElement('table');
+    
+    const headerRow = document.createElement('tr');
+    bannerData[0].forEach(cellData => {
+        const headerCell = document.createElement('th');
+        headerCell.textContent = cellData;
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow);
+    
+    for (let i = 1; i < bannerData.length; i++) {
+        const dataRow = document.createElement('tr');
+        bannerData[i].forEach(cellData => {
+            const dataCell = document.createElement('td');
+            dataCell.textContent = cellData;
+            dataRow.appendChild(dataCell);
+        });
+        table.appendChild(dataRow);
+    }
+    
+    return table;
+}
+
+
 function displayBanners() {
     let dataTable = null;
     let bannerData = null;
@@ -15,45 +40,9 @@ function displayBanners() {
         }
         
         bannerData = filterSheetData(dataTable, [0, 1, 2, 4]);
-        console.log(bannerData);
-    }).bind(bannerData: bannerData);
-    
-    const bannerContainer = document.getElementById('banner-container');
-    const bannerTable = document.createElement('table');
-    const bannerRow = document.createElement('tr');
-    const bannerCell = document.createElement('td');
-    
-    bannerCell.textContent = "Banner";
-    bannerRow.appendChild(bannerCell);
-    
-    bannerCell.textContent = "Start Date";
-    bannerRow.appendChild(bannerCell);
-    
-    bannerCell.textContent = "End Date";
-    bannerRow.appendChild(bannerCell);
-    
-    bannerCell.textContent = "Banner ID"
-    bannerRow.appendChild(bannerCell);
-    
-    bannerTable.appendChild(bannerRow);
-    
-    bannerData.forEach(row => {
-        bannerRow.innerHTML = "";
-        bannerCell.textContent = row[0];
-        bannerRow.appendChild(bannerCell);
-        
-        bannerCell.textContent = row[1];
-        bannerRow.appendChild(bannerCell);
-        
-        bannerCell.textContent = row[2];
-        bannerRow.appendChild(bannerCell);
-        
-        bannerCell.textContent = row[3];
-        bannerRow.appendChild(bannerCell);
-        
-        bannerTable.appendChild(bannerRow);
+        bannerData.unshift(['Banner Title', 'Start Date', 'End Date', 'Banner ID']);
+        const bannersTable = formatBanners(bannerData);
+        const bannersArea = document.getElementById('banner-container');
+        bannersArea.appendChild(bannersTable);
     });
-    
 }
-
-

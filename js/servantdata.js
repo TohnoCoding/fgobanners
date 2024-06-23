@@ -21,7 +21,7 @@ function fetchAllServantsInClass(className) {
         }
         const classData = servantArrayToObject(filterSheetData(dataTable, [0, 1]));
         displayClassUnits(classData, this.className);
-    }.bind({className: className}));
+    }.bind({ className: className }));
 }
 
 

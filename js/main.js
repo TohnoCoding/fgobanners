@@ -64,24 +64,3 @@ function filterSheetData(dataTable, columnIndices) {
     }
     return filteredData;
 }
-
-
-
-function isLink(value) {
-    return value.startsWith('=HYPERLINK(');
-}
-
-
-
-function parseLink(cellValue) {
-    const regex = /=HYPERLINK\("([^"]+)", "([^"]+)"\)/;
-    const match = cellValue.match(regex);
-    if (match) {
-        const url = match[1]; // Extract URL
-        const displayText = match[2]; // Extract Display Text
-        return { url, displayText };
-    } else {
-        console.error('Invalid hyperlink format:', cellValue);
-        return { url: '', displayText: '' }; // Return empty values or handle error
-    }
-}
