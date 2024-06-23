@@ -66,3 +66,208 @@ function filterSheetData(dataTable, columnIndices) {
     }
     return filteredData;
 }
+
+
+
+// -----------------------------------------------------------------------------------
+
+
+
+
+
+// Button trigger function to load all units in a class
+function fetchAllServantsInClass(className) {
+    const classQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
+    
+    // Send the query with a callback function
+    classQuery.send(function (response) {
+        if (response.isError()) {
+            console.error('Error fetching class data: ', response.getMessage());
+            return;
+        }
+        const dataTable = response.getDataTable();
+        if (!dataTable) {
+            console.error('Invalid dataTable object for class', this.className);
+            return;
+        }
+        if (servantData === null) {
+            console.error('Error loading Servant list');
+            return;
+        }
+        const classData = servantArrayToObject(filterSheetData(dataTable, [0, 1]));
+        displayClassUnits(classData, this.className);
+    }.bind({ className: className }));
+}
+
+
+
+// Converts fetched servant array to named objects
+function servantArrayToObject(servantArray) {
+    return servantArray.map(servant => ({
+        id: servant[0],
+        name: servant[1],
+        imageUrl: servant[2]
+    }));
+}
+
+
+
+
+
+
+// 
+function displayClassUnits(processedData, className) {
+    const container = document.getElementById('servant-container');
+    container.innerHTML = ''; // Clear previous data
+    document.getElementById('classTitle').innerHTML = `${className}`;
+    processedData.forEach(row => {
+        // Get the servant info
+        let servant = servantData.find((svt) => svt.id === row.id);
+        // Create HTML display table elements
+        const servantContainer = document.createElement('div');
+        const clickHandler = displaySingleServantByID.bind(null, servant.id);
+        servantContainer.addEventListener('click', clickHandler);
+        servantContainer.clickHandler = clickHandler;
+        servantContainer.setAttribute('class', 'td');
+       
+        const servantImg = document.createElement('img');
+        servantImg.setAttribute('src', servant.imageUrl);
+        servantImg.setAttribute('class', 'svtImg');
+        const linebreak = document.createElement('br');
+        
+        const servantName = document.createElement('span');
+        servantName.setAttribute('class', 'svtName');
+        servantName.innerHTML = servant.name;
+        
+        servantContainer.setAttribute('aria-servantId', servant.id);
+        servantContainer.appendChild(servantImg);
+        servantContainer.appendChild(servantName);
+        container.appendChild(servantContainer);
+    });
+}
+
+
+
+// Leaves only a single selected unit onscreen
+function displaySingleServantByID(id) {
+    const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
+    if (servantContainer.clickHandler) {
+        servantContainer.removeEventListener('click', servantContainer.clickHandler);
+        delete servantContainer.clickHandler;
+    }
+    const container = document.getElementById('servant-container');
+    const childNodes = container.childNodes;
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+        const child = childNodes[i];
+        if (child.nodeType === 1 && child.getAttribute('aria-servantId') != id) {
+            child.remove();
+        }
+    }
+    displayBanners(id);
+}
+
+
+
+// -----------------------------------------------------------------------------------
+
+
+
+function formatBanners(bannerData) {
+    const table = document.createElement('table');
+    
+    const headerRow = document.createElement('tr');
+    bannerData[0].forEach(cellData => {
+        const headerCell = document.createElement('th');
+        headerCell.textContent = cellData;
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow);
+    
+    for (let i = 1; i < bannerData.length; i++) {
+        const dataRow = document.createElement('tr');
+        bannerData[i].forEach(cellData => {
+            const dataCell = document.createElement('td');
+            dataCell.textContent = cellData;
+            dataRow.appendChild(dataCell);
+        });
+        table.appendChild(dataRow);
+    }
+    
+    return table;
+}
+
+
+function fetchBanners() {
+    bannersDataTable.length = 0;
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerOffset}`);
+    
+    bannerQuery.send(function(response) {
+        if (response.isError()) {
+            console.error('Error fetching banners data: ', response.getMessage());
+            return;
+        }
+        const dataTable = response.getDataTable();
+        if (!dataTable) {
+            console.error('Invalid dataTable object for banners list');
+            return;
+        }
+        bannersDataTable = filterSheetData(dataTable, [0, 1, 2, 4]);
+        
+        /*
+        // testing displaying the banners here; ideally all we want is
+        // to fetch the datatable and pass it to a new function that will
+        // collate and correlate it to the units
+        bannersDataTable.unshift(['Banner Title', 'Start Date', 'End Date', 'Banner ID']);
+        const bannersTable = formatBanners(bannersDataTable[0]);
+        const bannersArea = document.getElementById('banner-container');
+        bannersArea.appendChild(bannersTable);
+        */
+    });
+}
+
+
+
+function displayBanners(servantID) {
+    Promise.all([fetchBanners(), fetchBannerRelationships()]).then(() => {
+        
+        console.log(bannersDataTable);
+        console.log(bannerRelationships);
+        
+    });
+    /*
+    fetchBanners();
+    fetchBannerRelationships();
+    
+    if (!bannersDataTable || !bannerRelationships ) {
+        console.error('Main tables empty!');
+        alert('Main tables empty!');
+        return;
+    }
+    
+    
+    const bannersByServant = bannerRelationships.filter(rels => rels[0] == servantID);
+    */
+}
+
+
+
+function fetchBannerRelationships() {
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
+    bannerQuery.send(function(response) {
+        if (response.isError()) {
+            console.error('Error fetching banner relationship data: ', response.getMessage());
+            return;
+        }
+        const dataTable = response.getDataTable();
+        if (!dataTable) {
+            console.error('Invalid dataTable object for banner relationships');
+            return;
+        }
+        
+        const cols = [];
+        for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
+        { cols.push(i); }
+        
+        bannerRelationships = filterSheetData(dataTable, cols);
+    });
+}
