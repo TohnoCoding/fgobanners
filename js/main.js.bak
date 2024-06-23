@@ -252,7 +252,7 @@ function displayBanners(servantID) {
             ,bannerStartDate: currentBanner[1]
             ,bannerEndDate: currentBanner[2]
             ,soloBanner: bannersForUnit[i + 1]
-            ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "Yes" : "No"
+            ,isNAConfirmed: bannersForUnit[i].toString().includes('.')
         });
     }
     

@@ -1,1 +1,46 @@
-Under construction!
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>FGO Banners</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./reset.css">
+    <style type="text/css">
+    body { padding: 20px; font-family: sans-serif; text-align: center; font-size: 0.9em;}
+    div { padding: 0; margin: 0; }
+    .td { display: inline-block; margin: 10px; text-align: center; overflow-wrap: anywhere; line-height: 0.9; width: 110px; }
+    .svtImg { transform: scale(0.5, 0.5); display: block; margin: -27px 0px -30px 0px; padding: 0; }
+    .svtName { font-size: 0.75em; overflow-break: break-word; }
+    table { width: 100%; }
+    thead { font-weight: bold; }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/alasql"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+</head>
+<body>
+    <h1>FGO Banners by Servant</h1>
+    <p>Click on each class to display all Servants of that class, and click on a specific
+    Servant to view their current/expected banners.</p>
+    <button id="fetchSaber">Saber</button>
+    <button id="fetchLancer">Lancer</button>
+    <button id="fetchArcher">Archer</button>
+    <button id="fetchRider">Rider</button>
+    <button id="fetchCaster">Caster</button>
+    <button id="fetchAssassin">Assassin</button>
+    <button id="fetchBerserker">Berserker</button>
+    <button id="fetchExtra">EXTRA</button> |
+    <button id="resetForm">Reset page</button><br /><br />
+    <h2 id="classTitle">&nbsp;</h2>
+    <div id="servant-container">&nbsp;</div>
+    <div>&nbsp;</div>
+    <div id="banner-container"></div>
+    
+    <div>
+        Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a>.<br />
+        Data sourced from <a target="_blank" 
+        href="https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/edit">the
+        community-maintained FGO Upcoming Banners by Servant [EN]</a> spreadsheet.
+    </div>
+</body>
+</html>
