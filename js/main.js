@@ -265,26 +265,29 @@ function displayBanners(servantID) {
         let unitCat = "";
         switch (bannersObject.unitCategory.toString()) {
             case "Limited":
-                unitCat = "Limited";
+                unitCat = " Limited";
                 break;
             case "Welfare":
-                unitCat = 'Event prize ("Welfare")';
+                unitCat = ' Event prize ("Welfare")';
                 break;
             case "FP":
-                unitCat = "Friend Point";
+                unitCat = " Friend Point";
                 break;
             case "FP Limited":
-                unitCat = "Limited Friend Point";
+                unitCat = " Limited Friend Point";
                 break;
             case "Perma":
-                unitCat = "Permanent";
+                unitCat = " Permanent";
+                break;
+            case "Story":
+                unitCat = " Storylocked";
                 break;
             default:
-                unitCat = "Permanent";
+                unitCat = "n Unsummonable (lol)";
         }
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Projected banners for " + bannersObject.unitName + ", who is a " + unitCat + " Unit:";
+        titleText.innerHTML = "Projected banners for " + bannersObject.unitName + ", who is a" + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
