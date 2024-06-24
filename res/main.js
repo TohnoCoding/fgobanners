@@ -268,7 +268,7 @@ function displayBanners(servantID) {
                 ,bannerStartDate: currentBanner[1]
                 ,bannerEndDate: currentBanner[2]
                 ,soloBanner: bannersForUnit[i + 1]
-                ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "<span class='b'>Yes</span>" : "No"
+                ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "<span class='b'>Yes</span>" : "<span class='i'>No</span>"
             });
         }
         let unitCat = "";
