@@ -5,6 +5,11 @@ body {
 	text-align: center;
 	justify-content: center;
 	font-size: 1.2em;
+    background-image: url('../img/background.jpg');
+    background-size: 100% auto;
+    background-attachment: fixed;
+    background-position: top center;
+    background-repeat: no-repeat;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -61,6 +66,10 @@ thead {
 	margin: 0;
 	width: 100%;
 	margin-left: -20px;
+}
+
+#pageContainer {
+    background-color: rgba(128, 128, 128, 0.9);
 }
 
 .container {
