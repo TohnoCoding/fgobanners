@@ -28,8 +28,7 @@ function initialize() {
             document.getElementById('fetchCaster').addEventListener('click', () => fetchAllServantsInClass('Caster'));
             document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
             document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
-            document.getElementById('fetchExtra').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
-            document.getElementById('resetForm').addEventListener('click', () => resetAll());
+            document.getElementById('fetchEXTRA').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
             if (servantData === null) {
                 const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
                 // Query Servant names, IDs and profile images
@@ -48,7 +47,10 @@ function resetAll() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
     document.getElementById('banner-container').innerHTML = '&nbsp;';
     document.getElementById('classTitle').innerHTML = '&nbsp;';
-    document.getElementById('dynamic-contents').style.display = 'none';
+    document.getElementById('classTitle').style.display = 'block';
+    [...document.getElementsByClassName('svtButton')].forEach(elem => {
+        elem.style.backgroundColor = 'gray';
+    });
 }
 
 
@@ -118,10 +120,11 @@ function servantArrayToObject(servantArray) {
 // Displays all units from the selected class
 function displayClassUnits(processedData, className) {
     resetAll();
+    document.getElementById('fetch' + className).style.backgroundColor = "gold";
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = ''; // Clear previous data
-    document.getElementById('classTitle').innerHTML = `${className}`;
+    document.getElementById('classTitle').innerHTML = `${className}<br /><br />`;
     processedData.forEach(row => {
         // Get the servant info
         let servant = servantData.find((svt) => svt.id === row.id);
@@ -166,6 +169,7 @@ function displaySingleServantByID(id) {
             child.remove();
         }
     }
+    document.getElementById('classTitle').style.display = 'none';
     displayBanners(id);
 }
 
@@ -303,6 +307,7 @@ function displayBanners(servantID) {
         const tbody = document.createElement('tbody');
         bannersObject.banners.forEach(item => {
             const row = document.createElement('tr');
+            row.setAttribute('class', 'small');
             const tdName = document.createElement('td');
             tdName.textContent = item.bannerName;
             const tdStart = document.createElement('td');
