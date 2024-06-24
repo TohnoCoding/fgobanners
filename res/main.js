@@ -14,8 +14,6 @@
     const versionNumber = '0.2.5';
 // }
 
-
-
 // Set stuff up once the DOM is fully loaded and do initial load of Servants
 function initialize() {
     // Fetch banner information to keep in memory
@@ -53,8 +51,6 @@ function initialize() {
     });
 }
 
-
-
 // Clean out the form
 function resetAll() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
@@ -67,8 +63,6 @@ function resetAll() {
         elem.setAttribute('class', 'svtButton');
     });
 }
-
-
 
 // Get specific columns only from specified sheet in spreadsheet
 function filterSheetData(dataTable, columnIndices) {
@@ -89,11 +83,7 @@ function filterSheetData(dataTable, columnIndices) {
     return filteredData;
 }
 
-
-
 // -----------------------------------------------------------------------------------
-
-
 
 // Button trigger function to load all units in a class
 function fetchAllServantsInClass(className) {
@@ -119,8 +109,6 @@ function fetchAllServantsInClass(className) {
     }.bind({ className: className }));
 }
 
-
-
 // Converts fetched servant array to named objects
 function servantArrayToObject(servantArray) {
     return servantArray.map(servant => ({
@@ -129,8 +117,6 @@ function servantArrayToObject(servantArray) {
         imageUrl: servant[2]
     }));
 }
-
-
 
 // Displays all units from the selected class
 function displayClassUnits(processedData, className) {
@@ -166,8 +152,6 @@ function displayClassUnits(processedData, className) {
     });
 }
 
-
-
 // Leaves only a single selected unit onscreen
 function displaySingleServantByID(id) {
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
@@ -187,11 +171,7 @@ function displaySingleServantByID(id) {
     displayBanners(id);
 }
 
-
-
 // -----------------------------------------------------------------------------------
-
-
 
 // Gets the full list of banners
 function fetchBanners() {
@@ -213,8 +193,6 @@ function fetchBanners() {
         bannersDataTable = filterSheetData(dataTable, [0, 1, 2, 4]);
     });
 }
-
-
 
 // Gets the relationships between banners and units
 function fetchBannerRelationships() {
@@ -241,8 +219,6 @@ function fetchBannerRelationships() {
         bannerRelationships = filterSheetData(dataTable, cols);
     });
 }
-
-
 
 // Displays the collated banners corresponding to a single servant ID
 function displayBanners(servantID) {
