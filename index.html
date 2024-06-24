@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>FGO Banners by Servant [EN/Global] v0.1</title>
+	<meta charset="UTF-8">
+	<title>FGO Banners by Servant [EN/Global] v0.1</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="./reset.css">
     <style type="text/css">
-    body { padding: 20px; font-family: sans-serif; text-align: center; font-size: 0.9em;}
+    body { padding: 20px; font-family: sans-serif; text-align: center; justify-content: center; font-size: 1.4em;}
     div { padding: 0; margin: 0; }
-    .td { display: inline-block; margin: 10px; text-align: center; overflow-wrap: anywhere; line-height: 0.9; width: 110px; }
-    .svtImg { transform: scale(0.5, 0.5); display: block; margin: -27px 0px -30px 0px; padding: 0; }
-    .svtName { font-size: 0.75em; overflow-break: break-word; }
-    table { width: 100%; }
+    table { width: 100%; border: 3px solid; }
+    th { border: 2px solid; }
+    td { border: 1px solid; }
     thead { font-weight: bold; }
+    #servant-container { text-align: center; }
+    .container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: flex-start; }
+    .item { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: center; overflow-wrap: break-word; width: 130px; }
+    .item img { display: block; }
+    .outer-container { width: 100%; justify-contents: center; align-items: center; display: flex; }
+    .svtImg { transform: scale(1.2, 1.2); display: block; margin-bottom: 10px; width: 130px; }
+    .svtName { font-size: 1.5em; padding-top: 5px; overflow-wrap: break-word; width: 130px; }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/alasql"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -20,6 +26,7 @@
 </head>
 <body>
     <h1>FGO Banners by Servant [EN/Global] v0.1</h1>
+    <hr />
     <p>Click/tap on each class button to display all Servants of that class, and
     click/tap on a specific Servant to view their current/expected banners.</p>
     <button id="fetchSaber">Saber</button>
@@ -32,9 +39,9 @@
     <button id="fetchExtra">EXTRA</button> |
     <button id="resetForm">Reset page</button><br /><br />
     <h2 id="classTitle">&nbsp;</h2>
-    <div id="servant-container">&nbsp;</div>
-    <div>&nbsp;</div>
-    <div id="banner-container">&nbsp;</div>
+    <br />
+    <div id="servant-container" class="container">&nbsp;</div>
+    <div class="outer-container"><div id="banner-container">&nbsp;</div></div>
     <br /><hr /><br />
     <div><p>
         Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a>. 

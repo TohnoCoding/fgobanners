@@ -242,86 +242,81 @@ function displayBanners(servantID) {
     let bannersForUnit = bannerRelationships.filter(row => row[0] == servantID);
     bannersForUnit = bannersForUnit[0].filter(col => col !== null);
     
+    console.log(bannersForUnit);
     
-    if (bannersForUnit.length > 3) {
-        const bannersObject = {
-            unitName: document.getElementById('svtName' + servantID).textContent,
-            unitCategory: bannersForUnit[1],
-            banners: []
-        };
-        for (let i = 3; i < bannersForUnit.length; i = i + 2) {
-            const currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i] );
-            bannersObject.banners.push({ 
-                 bannerID: bannersForUnit[i]
-                ,bannerName: currentBanner[0]
-                ,bannerStartDate: currentBanner[1]
-                ,bannerEndDate: currentBanner[2]
-                ,soloBanner: bannersForUnit[i + 1]
-                ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "Yes" : "No"
-            });
-        }
-        
-        let unitCat = "";
-        switch (bannersObject.unitCategory.toString()) {
-            case "Limited":
-                unitCat = "Limited";
-                break;
-            case "Welfare":
-                unitCat = 'Event prize ("Welfare")';
-                break;
-            case "FP":
-                unitCat = "Friend Point";
-                break;
-            case "FP Limited":
-                unitCat = "Limited Friend Point";
-                break;
-            case "Perma":
-                unitCat = "Permanent";
-                break;
-            default:
-                unitCat = "Permanent";
-        }
-        
-        const br = document.createElement('br');
-        const titleText = document.createElement('h2');
-        titleText.innerHTML = "Banners for " + bannersObject.unitName + ", Servant ID " + servantID + ", who is a " + unitCat + " Unit:";
-        bannersArea.appendChild(titleText);
-        const tbl = document.createElement('table');
-        const thead = document.createElement('thead');
-        const headRow = document.createElement('tr');
-        const headers = ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Confirmed for global server?'];
-        headers.forEach(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            headRow.appendChild(th);
+    const bannersObject = {
+        unitName: document.getElementById('svtName' + servantID).textContent,
+        unitCategory: bannersForUnit[1],
+        banners: []
+    };
+    for (let i = 3; i < bannersForUnit.length; i = i + 2) {
+        const currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i] );
+        bannersObject.banners.push({ 
+             bannerID: bannersForUnit[i]
+            ,bannerName: currentBanner[0]
+            ,bannerStartDate: currentBanner[1]
+            ,bannerEndDate: currentBanner[2]
+            ,soloBanner: bannersForUnit[i + 1]
+            ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "Yes" : "No"
         });
-        thead.appendChild(headRow);
-        tbl.appendChild(thead);
-        const tbody = document.createElement('tbody');
-        bannersObject.banners.forEach(item => {
-            const row = document.createElement('tr');
-            const tdName = document.createElement('td');
-            tdName.textContent = item.bannerName;
-            const tdStart = document.createElement('td');
-            tdStart.textContent = item.bannerStartDate;
-            const tdEnd = document.createElement('td');
-            tdEnd.textContent = item.bannerEndDate;
-            const tdSolo = document.createElement('td');
-            tdSolo.textContent = item.soloBanner;
-            const tdConfirmed = document.createElement('td');
-            tdConfirmed.textContent = item.isNAConfirmed;
-            row.appendChild(tdName);
-            row.appendChild(tdStart);
-            row.appendChild(tdEnd);
-            row.appendChild(tdSolo);
-            row.appendChild(tdConfirmed);        
-            tbody.appendChild(row);
-        });
-        tbl.appendChild(tbody);
-        document.getElementById('banner-container').appendChild(tbl);
-    } else {
-        const msg = document.createElement('h1');
-        msg.innerText = "There are no projected banners for this unit for EN in the foreseeable future.";
-        document.getElementById('banner-container').appendChild(msg);
     }
+    
+    let unitCat = "";
+    switch (bannersObject.unitCategory.toString()) {
+        case "Limited":
+            unitCat = "Limited";
+            break;
+        case "Welfare":
+            unitCat = 'Event prize ("Welfare")';
+            break;
+        case "FP":
+            unitCat = "Friend Point";
+            break;
+        case "FP Limited":
+            unitCat = "Limited Friend Point";
+            break;
+        case "Perma":
+            unitCat = "Permanent";
+            break;
+        default:
+            unitCat = "Permanent";
+    }
+    
+    const br = document.createElement('br');
+    const titleText = document.createElement('h2');
+    titleText.innerHTML = "Banners for " + bannersObject.unitName + ", Servant ID " + servantID + ", who is a " + unitCat + " Unit:";
+    bannersArea.appendChild(titleText);
+    const tbl = document.createElement('table');
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    const headers = ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Confirmed for global server?'];
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    tbl.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    bannersObject.banners.forEach(item => {
+        const row = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.textContent = item.bannerName;
+        const tdStart = document.createElement('td');
+        tdStart.textContent = item.bannerStartDate;
+        const tdEnd = document.createElement('td');
+        tdEnd.textContent = item.bannerEndDate;
+        const tdSolo = document.createElement('td');
+        tdSolo.textContent = item.soloBanner;
+        const tdConfirmed = document.createElement('td');
+        tdConfirmed.textContent = item.isNAConfirmed;
+        row.appendChild(tdName);
+        row.appendChild(tdStart);
+        row.appendChild(tdEnd);
+        row.appendChild(tdSolo);
+        row.appendChild(tdConfirmed);        
+        tbody.appendChild(row);
+    });
+    tbl.appendChild(tbody);
+    document.getElementById('banner-container').appendChild(tbl);
 }
