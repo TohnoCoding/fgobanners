@@ -260,7 +260,6 @@ function displayBanners(servantID) {
                 ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "Yes" : "No"
             });
         }
-        
         let unitCat = "";
         switch (bannersObject.unitCategory.toString()) {
             case "Limited":
@@ -281,10 +280,9 @@ function displayBanners(servantID) {
             default:
                 unitCat = "Permanent";
         }
-        
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Banners for " + bannersObject.unitName + ", Servant ID " + servantID + ", who is a " + unitCat + " Unit:";
+        titleText.innerHTML = "Projected banners for " + bannersObject.unitName + ", who is a " + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
@@ -318,6 +316,10 @@ function displayBanners(servantID) {
             tbody.appendChild(row);
         });
         tbl.appendChild(tbody);
+        const nameBox = document.getElementsByClassName('svtName');
+        [...nameBox].forEach(name => {
+            name.remove();
+        });
         document.getElementById('banner-container').appendChild(tbl);
     } else {
         const msg = document.createElement('h1');
