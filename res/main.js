@@ -49,7 +49,8 @@ function resetAll() {
     document.getElementById('classTitle').innerHTML = '&nbsp;';
     document.getElementById('classTitle').style.display = 'block';
     [...document.getElementsByClassName('svtButton')].forEach(elem => {
-        elem.style.backgroundColor = 'gray';
+        elem.removeAttribute('class');
+        elem.setAttribute('class', 'svtButton');
     });
 }
 
@@ -120,7 +121,7 @@ function servantArrayToObject(servantArray) {
 // Displays all units from the selected class
 function displayClassUnits(processedData, className) {
     resetAll();
-    document.getElementById('fetch' + className).style.backgroundColor = "gold";
+    document.getElementById('fetch' + className).setAttribute('class', 'svtButton svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = ''; // Clear previous data
@@ -269,22 +270,22 @@ function displayBanners(servantID) {
         let unitCat = "";
         switch (bannersObject.unitCategory.toString()) {
             case "Limited":
-                unitCat = " Limited";
+                unitCat = " <span class='b'>Limited</span>";
                 break;
             case "Welfare":
                 unitCat = ' Event prize ("Welfare")';
                 break;
             case "FP":
-                unitCat = " Friend Point";
+                unitCat = " <span class='i'>Friend Point</span>";
                 break;
             case "FP Limited":
-                unitCat = " Limited Friend Point";
+                unitCat = " <span class='b i'>Limited Friend Point</span>";
                 break;
             case "Perma":
                 unitCat = " Permanent";
                 break;
             case "Story":
-                unitCat = " Storylocked";
+                unitCat = " <span class='u'>Storylocked</span>";
                 break;
             default:
                 unitCat = "n Unsummonable (lol)";

@@ -108,15 +108,17 @@ thead {
 	background-color: gray;
 	margin: 0px;
 	padding: 0px;
+    opacity: 0.5;
 }
 
-.svtButton>img:hover { background-color: gold; }
-
-.svtbutton:hover { background-color: gold; }
+.svtButtonSelected { opacity: 1.0!important; }
+.svtButtonSelected>img { opacity: 1.0!important; }
 
 .b { font-weight: bold; }
 
 .i { font-style: italic; }
+
+.u { text-decoration: underline; }
 
 hr {
 	margin-top: 15px;
