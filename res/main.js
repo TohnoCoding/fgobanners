@@ -198,16 +198,6 @@ function fetchBanners() {
             return;
         }
         bannersDataTable = filterSheetData(dataTable, [0, 1, 2, 4]);
-        
-        /*
-        // testing displaying the banners here; ideally all we want is
-        // to fetch the datatable and pass it to a new function that will
-        // collate and correlate it to the units
-        bannersDataTable.unshift(['Banner Title', 'Start Date', 'End Date', 'Banner ID']);
-        const bannersTable = formatBanners(bannersDataTable[0]);
-        const bannersArea = document.getElementById('banner-container');
-        bannersArea.appendChild(bannersTable);
-        */
     });
 }
 
