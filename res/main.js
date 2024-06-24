@@ -11,6 +11,7 @@
     const bannerOffset = 385;
     let bannersDataTable = [];
     let bannerRelationships = [];
+    const versionNumber = '0.2.5';
 // }
 
 
@@ -38,6 +39,18 @@ function initialize() {
                 });
             }
         });
+    document.title += ` v${versionNumber}`;
+    document.getElementById('versionNumber').textContent = versionNumber;
+    const metaTags = [
+        { selector: 'meta[property="og:title"]', prefix: 'FGO Servant Banners ' },
+        { selector: 'meta[name="twitter:title"]', prefix: 'FGO Servant Banners ' },
+    ];
+    metaTags.forEach(tag => {
+        const element = document.querySelector(tag.selector);
+        if (element) {
+            element.setAttribute('content', `${tag.prefix}v${versionNumber}`);
+        }
+    });
 }
 
 
@@ -138,12 +151,11 @@ function displayClassUnits(processedData, className) {
         servantContainer.setAttribute('class', 'item');
        
         const servantImg = document.createElement('img');
-        servantImg.setAttribute('src', servant.imageUrl);
+        servantImg.setAttribute('src', servant.imageUrl.substring(0, servant.imageUrl.length - 4) + "_bordered.png");
         servantImg.setAttribute('class', 'svtImg');
-        const linebreak = document.createElement('br');
         
         const servantName = document.createElement('span');
-        servantName.setAttribute('class', 'svtName small');
+        servantName.setAttribute('class', 'svtName invisible');
         servantName.setAttribute('id', 'svtName' + servant.id);
         servantName.innerHTML = servant.name;
         
