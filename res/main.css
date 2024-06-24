@@ -65,11 +65,12 @@ thead {
 	color: white;
 	margin: 0;
 	width: 100%;
-	margin-left: -20px;
+	margin-left: -40px;
 }
 
 #pageContainer {
     background-color: rgba(128, 128, 128, 0.9);
+    padding: 20px;
 }
 
 .container {
@@ -115,10 +116,11 @@ thead {
 
 .svtButton {
 	transition-duration: 0.4s;
-	background-color: gray;
+	background-color: transparent;
 	margin: 0px;
 	padding: 0px;
     opacity: 0.3;
+    border: 0px;
 }
 
 .svtButtonSelected { opacity: 1.0!important; }
