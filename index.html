@@ -2,44 +2,17 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>FGO Servant Banners for the EN/Global Server v0.2</title>
+	<title>FGO Servant Banners for the EN/Global Server v0.2.1</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    <link rel="stylesheet" href="./reset.css">
-    <style type="text/css">
-    body { padding: 20px; font-family: sans-serif; text-align: center; justify-content: center; font-size: 1.4em; }
-    h1, h2, h3, h4, h5, h6 { font-weight: normal; }
-    div { padding: 0; margin: 0; }
-    table { width: 100%; border: 1px solid; margin: 0px; border-collapse: collapse; }
-    th { border: 1px solid; margin: 0px; padding: 5px; }
-    td { border: 1px solid; margin: 0px; padding: 5px; }
-    thead { font-weight: bold; }
-    #servant-container { text-align: center; width: 100%; }
-    #banner-container { text-align: center; width: 100%; }
-    .container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: flex-start; }
-    .item { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: center; overflow-wrap: break-word; width: 130px; }
-    .item img { display: block; }
-    .outer-container { width: 100%; justify-contents: center; align-items: center; display: flex; }
-    .svtImg { transform: scale(1.2, 1.2); display: block; margin-bottom: 10px; width: 130px; }
-    .svtName { font-size: 1.2em; padding-top: 5px; overflow-wrap: break-word; width: 130px; }
-    .svtButton { transition-duration: 0.4s; background-color: gray; margin: 0px; padding: 0px; }
-    .svtButton>img:hover { background-color: gold; }
-    .svtbutton:hover { background-color: gold; }
-    .b { font-weight: bold; }
-    .i { font-style: italic; }
-    hr { margin-top: 15px; margin-bottom: 15px; }
-    .xlarge { font-size: 2em; }
-    .large { font-size: 1.7em; }
-    .medium { font-size: 1.4em; }
-    .small { font-size: 0.7em; }
-    .xsmall { font-size: 0.6em; }
-    </style>
+    <link rel="stylesheet" href="./res/reset.css">
+    <link rel="stylesheet" href="./res/main.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./res/main.js"></script>
 </head>
-<body>
-    <h1 class="b xlarge">FGO Servant Banners v0.2</h1>
-    <h3>for the EN/Global server<h3>
-    <hr />
+<body><div id="pageHeader">
+        <h1 class="b xlarge title">FGO Servant Banners v0.2.1</h1>
+        <h3 class="subtitle">for the EN/Global server<h3>
+    </div>
     <p class="small"><span class="b i medium">How to Use</span><br />Click/tap on each class button to display
     all Servants of that class, and click/tap on a specific Servant to view their current/expected banners.
     <span class="b i">REMEMBER:</span> All displayed banner information is 
@@ -60,14 +33,21 @@
         </div>
     </div>
     <hr />
-    <div><p>
+    <div class="xsmall"><p>
         Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a>. 
         Data sourced live directly from <a target="_blank" 
         href="https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/edit">the
         community-maintained FGO Upcoming Banners by Servant [EN]</a> spreadsheet. Credits for this
         amazing piece of work goes to the authors and maintaners.<br />
         This code is copyright-free, as specified in the <a target="_blank"
-        href="https://github.com/TohnoCoding/fgobanners/blob/master/LICENSE">project license</a>.
+        href="https://github.com/TohnoCoding/fgobanners/blob/master/LICENSE">project license</a>.<br />
+        Fate/Grand Order and related materials are registered trademarks and properties of 
+	    <a target="_blank" href="http://typemoon.com/">TYPE-MOON</a>, 
+        <a target="_blank" href="https://www.lasengle.co.jp/">LASENGLE</a>,
+        <a target="_blank" href="https://www.marv.jp/">Marvelous Inc.</a>, and
+        <a target="_blank" href="https://www.aniplex.co.jp/">Aniplex Inc.</a> This web app is in no way
+        affiliated, endorsed or related to any of the aforementioned companies.<br />
+        All use of copyrighted materials is done so under Fair Use.
     </p></div>
 </body>
 </html>
