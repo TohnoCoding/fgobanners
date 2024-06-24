@@ -48,6 +48,7 @@ function resetAll() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
     document.getElementById('banner-container').innerHTML = '&nbsp;';
     document.getElementById('classTitle').innerHTML = '&nbsp;';
+    document.getElementById('dynamic-contents').style.display = 'none';
 }
 
 
@@ -117,6 +118,7 @@ function servantArrayToObject(servantArray) {
 // Displays all units from the selected class
 function displayClassUnits(processedData, className) {
     resetAll();
+    document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = ''; // Clear previous data
     document.getElementById('classTitle').innerHTML = `${className}`;

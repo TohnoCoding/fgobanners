@@ -13,12 +13,13 @@
     td { border: 1px solid; }
     thead { font-weight: bold; }
     #servant-container { text-align: center; }
+    #dynamic-contents { display: none; }
     .container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: flex-start; }
     .item { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: center; overflow-wrap: break-word; width: 130px; }
     .item img { display: block; }
     .outer-container { width: 100%; justify-contents: center; align-items: center; display: flex; }
     .svtImg { transform: scale(1.2, 1.2); display: block; margin-bottom: 10px; width: 130px; }
-    .svtName { font-size: 1.5em; padding-top: 5px; overflow-wrap: break-word; width: 130px; }
+    .svtName { font-size: 1.2em; padding-top: 5px; overflow-wrap: break-word; width: 130px; }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/alasql"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -38,10 +39,12 @@
     <button id="fetchBerserker">Berserker</button>
     <button id="fetchExtra">EXTRA</button> |
     <button id="resetForm">Reset page</button><br /><br />
-    <h2 id="classTitle">&nbsp;</h2>
-    <br />
-    <div id="servant-container" class="container">&nbsp;</div>
-    <div class="outer-container"><div id="banner-container">&nbsp;</div></div>
+    <div id="dynamic-contents">
+        <h2 id="classTitle">&nbsp;</h2>
+        <br />
+        <div id="servant-container" class="container">&nbsp;</div>
+        <div class="outer-container"><div id="banner-container">&nbsp;</div></div>
+    </div>
     <br /><hr /><br />
     <div><p>
         Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a>. 
