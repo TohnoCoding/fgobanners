@@ -48,6 +48,7 @@ function resetAll() {
     document.getElementById('banner-container').innerHTML = '&nbsp;';
     document.getElementById('classTitle').innerHTML = '&nbsp;';
     document.getElementById('classTitle').style.display = 'block';
+    document.getElementById('disclaimer').style.display = 'none';
     [...document.getElementsByClassName('svtButton')].forEach(elem => {
         elem.removeAttribute('class');
         elem.setAttribute('class', 'svtButton');
@@ -235,6 +236,7 @@ function fetchBannerRelationships() {
 function displayBanners(servantID) {
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
+    document.getElementById('disclaimer').style.display = 'block';
     
     let bannersForUnit = bannerRelationships.filter(row => row[0] == servantID);
     bannersForUnit = bannersForUnit[0].filter(col => col !== null);
@@ -254,16 +256,13 @@ function displayBanners(servantID) {
                 ,bannerStartDate: currentBanner[1]
                 ,bannerEndDate: currentBanner[2]
                 ,soloBanner: bannersForUnit[i + 1]
-                ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "Yes" : "No"
+                ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "<span class='b'>Yes</span>" : "No"
             });
         }
         let unitCat = "";
         switch (bannersObject.unitCategory.toString()) {
             case "Limited":
                 unitCat = " <span class='b'>Limited</span>";
-                break;
-            case "Welfare":
-                unitCat = ' Event prize ("Welfare")';
                 break;
             case "FP":
                 unitCat = " <span class='i'>Friend Point</span>";
@@ -277,6 +276,9 @@ function displayBanners(servantID) {
             case "Story":
                 unitCat = " <span class='u'>Storylocked</span>";
                 break;
+            case "Welfare":
+                unitCat = 'n Event prize ("Welfare")';
+                break;
             default:
                 unitCat = "n Unsummonable (lol)";
         }
@@ -287,7 +289,7 @@ function displayBanners(servantID) {
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
         const headRow = document.createElement('tr');
-        const headers = ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Confirmed for global server?'];
+        const headers = ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Dates confirmed for Global?'];
         headers.forEach(header => {
             const th = document.createElement('th');
             th.textContent = header;
@@ -308,7 +310,7 @@ function displayBanners(servantID) {
             const tdSolo = document.createElement('td');
             tdSolo.textContent = item.soloBanner;
             const tdConfirmed = document.createElement('td');
-            tdConfirmed.textContent = item.isNAConfirmed;
+            tdConfirmed.innerHTML = item.isNAConfirmed;
             row.appendChild(tdName);
             row.appendChild(tdStart);
             row.appendChild(tdEnd);

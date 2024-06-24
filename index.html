@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>FGO Servant Banners for the EN/Global Server v0.2.2</title>
-    <link rel="icon" type="image/x-icon" href="./res/favicon.ico">
+    <meta charset="UTF-8">
+    <meta property="og:title" content="FGO Servant Servant Banners v0.2.3" />
+	<meta property="og:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
+	<meta property="og:image" content="./img/meta-img.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FGO Servant Servant Banners v0.2.3" />
+	<meta name="twitter:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
+	<meta name="twitter:image" content="./img/meta-img.png" />
+    <title>FGO Servant Banners for the EN/Global Server v0.2.3</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="./res/reset.css">
     <link rel="stylesheet" href="./res/main.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -11,13 +18,15 @@
 </head>
 <body><div id="pageContainer">
     <div id="pageHeader">
-        <h1 class="b xlarge title">FGO Servant Banners v0.2.2</h1>
+        <h1 class="b xlarge title">FGO Servant Banners v0.2.3</h1>
         <h3 class="subtitle">for the EN/Global server<h3>
     </div>
     <p class="small"><span class="b i medium">How to Use</span><br />Click/tap on each class button to display
     all Servants of that class, and click/tap on a specific Servant to view their current/expected banners.
     <span class="b i">REMEMBER:</span> All displayed banner information is 
-    <span class="b i">strictly speculation</span> until confirmed via official announcements.</p><br />
+    <span class="b i">strictly speculation</span> until confirmed via official announcements.<br />
+    Site performance might be affected a bit depending on your network conditions, since data needs
+    to be live-fetched from both Atlas Academy and the Banners by Servant Google Spreadsheet.</p><br />
     <button id="fetchSaber" class="svtButton"><img src="./img/saber.png" /></button>&nbsp;&nbsp;
     <button id="fetchLancer" class="svtButton"><img src="./img/lancer.png" /></button>&nbsp;&nbsp;
     <button id="fetchArcher" class="svtButton"><img src="./img/archer.png" /></button>&nbsp;&nbsp;
@@ -33,6 +42,10 @@
             <div id="banner-container">&nbsp;</div>
         </div>
     </div>
+    <div id="disclaimer">If a banner is marked as <span class="b">confirmed</span>, it means the devs
+    have officially announced either on Twitter/X or the in-game News page that the banner will be
+    taking place in the specified dates. If a banner is marked as <span class="i">NOT confirmed</span>,
+    it means the dates are just an extrapolation based on the dates when the banner happened in JP.</div>
     <hr />
     <div class="xsmall"><p>
         Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a>. 
@@ -43,12 +56,12 @@
         This code is copyright-free, as specified in the <a target="_blank"
         href="https://github.com/TohnoCoding/fgobanners/blob/master/LICENSE">project license</a>.<br />
         Fate/Grand Order and related materials are registered trademarks and properties of 
-	    <a target="_blank" href="http://typemoon.com/">TYPE-MOON</a>, 
+        <a target="_blank" href="http://typemoon.com/">TYPE-MOON</a>, 
         <a target="_blank" href="https://www.lasengle.co.jp/">LASENGLE</a>,
         <a target="_blank" href="https://www.marv.jp/">Marvelous Inc.</a>, and
         <a target="_blank" href="https://www.aniplex.co.jp/">Aniplex Inc.</a> This web app is in no way
         affiliated, endorsed or related to any of the aforementioned companies.<br />
-        All use of copyrighted materials is done so under Fair Use.
+        All use of copyrighted materials is done so under the Fair Use doctrine.
     </p></div>
 </div></body>
 </html>
