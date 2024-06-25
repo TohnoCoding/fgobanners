@@ -6,9 +6,9 @@ body {
     justify-content: center;
     font-size: 1.2em;
     background-image: url('../img/background.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-attachment: fixed;
-    background-position: top center;
+    background-position: center top;
     background-repeat: no-repeat;
 }
 
