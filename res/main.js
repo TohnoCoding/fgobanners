@@ -8,10 +8,10 @@
     // Servant IDs, names, and profile image links
     let servantData = null;
     const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
-    const bannerOffset = 385;
+    const bannerOffset = 370;
     let bannersDataTable = [];
     let bannerRelationships = [];
-    const versionNumber = '0.2.5';
+    const versionNumber = '0.3';
 // }
 
 // Set stuff up once the DOM is fully loaded and do initial load of Servants
@@ -272,7 +272,7 @@ function displayBanners(servantID) {
         }
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Projected banners for " + bannersObject.unitName + ", who is a" + unitCat + " Unit:";
+        titleText.innerHTML = "Recent past and projected banners for " + bannersObject.unitName + ", who is a" + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
