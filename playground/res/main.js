@@ -4,39 +4,6 @@
 
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(initialize);
-    
-    /* blinds effect {
-    const toggler = document.getElementById('toggler');
-    const blinds = document.getElementById('blinds');
-
-    let isBlindsVisible = false;
-    let lastHeight = 0;
-
-    toggler.addEventListener('click', function() {
-        isBlindsVisible = !isBlindsVisible;
-
-        if (isBlindsVisible) {
-            blinds.style.height = blinds.scrollHeight + 'px'; // Set specific height based on content
-            blinds.style.maxHeight = '1000px'; // Adjust this to match max-height in CSS
-        } else {
-            lastHeight = blinds.scrollHeight + 'px'; // Store current height before collapsing
-            blinds.style.height = '0'; // Collapse to height 0
-            blinds.style.maxHeight = '0'; // Ensure max-height is also 0 during collapse
-        }
-    });
-
-    // Adjust height and max-height after transition ends
-    blinds.addEventListener('transitionend', function() {
-        if (!isBlindsVisible) {
-            blinds.style.height = '0';
-            blinds.style.maxHeight = '0';
-        } else {
-            blinds.style.height = lastHeight;
-            blinds.style.maxHeight = '1000px'; // Adjust this to match max-height in CSS
-        }
-    });
-    */// }
-
 
     // Servant IDs, names, and profile image links
     let servantData = null;
@@ -44,7 +11,7 @@
     const bannerOffset = 370;
     let bannersDataTable = [];
     let bannerRelationships = [];
-    const versionNumber = '0.3';
+    const versionNumber = '0.3.6';
     const classNumbers = new Map([
         ["Saber", 1],
         ["Archer", 2],
@@ -77,6 +44,11 @@ function initialize() {
             document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
             document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
             document.getElementById('fetchEXTRA').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
+            document.getElementById('toggler').addEventListener('click', function() {
+                const blinds = document.getElementById('blinds');
+                const isVisible = blinds.classList.toggle('visible');
+                blinds.style.height = isVisible ? '131px' : '0';
+            });
             if (servantData === null) {
                 const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
                 // Query Servant names, IDs and profile images
@@ -380,49 +352,3 @@ function displayBanners(servantID) {
         document.getElementById('banner-container').appendChild(msg);
     }
 }
-
-// -----------------------------------------------------------------------------------
-
-document.addEventListener('DOMContentLoaded', function() {
-    const toggler = document.getElementById('toggler');
-    const blinds = document.getElementById('blinds');
-
-    let isBlindsVisible = false;
-    let lastHeight = 0;
-
-    // Measure and set initial height
-    blinds.style.position = 'absolute';
-    blinds.style.left = '-9999px';
-    blinds.classList.add('visible'); // Temporarily show to measure height
-    blinds.style.height = 'auto'; // Set to auto to measure scrollHeight
-    lastHeight = blinds.scrollHeight + 'px';
-    blinds.style.height = '0'; // Reset to 0 after measurement
-    blinds.style.position = 'static'; // Reset position
-    blinds.style.left = 'auto'; // Reset left
-
-    // Event listener for toggling blinds visibility
-    toggler.addEventListener('click', function() {
-        isBlindsVisible = !isBlindsVisible;
-
-        if (isBlindsVisible) {
-            blinds.style.height = lastHeight; // Set stored height
-            blinds.style.maxHeight = '1000px'; // Adjust max-height as needed
-            blinds.classList.add('visible');
-        } else {
-            blinds.style.height = '0'; // Collapse to height 0
-            blinds.style.maxHeight = '0';
-            blinds.classList.remove('visible');
-        }
-    });
-
-    // Adjust height and max-height after transition ends
-    blinds.addEventListener('transitionend', function() {
-        if (!isBlindsVisible) {
-            blinds.style.height = '0';
-            blinds.style.maxHeight = '0';
-        } else {
-            blinds.style.height = lastHeight;
-            blinds.style.maxHeight = '1000px'; // Adjust max-height as needed
-        }
-    });
-});
