@@ -4,39 +4,6 @@
 
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(initialize);
-    
-    /* blinds effect {
-    const toggler = document.getElementById('toggler');
-    const blinds = document.getElementById('blinds');
-
-    let isBlindsVisible = false;
-    let lastHeight = 0;
-
-    toggler.addEventListener('click', function() {
-        isBlindsVisible = !isBlindsVisible;
-
-        if (isBlindsVisible) {
-            blinds.style.height = blinds.scrollHeight + 'px'; // Set specific height based on content
-            blinds.style.maxHeight = '1000px'; // Adjust this to match max-height in CSS
-        } else {
-            lastHeight = blinds.scrollHeight + 'px'; // Store current height before collapsing
-            blinds.style.height = '0'; // Collapse to height 0
-            blinds.style.maxHeight = '0'; // Ensure max-height is also 0 during collapse
-        }
-    });
-
-    // Adjust height and max-height after transition ends
-    blinds.addEventListener('transitionend', function() {
-        if (!isBlindsVisible) {
-            blinds.style.height = '0';
-            blinds.style.maxHeight = '0';
-        } else {
-            blinds.style.height = lastHeight;
-            blinds.style.maxHeight = '1000px'; // Adjust this to match max-height in CSS
-        }
-    });
-    */// }
-
 
     // Servant IDs, names, and profile image links
     let servantData = null;
@@ -77,6 +44,11 @@ function initialize() {
             document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
             document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
             document.getElementById('fetchEXTRA').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
+            document.getElementById('toggler').addEventListener('click', function() {
+                const blinds = document.getElementById('blinds');
+                const isVisible = blinds.classList.toggle('visible');
+                blinds.style.height = isVisible ? '131px' : '0';
+            });
             if (servantData === null) {
                 const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
                 // Query Servant names, IDs and profile images

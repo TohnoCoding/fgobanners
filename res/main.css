@@ -64,17 +64,28 @@ thead {
 
 #toggler { background: transparent; border: 0; }
 
-/*#blinds {
+#blinds {
     height: 0;
     overflow: hidden;
-    transition: height 0.5s ease-out;
-    max-height: 1000px; * Adjust this to a large enough value to cover potential content *
+    transition: height 0.5s ease-out; /* Adjust timing function and duration as desired */
 }
 
 #blinds.visible {
-    height: auto;
-    max-height: 1000px; * Ensure the max-height is large enough to accommodate all content *
-}*/
+    height: 131px; /* Set the height to the fixed height of your image */
+    transition: height 0.5s ease-out;
+}
+
+.blinds {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100%; /* Ensures the content takes full height of the #blinds container */
+}
+
+#blinds img {
+    max-width: 100%;
+    height: auto; /* Ensure the image maintains its aspect ratio */
+}
 
 .container {
     display: flex;
