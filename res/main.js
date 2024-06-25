@@ -4,6 +4,39 @@
 
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(initialize);
+    
+    /* blinds effect {
+    const toggler = document.getElementById('toggler');
+    const blinds = document.getElementById('blinds');
+
+    let isBlindsVisible = false;
+    let lastHeight = 0;
+
+    toggler.addEventListener('click', function() {
+        isBlindsVisible = !isBlindsVisible;
+
+        if (isBlindsVisible) {
+            blinds.style.height = blinds.scrollHeight + 'px'; // Set specific height based on content
+            blinds.style.maxHeight = '1000px'; // Adjust this to match max-height in CSS
+        } else {
+            lastHeight = blinds.scrollHeight + 'px'; // Store current height before collapsing
+            blinds.style.height = '0'; // Collapse to height 0
+            blinds.style.maxHeight = '0'; // Ensure max-height is also 0 during collapse
+        }
+    });
+
+    // Adjust height and max-height after transition ends
+    blinds.addEventListener('transitionend', function() {
+        if (!isBlindsVisible) {
+            blinds.style.height = '0';
+            blinds.style.maxHeight = '0';
+        } else {
+            blinds.style.height = lastHeight;
+            blinds.style.maxHeight = '1000px'; // Adjust this to match max-height in CSS
+        }
+    });
+    */// }
+
 
     // Servant IDs, names, and profile image links
     let servantData = null;
@@ -12,6 +45,22 @@
     let bannersDataTable = [];
     let bannerRelationships = [];
     const versionNumber = '0.3';
+    const classNumbers = new Map([
+        ["Saber", 1],
+        ["Archer", 2],
+        ["Lancer", 3],
+        ["Rider", 4],
+        ["Caster", 5],
+        ["Assassin", 6],
+        ["Berserker", 7],
+        ["Ruler", 9],
+        ["Alter-Ego", 10],
+        ["Avenger", 11],
+        ["Moon-Cancer", 23],
+        ["Foreigner", 25],
+        ["Pretender", 28],
+        ["Beast", 33]
+    ]);
 // }
 
 // Set stuff up once the DOM is fully loaded and do initial load of Servants
@@ -33,7 +82,7 @@ function initialize() {
                 // Query Servant names, IDs and profile images
                 servantQuery.send(function (response) {
                     const dataTable = response.getDataTable();
-                    servantData = servantArrayToObject(filterSheetData(dataTable, [0, 1, 4]));
+                    servantData = servantArrayToObject(filterSheetData(dataTable, [0, 1, 4, 3]));
                 });
             }
         });
@@ -104,7 +153,13 @@ function fetchAllServantsInClass(className) {
             console.error('Error loading Servant list');
             return;
         }
-        const classData = servantArrayToObject(filterSheetData(dataTable, [0, 1]));
+        let classData;
+        if (className == "EXTRA") {
+            classData = servantData.filter(servant => servant.sClass > 8).sort((a, b) => a.sClass - b.sClass);
+        } else {
+            const classNumber = classNumbers.get(className);            
+            classData = servantData.filter(servant => servant.sClass === classNumber);
+        }
         displayClassUnits(classData, this.className);
     }.bind({ className: className }));
 }
@@ -114,7 +169,8 @@ function servantArrayToObject(servantArray) {
     return servantArray.map(servant => ({
         id: servant[0],
         name: servant[1],
-        imageUrl: servant[2]
+        imageUrl: servant[2],
+        sClass: servant[3]
     }));
 }
 
@@ -168,6 +224,12 @@ function displaySingleServantByID(id) {
         }
     }
     document.getElementById('classTitle').style.display = 'none';
+    const img = servantContainer.querySelector('img');
+    const a = document.createElement('a');
+    a.href = 'https://apps.atlasacademy.io/db/JP/servant/' + id;
+    a.setAttribute('target', '_blank');
+    a.appendChild(img);
+    servantContainer.insertBefore(a, servantContainer.querySelector('span'));
     displayBanners(id);
 }
 

@@ -62,6 +62,20 @@ thead {
 
 #disclaimer { width: 100%; padding: 2%; display: none; }
 
+#toggler { background: transparent; border: 0; }
+
+/*#blinds {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease-out;
+    max-height: 1000px; * Adjust this to a large enough value to cover potential content *
+}
+
+#blinds.visible {
+    height: auto;
+    max-height: 1000px; * Ensure the max-height is large enough to accommodate all content *
+}*/
+
 .container {
     display: flex;
     flex-wrap: wrap;

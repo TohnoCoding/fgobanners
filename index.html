@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="FGO Servant Servant Banners v0.3" />
+    <meta property="og:title" content="FGO Servant Servant Banners v0.3.5" />
 	<meta property="og:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta property="og:image" content="./img/meta-img.jpg" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FGO Servant Servant Banners v0.3" />
+    <meta name="twitter:title" content="FGO Servant Servant Banners v0.3.5" />
 	<meta name="twitter:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta name="twitter:image" content="./img/meta-img.jpg" />
     <title>FGO Servant Banners for the EN/Global Server</title>
@@ -21,12 +21,16 @@
         <h1 class="b xlarge title">FGO Servant Banners v<span id="versionNumber">X</span></h1>
         <h3 class="subtitle">for the EN/Global server<h3>
     </div>
-    <p class="small"><span class="b i u large">How to Use</span><br />Click/tap on each class button to display
-    all Servants of that class, and then click/tap on a specific Servant to view their current/expected banners.
-    <span class="b i">REMEMBER:</span> All displayed banner information is 
+    <button id="toggler" class="b large">Usage instructions:</button>
+    <div id="blinds" class="small">Click/tap on each class button to display
+    all Servants of that class, and then click/tap on a specific Servant to view their current/expected
+    banners (extra classes will be ordered by class ID, and then by Servant ID). Once you've picked
+    your target Servant, their picture will become a link that you can click/tap to go to that Servant's
+    data page on the Atlas Academy Database, if you want to quickly check their kit and features.</div>
+    <p class="small"><span class="b i">REMEMBER:</span> All displayed banner information is 
     <span class="b i">strictly speculation</span> until confirmed via official announcements.<br />
     Site performance might be affected a bit depending on your network conditions, since data needs
-    to be live-fetched from both Atlas Academy and the Banners by Servant Google Spreadsheet.</p><br />
+    to be live-fetched from both Atlas Academy and the Banners by Servant Google Spreadsheet.</p>
     <button id="fetchSaber" class="svtButton"><img src="./img/saber.png" /></button>&nbsp;&nbsp;
     <button id="fetchLancer" class="svtButton"><img src="./img/lancer.png" /></button>&nbsp;&nbsp;
     <button id="fetchArcher" class="svtButton"><img src="./img/archer.png" /></button>&nbsp;&nbsp;
