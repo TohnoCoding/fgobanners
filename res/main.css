@@ -67,24 +67,27 @@ thead {
 #blinds {
     height: 0;
     overflow: hidden;
-    transition: height 0.5s ease-out; /* Adjust timing function and duration as desired */
+    transition: height 0.5s ease-out;
 }
 
 #blinds.visible {
-    height: 131px; /* Set the height to the fixed height of your image */
+    height: 131px;
     transition: height 0.5s ease-out;
 }
 
 .blinds {
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    height: 100%; /* Ensures the content takes full height of the #blinds container */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 #blinds img {
+    background-color: black;
+    border: 3px solid black;
+    border-radius: 30px;
     max-width: 100%;
-    height: auto; /* Ensure the image maintains its aspect ratio */
+    height: auto;
 }
 
 .container {

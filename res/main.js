@@ -11,7 +11,9 @@
     const bannerOffset = 370;
     let bannersDataTable = [];
     let bannerRelationships = [];
-    const versionNumber = '0.3';
+    const globalThreshold = 350;
+    const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
+    const versionNumber = '0.3.7';
     const classNumbers = new Map([
         ["Saber", 1],
         ["Archer", 2],
@@ -104,8 +106,6 @@ function filterSheetData(dataTable, columnIndices) {
     return filteredData;
 }
 
-// -----------------------------------------------------------------------------------
-
 // Button trigger function to load all units in a class
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
@@ -183,6 +183,7 @@ function displayClassUnits(processedData, className) {
 // Leaves only a single selected unit onscreen
 function displaySingleServantByID(id) {
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
+    servantContainer.querySelector('img').style.marginTop = '15px';
     if (servantContainer.clickHandler) {
         servantContainer.removeEventListener('click', servantContainer.clickHandler);
         delete servantContainer.clickHandler;
@@ -196,16 +197,32 @@ function displaySingleServantByID(id) {
         }
     }
     document.getElementById('classTitle').style.display = 'none';
+    const linkSpan = document.createElement('div');
+    linkSpan.style.textAlign = 'center';
+    linkSpan.style.width = '100%';
+    const jp = document.createElement('a');
+    jp.href = atlasLink.replace('REGION', 'JP') + id;
+    jp.setAttribute('target', '_blank');
+    jp.textContent = 'Atlas (JP)';
+    linkSpan.appendChild(jp);
+    if (id <= globalThreshold) {
+        const br = document.createElement('br');
+        const na = document.createElement('a');
+        na.href = atlasLink.replace('REGION', 'NA') + id;
+        na.setAttribute('target', '_blank');
+        na.textContent = 'Atlas (NA)';
+        linkSpan.appendChild(br);
+        linkSpan.appendChild(na);
+    }        
+    /*
     const img = servantContainer.querySelector('img');
     const a = document.createElement('a');
     a.href = 'https://apps.atlasacademy.io/db/JP/servant/' + id;
     a.setAttribute('target', '_blank');
-    a.appendChild(img);
-    servantContainer.insertBefore(a, servantContainer.querySelector('span'));
+    a.appendChild(img);*/
+    servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
     displayBanners(id);
 }
-
-// -----------------------------------------------------------------------------------
 
 // Gets the full list of banners
 function fetchBanners() {
