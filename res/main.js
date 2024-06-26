@@ -11,7 +11,7 @@
     const bannerOffset = 370;
     let bannersDataTable = [];
     let bannerRelationships = [];
-    const globalThreshold = 350;
+    const globalThreshold = Math.max(...(await fetch('https://api.atlasacademy.io/export/NA/basic_servant.json').then(r => r.json())).map(s => s.collectionNo));
     const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
     const versionNumber = '0.3.7';
     const classNumbers = new Map([
