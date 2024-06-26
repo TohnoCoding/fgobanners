@@ -1,4 +1,4 @@
-// globals {
+// Globals {
     // Load the Visualization API and the corechart package.
     google.charts.load('current', {'packages':['corechart']});
 
@@ -68,18 +68,15 @@ function initialize() {
         });
     document.title += ` v${versionNumber}`;
     document.getElementById('versionNumber').textContent = versionNumber;
-    const metaTags = [
-        { selector: 'meta[property="og:title"]', prefix: 'FGO Servant Banners ' },
-        { selector: 'meta[name="twitter:title"]', prefix: 'FGO Servant Banners ' },
-    ];
+    const metaTags = [{ selector: 'meta[property="og:title"]', prefix: 'FGO Servant Banners ' },
+        { selector: 'meta[name="twitter:title"]', prefix: 'FGO Servant Banners ' }];
     metaTags.forEach(tag => {
         const element = document.querySelector(tag.selector);
-        if (element) {
-            element.setAttribute('content', `${tag.prefix}v${versionNumber}`);
-        }
+        if (element) { element.setAttribute('content', `${tag.prefix}v${versionNumber}`); }
     });
 }
 
+// Gets the ID of the latest released unit in NA, used to build links to Atlas Database
 async function fetchGlobalThreshold() {
     try {
         const threshold = Math.max(...(await
@@ -99,7 +96,7 @@ async function fetchGlobalThreshold() {
     }
 }
 
-// Clean out the form
+// Clean out the page
 function resetAll() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
     document.getElementById('banner-container').innerHTML = '&nbsp;';
@@ -120,7 +117,6 @@ function filterSheetData(dataTable, columnIndices) {
     }
     const numRows = dataTable.getNumberOfRows();
     const filteredData = [];
-
     for (let row = 0; row < numRows; row++) {
         const rowData = [];
         columnIndices.forEach(col => {
@@ -188,16 +184,16 @@ function displayClassUnits(processedData, className) {
         servantContainer.addEventListener('click', clickHandler);
         servantContainer.clickHandler = clickHandler;
         servantContainer.setAttribute('class', 'item');
-       
+        // Create unit image
         const servantImg = document.createElement('img');
         servantImg.setAttribute('src', servant.imageUrl.substring(0, servant.imageUrl.length - 4) + "_bordered.png");
         servantImg.setAttribute('class', 'svtImg');
-        
+        // Create invisible area with servant name
         const servantName = document.createElement('span');
         servantName.setAttribute('class', 'svtName invisible');
         servantName.setAttribute('id', 'svtName' + servant.id);
         servantName.innerHTML = servant.name;
-        
+        // Render sevant container into the DOM
         servantContainer.setAttribute('aria-servantId', servant.id);
         servantContainer.appendChild(servantImg);
         servantContainer.appendChild(servantName);
@@ -222,17 +218,15 @@ function displaySingleServantByID(id) {
         }
     }
     document.getElementById('classTitle').style.display = 'none';
+    // Create the DOM container for the Atlas link, and output JP link
     const linkSpan = document.createElement('div');
-    linkSpan.style.textAlign = 'center';
-    linkSpan.style.width = '100%';
-    linkSpan.style.backgroundColor = 'white';
-    linkSpan.style.border = '2px solid black';
-    linkSpan.style.marginTop = '5px';
+    linkSpan.setAttribute('class', 'atlas');
     const jp = document.createElement('a');
     jp.href = atlasLink.replace('REGION', 'JP') + id;
     jp.setAttribute('target', '_blank');
     jp.textContent = 'Atlas (JP)';
     linkSpan.appendChild(jp);
+    // If the current unit ID is lower or equal than globalThreshold, create the NA link
     if (id <= globalThreshold) {
         const br = document.createElement('br');
         const na = document.createElement('a');
@@ -267,7 +261,7 @@ function fetchBanners() {
     });
 }
 
-// Gets the relationships between banners and units
+// Gets the correlations between banners and units
 function fetchBannerRelationships() {
     const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
     bannerQuery.send(function(response) {
@@ -284,11 +278,9 @@ function fetchBannerRelationships() {
             alert('Invalid dataTable object for banner relationships');
             return;
         }
-        
         const cols = [];
         for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
         { cols.push(i); }
-        
         bannerRelationships = filterSheetData(dataTable, cols);
     });
 }
@@ -301,7 +293,6 @@ function displayBanners(servantID) {
     
     let bannersForUnit = bannerRelationships.filter(row => row[0] == servantID);
     bannersForUnit = bannersForUnit[0].filter(col => col !== null);
-    
     
     if (bannersForUnit.length > 3) {
         const bannersObject = {
