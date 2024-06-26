@@ -200,6 +200,9 @@ function displaySingleServantByID(id) {
     const linkSpan = document.createElement('div');
     linkSpan.style.textAlign = 'center';
     linkSpan.style.width = '100%';
+    linkSpan.style.backgroundColor = 'white';
+    linkSpan.style.border = '2px solid black';
+    linkSpan.style.marginTop = '5px';
     const jp = document.createElement('a');
     jp.href = atlasLink.replace('REGION', 'JP') + id;
     jp.setAttribute('target', '_blank');
@@ -213,13 +216,7 @@ function displaySingleServantByID(id) {
         na.textContent = 'Atlas (NA)';
         linkSpan.appendChild(br);
         linkSpan.appendChild(na);
-    }        
-    /*
-    const img = servantContainer.querySelector('img');
-    const a = document.createElement('a');
-    a.href = 'https://apps.atlasacademy.io/db/JP/servant/' + id;
-    a.setAttribute('target', '_blank');
-    a.appendChild(img);*/
+    }
     servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
     displayBanners(id);
 }
