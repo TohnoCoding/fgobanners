@@ -11,7 +11,11 @@
     const bannerOffset = 370;
     let bannersDataTable = [];
     let bannerRelationships = [];
-    const globalThreshold = Math.max(...(await fetch('https://api.atlasacademy.io/export/NA/basic_servant.json').then(r => r.json())).map(s => s.collectionNo));
+    Object.defineProperty(window, 'globalThreshold', {
+        value: undefined,
+        writable: true,
+        configurable: true
+    });
     const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
     const versionNumber = '0.3.7';
     const classNumbers = new Map([
@@ -34,6 +38,8 @@
 
 // Set stuff up once the DOM is fully loaded and do initial load of Servants
 function initialize() {
+    // Fetch the global threshold value for NA-released units
+    fetchGlobalThreshold();
     // Fetch banner information to keep in memory
     Promise.all([fetchBanners(), fetchBannerRelationships()])
         .then(() => {
@@ -72,6 +78,25 @@ function initialize() {
             element.setAttribute('content', `${tag.prefix}v${versionNumber}`);
         }
     });
+}
+
+async function fetchGlobalThreshold() {
+    try {
+        const threshold = Math.max(...(await
+            (await fetch('https://api.atlasacademy.io/export/NA/basic_servant.json')).json()).map(s => s.collectionNo));
+        Object.defineProperty(window, 'globalThreshold', {
+            value: threshold,
+            writable: false,
+            configurable: false
+        });
+    } catch (error) {
+        Object.defineProperty(window, 'globalThreshold', {
+            value: 0,
+            writable: false,
+            configurable: false
+        });
+        console.error('Error fetching global NA threshold from Atlas, will only display JP links!');
+    }
 }
 
 // Clean out the form
@@ -216,13 +241,7 @@ function displaySingleServantByID(id) {
         na.textContent = 'Atlas (NA)';
         linkSpan.appendChild(br);
         linkSpan.appendChild(na);
-    }        
-    /*
-    const img = servantContainer.querySelector('img');
-    const a = document.createElement('a');
-    a.href = 'https://apps.atlasacademy.io/db/JP/servant/' + id;
-    a.setAttribute('target', '_blank');
-    a.appendChild(img);*/
+    }
     servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
     displayBanners(id);
 }
