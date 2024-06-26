@@ -62,7 +62,7 @@ thead {
 
 #disclaimer { width: 100%; padding: 2%; display: none; }
 
-#toggler { background: transparent; border: 0; }
+#toggler { background: transparent; border: 0; color: black!important; }
 
 #blinds {
     height: 0;
@@ -111,6 +111,15 @@ thead {
 .item img { display: block; }
 
 .invisible { display: none; }
+
+.atlas { 
+    text-align: center;
+    background-color: white;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 3px;
+    margin-top: 5px;
+}
 
 .outer-container {
     width: 100%;
