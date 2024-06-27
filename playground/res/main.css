@@ -58,7 +58,7 @@ thead {
     margin-left: -40px;
 }
 
-#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; }
+#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; margin-top: 60px; }
 
 #disclaimer { width: 100%; padding: 2%; display: none; }
 
