@@ -17,7 +17,7 @@
         configurable: true
     });
     const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-    const versionNumber = '0.3.7';
+    const versionNumber = '0.3.8';
     const classNumbers = new Map([
         ["Saber", 1],
         ["Archer", 2],
