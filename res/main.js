@@ -79,8 +79,8 @@ function initialize() {
 // Gets the ID of the latest released unit in NA, used to build links to Atlas Database
 async function fetchGlobalThreshold() {
     try {
-        const threshold = Math.max(...(await
-            (await fetch('https://api.atlasacademy.io/export/NA/basic_servant.json')).json()).map(s => s.collectionNo));
+        const threshold = (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
+            .then(r => r.json())).map(s => s.collectionNo).at(-1);
         Object.defineProperty(window, 'globalThreshold', {
             value: threshold,
             writable: false,
