@@ -74,7 +74,7 @@ function initialize() {
                 // Query Servant names, IDs and profile images
                 servantQuery.send(function (response) {
                     const dataTable = response.getDataTable();
-                    Object.defineProperty(window, 'servantData' {
+                    Object.defineProperty(window, 'servantData', {
                         value: servantArrayToObject(filterSheetData(dataTable, [0, 1, 2, 4])),
                         writable: false,
                         configurable: false
