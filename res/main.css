@@ -1,5 +1,4 @@
 body {
-    padding: 20px;
     padding-top: 70px;
     font-family: sans-serif;
     text-align: center;
@@ -55,12 +54,12 @@ thead {
     z-index: 1000;
     background: no-repeat 2% center, linear-gradient(to bottom, rgba(2,41,88,1) 0%, rgba(9,77,157,1) 87%, rgba(9,77,157,1) 100%);
     color: white;
-    width: 104vw;
-    margin: 0 -2vw 0 -3.5vw;
+    width: 100vw;
+    margin: 0 0vw 0 0vw;
     left: -2vw;
 }
 
-#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; margin: 0 auto; }
+#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; margin-left: 1.2vw; width: 95%; }
 
 #disclaimer { width: 100%; padding: 2%; display: none; }
 
