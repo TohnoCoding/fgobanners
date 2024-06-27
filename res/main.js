@@ -6,11 +6,23 @@
     google.charts.setOnLoadCallback(initialize);
 
     // Servant IDs, names, and profile image links
-    let servantData = null;
+    Object.defineProperty(window, 'servantData', {
+        value: undefined,
+        writable: true,
+        configurable: true
+    });
     const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
-    const bannerOffset = 370;
-    let bannersDataTable = [];
-    let bannerRelationships = [];
+    const bannerSheetRowOffset = 370;
+    Object.defineProperty(window, 'bannersDataTable', {
+        value: undefined,
+        writable: true,
+        configurable: true
+    });
+    Object.defineProperty(window, 'bannerRelationships', {
+        value: undefined,
+        writable: true,
+        configurable: true
+    });
     Object.defineProperty(window, 'globalThreshold', {
         value: undefined,
         writable: true,
@@ -62,7 +74,11 @@ function initialize() {
                 // Query Servant names, IDs and profile images
                 servantQuery.send(function (response) {
                     const dataTable = response.getDataTable();
-                    servantData = servantArrayToObject(filterSheetData(dataTable, [0, 1, 4, 3]));
+                    Object.defineProperty(window, 'servantData' {
+                        value: servantArrayToObject(filterSheetData(dataTable, [0, 1, 2, 4])),
+                        writable: false,
+                        configurable: false
+                    });
                 });
             }
         });
@@ -242,7 +258,7 @@ function displaySingleServantByID(id) {
 
 // Gets the full list of banners
 function fetchBanners() {
-    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerOffset}`);
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
             console.error('Error fetching banners data: ', response.getMessage());
@@ -257,7 +273,11 @@ function fetchBanners() {
             alert('Invalid dataTable object for banners list');
             return;
         }
-        bannersDataTable = filterSheetData(dataTable, [0, 1, 2, 4]);
+        Object.defineProperty(window, 'bannersDataTable', {
+            value: filterSheetData(dataTable, [0, 1, 2, 4]),
+            writable: false,
+            configurable: false
+        });
     });
 }
 
@@ -281,7 +301,11 @@ function fetchBannerRelationships() {
         const cols = [];
         for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
         { cols.push(i); }
-        bannerRelationships = filterSheetData(dataTable, cols);
+        Object.defineProperty(window, 'bannerRelationships', {
+            value: filterSheetData(dataTable, cols),
+            writable: false,
+            configurable: false
+        });
     });
 }
 
