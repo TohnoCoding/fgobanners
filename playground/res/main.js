@@ -336,7 +336,7 @@ function displayBanners(servantID) {
         }
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Recent past and projected banners for " + bannersObject.unitName + ", who is a" + unitCat + " Unit:";
+        titleText.innerHTML = "Currently active and projected future banners for " + bannersObject.unitName + ", who is a" + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');

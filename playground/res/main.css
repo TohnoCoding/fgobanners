@@ -11,6 +11,7 @@ body {
     background-position: center top;
     background-repeat: no-repeat;
     margin-top: -110px;
+    overflow-x: hidden;
 }
 
 div { padding: 0; margin: 0; }
@@ -47,15 +48,19 @@ thead {
 
 #pageHeader {
     position: sticky;
+    margin: 0px;
+    padding: 0px;
     top: 0;
     text-align: center;
     z-index: 1000;
     background: no-repeat 2% center, linear-gradient(to bottom, rgba(2,41,88,1) 0%, rgba(9,77,157,1) 87%, rgba(9,77,157,1) 100%);
     color: white;
-    width: 100%;
+    width: 104vw;
+    margin: 0 -2vw 0 -3.5vw;
+    left: -2vw;
 }
 
-#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; /*margin-top: 60px;*/ }
+#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; margin: 0 auto; }
 
 #disclaimer { width: 100%; padding: 2%; display: none; }
 
