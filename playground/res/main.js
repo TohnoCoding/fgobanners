@@ -69,13 +69,13 @@ function initialize() {
                 const isVisible = blinds.classList.toggle('visible');
                 blinds.style.height = isVisible ? '131px' : '0';
             });
-            if (servantData === null) {
+            if (servantData == undefined) {
                 const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
                 // Query Servant names, IDs and profile images
                 servantQuery.send(function (response) {
                     const dataTable = response.getDataTable();
                     Object.defineProperty(window, 'servantData', {
-                        value: servantArrayToObject(filterSheetData(dataTable, [0, 1, 2, 4])),
+                        value: servantArrayToObject(filterSheetData(dataTable, [0, 1, 4, 3])),
                         writable: false,
                         configurable: false
                     });
