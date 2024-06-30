@@ -67,7 +67,7 @@ function initialize() {
             document.getElementById('toggler').addEventListener('click', function() {
                 const blinds = document.getElementById('blinds');
                 const isVisible = blinds.classList.toggle('visible');
-                blinds.style.height = isVisible ? '131px' : '0';
+                blinds.style.height = isVisible ? '141px' : '0';
             });
             if (servantData == undefined) {
                 const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
