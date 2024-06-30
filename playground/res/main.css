@@ -1,22 +1,76 @@
+/* Ensure all elements have no default margin/padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    padding-top: 70px;
     font-family: sans-serif;
     text-align: center;
+    align-items: center;
     justify-content: center;
-    font-size: 1.2em;
+    font-size: x-large;
     background-image: url('../img/background.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center top;
     background-repeat: no-repeat;
-    margin-top: -110px;
+    margin-top: -90px;
+    box-sizing: border-box; 
     overflow-x: hidden;
 }
 
-div { padding: 0; margin: 0; }
+@media (max-width: 445px) {
+    body {
+        font-size: 2em;
+    }
+}
+
+.infobox { margin-top: 15px; margin-bottom: 20px; }
+
+#page {
+    padding-top: 160px;
+}
+
+#dynamic-contents {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+}
+
+#servant-container, #banner-container {
+    text-align: center;
+}
+
+#pageHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: no-repeat 2% center, linear-gradient(to bottom, rgba(2,41,88,1) 0%, rgba(9,77,157,1) 87%, rgba(9,77,157,1) 100%);
+    color: white;
+    width: 100vw;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -110px;
+}
+
+#pageContainer {
+    background-color: rgba(128, 128, 128, 0.9);
+    padding: 20px;
+    margin: 0 auto;
+    width: 90%;
+    box-sizing: border-box; 
+}
+
+
+#disclaimer { padding: 2%; display: none; }
+
+#toggler { background: transparent; border: 2px solid; color: black!important; padding: 10px; margin-bottom: 5px; }
+
 
 table {
-    width: 100%;
     border: 1px solid;
     margin: 0px;
     border-collapse: collapse;
@@ -41,29 +95,6 @@ thead {
     color: white;
 }
 
-#servant-container { text-align: center; width: 100%; }
-
-#banner-container { text-align: center; width: 100%; }
-
-#pageHeader {
-    position: sticky;
-    margin: 0px;
-    padding: 0px;
-    top: 0;
-    text-align: center;
-    z-index: 1000;
-    background: no-repeat 2% center, linear-gradient(to bottom, rgba(2,41,88,1) 0%, rgba(9,77,157,1) 87%, rgba(9,77,157,1) 100%);
-    color: white;
-    width: 100vw;
-    margin: 0 0vw 0 0vw;
-    left: -2vw;
-}
-
-#pageContainer { background-color: rgba(128, 128, 128, 0.9); padding: 20px; margin-left: 1.2vw; width: 95%; }
-
-#disclaimer { width: 100%; padding: 2%; display: none; }
-
-#toggler { background: transparent; border: 0; color: black!important; }
 
 #blinds {
     height: 0;
@@ -72,7 +103,7 @@ thead {
 }
 
 #blinds.visible {
-    height: 131px;
+    height: 151px;
     transition: height 0.5s ease-out;
 }
 
@@ -92,21 +123,17 @@ thead {
 }
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
-    align-items: flex-start;
+    display: block;
+    margin-left: -5px;
 }
 
 .item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: inline-block;
     justify-content: center;
     text-align: center;
     overflow-wrap: break-word;
     width: 130px;
+    margin: 30px;
 }
 
 .item img { display: block; }
@@ -116,10 +143,12 @@ thead {
 .atlas { 
     text-align: center;
     background-color: white;
-    width: 100%;
+    width: 125%;
     border: 2px solid black;
     border-radius: 3px;
-    margin-top: 5px;
+    margin-top: 15px;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
 .outer-container {
@@ -133,14 +162,12 @@ thead {
     transform: scale(1.2, 1.2);
     display: block;
     margin-bottom: 10px;
-    width: 130px;
 }
 
 .svtName {
     font-size: 1.2em;
     padding-top: 5px;
     overflow-wrap: break-word;
-    width: 130px;
 }
 
 .svtButton {
@@ -162,10 +189,6 @@ thead {
 .u { text-decoration: underline; }
 
 hr { margin-top: 15px; margin-bottom: 15px; }
-
-.xlarge { font-size: 2em; }
-
-.large { font-size: 1.7em; }
 
 .medium { font-size: 1.4em; }
 
