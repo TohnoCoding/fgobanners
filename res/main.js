@@ -29,7 +29,7 @@
         configurable: true
     });
     const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-    const versionNumber = '0.4';
+    const versionNumber = '0.4.2';
     const classNumbers = new Map([
         ["Saber", 1],
         ["Archer", 2],
@@ -190,7 +190,15 @@ function displayClassUnits(processedData, className) {
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = ''; // Clear previous data
-    document.getElementById('classTitle').innerHTML = `${className}<br />`;
+    let classTitle = '';
+    switch (className) {
+        case 'EXTRA':
+            classTitle = 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)';
+            break;
+        default:
+            classTitle = className;
+    }
+    document.getElementById('classTitle').innerHTML = `${classTitle}<br />`;
     processedData.forEach(row => {
         // Get the servant info
         let servant = servantData.find((svt) => svt.id === row.id);
@@ -313,12 +321,12 @@ function fetchBannerRelationships() {
 function displayBanners(servantID) {
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
-    document.getElementById('disclaimer').style.display = 'block';
     
     let bannersForUnit = bannerRelationships.filter(row => row[0] == servantID);
     bannersForUnit = bannersForUnit[0].filter(col => col !== null);
     
     if (bannersForUnit.length > 3) {
+        document.getElementById('disclaimer').style.display = 'block';
         const bannersObject = {
             unitName: document.getElementById('svtName' + servantID).textContent,
             unitCategory: bannersForUnit[1],
