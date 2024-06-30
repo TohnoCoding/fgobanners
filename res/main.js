@@ -29,7 +29,7 @@
         configurable: true
     });
     const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-    const versionNumber = '0.3.8';
+    const versionNumber = '0.4';
     const classNumbers = new Map([
         ["Saber", 1],
         ["Archer", 2],
@@ -190,7 +190,7 @@ function displayClassUnits(processedData, className) {
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = ''; // Clear previous data
-    document.getElementById('classTitle').innerHTML = `${className}<br /><br />`;
+    document.getElementById('classTitle').innerHTML = `${className}<br />`;
     processedData.forEach(row => {
         // Get the servant info
         let servant = servantData.find((svt) => svt.id === row.id);
@@ -360,7 +360,7 @@ function displayBanners(servantID) {
         }
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Currently active and projected future banners for " + bannersObject.unitName + ", who is a" + unitCat + " Unit:";
+        titleText.innerHTML = "Currently active and projected future banners for [" + bannersObject.unitName + "], who is a" + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
