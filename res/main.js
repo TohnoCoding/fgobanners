@@ -18,12 +18,15 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
 
 
 // Page initialization {
+/**
+ * Initializes all required elements by calling all necessary functions when the DOM is finished loading.
+ */
 function initialize() {
     fetchGlobalThreshold(); // Fetch the global threshold value for NA-released units
     Promise.all([fetchBanners(), fetchBannerRelationships()]) // Fetch banner information to keep in memory
         .then(() => {
             addListeners()
-            if (servantData == undefined) fetchServantData();
+            if (servantData == undefined) { fetchServantData(); }
         });
     displayVersionNumber();
 }
@@ -31,6 +34,9 @@ function initialize() {
 
 
 // Event listeners {
+/**
+ * Adds all event listeners to the DOM elements that require them.
+ */
 function addListeners() {
     document.getElementById('fetchSaber').addEventListener('click', () => fetchAllServantsInClass('Saber'));
     document.getElementById('fetchLancer').addEventListener('click', () => fetchAllServantsInClass('Lancer'));
@@ -52,6 +58,9 @@ function addListeners() {
 
 // HELPERS {
 // Display version number {
+/**
+ * Updates the displayed version number in both the visible DOM and the meta tags.
+ */
 function displayVersionNumber() {
     document.title += ` v${versionNumber}`;
     document.getElementById('versionNumber').textContent = versionNumber;
@@ -67,6 +76,9 @@ function displayVersionNumber() {
 // }
 
 // Clean out the page {
+/**
+ * Resets all UI elements to their default state. Required when selecting a class.
+ */
 function resetAll() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
     document.getElementById('banner-container').innerHTML = '&nbsp;';
@@ -82,6 +94,12 @@ function resetAll() {
 
 
 // Get specific columns only from provided sheet in spreadsheet {
+/**
+ * Filters the information from the provided dataTable object to return only the information in the specified column indices.
+ * @param {Object} dataTable - The dataTable object to extract the information from.
+ * @param {number[]} columnIndices - The zero-based columns to include in the filtered data.
+ * @returns {Array} The filtered data as a two-dimensional array; an empty array if something went wrong.
+ */
 function filterSheetData(dataTable, columnIndices) {
     if (!dataTable) {
         console.error('Invalid dataTable passed to filterSheetData');
@@ -102,6 +120,11 @@ function filterSheetData(dataTable, columnIndices) {
 
 
 // Converts fetched servant array to named objects {
+/**
+ * Creates a plain Javascript object from the specified Servant array.
+ * @param {Array} servantArray - The array of Servants to create an object from.
+ * @returns {Object} A plain Javascript object containing the Servant data (internal game ID, name, portrait image URL and class number).
+ */
 function servantArrayToObject(servantArray) {
     return servantArray.map(servant => ({
         id: servant[0],
@@ -116,6 +139,10 @@ function servantArrayToObject(servantArray) {
 
 // DATA FETCH {
 // Fetch last NA unit ID {
+/**
+ * Uses the Atlas Academy API to get the internal game ID of the latest unit released in the global/EN server, in order to know when to construct NA/EN links to the the Atlas Academy Database unit pages.
+ * @returns {Promise<void>} A promise that resolves when the fetch is complete.
+ */
 async function fetchGlobalThreshold() {
     try {
         const threshold = (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
@@ -138,6 +165,9 @@ async function fetchGlobalThreshold() {
 
 
 // Fetch full list of units {
+/**
+ * Fetches all the currently released Servants (including JP-only units) from the Google spreadsheet.
+ */
 function fetchServantData() {
     const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
     servantQuery.send(function (response) {
@@ -151,7 +181,11 @@ function fetchServantData() {
 }
 // }
 
+
 // Get the full list of banners {
+/**
+ * Fetches all the banner data from the Google spreadsheet.
+ */
 function fetchBanners() {
     const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
     bannerQuery.send(function(response) {
@@ -177,7 +211,11 @@ function fetchBanners() {
 }
 // }
 
+
 // Get the correlations between banners and units {
+/**
+ * Gets the relationships between the fetched banners and the units that appear in each.
+ */
 function fetchBannerRelationships() {
     const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
     bannerQuery.send(function(response) {
@@ -208,6 +246,10 @@ function fetchBannerRelationships() {
 
 
 // Load all units in the selected class {
+/**
+ * Fetches all the Servants in a given class.
+ * @param {string} className - the name of the class. If 'EXTRA' is provided, displays all Extra-class units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast).
+ */
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
     
@@ -242,6 +284,11 @@ function fetchAllServantsInClass(className) {
 
 // DISPLAY FUNCTIONS {
 // Display all units from the selected class {
+/**
+ * Displays all the units in the selected class. If 'EXTRA' is selected, displays all Extra-class units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast).
+ * @param {Array} processedData - The collection of units to display.
+ * @param {string} className - The name of the class to display. If 'EXTRA' is provided, displays 'EXTRA' followed by the names of all the subclasses contained in the Extra group.
+ */
 function displayClassUnits(processedData, className) {
     resetAll();
     document.getElementById('fetch' + className).setAttribute('class', 'svtButton svtButtonSelected');
@@ -282,6 +329,9 @@ function displayClassUnits(processedData, className) {
 
 
 // Leave only a single selected unit onscreen {
+/**
+ * Removes all units other than the selected one from the page.
+ */
 function displaySingleServantByID(id) {
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
     servantContainer.querySelector('img').style.marginTop = '15px';
@@ -323,6 +373,10 @@ function displaySingleServantByID(id) {
 
 
 // Display the collated banners corresponding to a single servant ID {
+/**
+ * Displays a table with the banners found in the Google spreadsheet for the selected unit.
+ * @param {number} servantID - The internal game ID of the unit to isolate.
+ */
 function displayBanners(servantID) {
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
