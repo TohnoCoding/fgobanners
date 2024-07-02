@@ -1,4 +1,4 @@
-/* Ensure all elements have no default margin/padding */
+/* Global Styles and Resets */
 * {
     margin: 0;
     padding: 0;
@@ -17,31 +17,32 @@ body {
     background-position: center top;
     background-repeat: no-repeat;
     margin-top: -90px;
-    box-sizing: border-box; 
     overflow-x: hidden;
 }
 
-@media (max-width: 445px) {
-    body {
-        font-size: 2em;
-    }
-}
+@media (max-width: 445px) { body { font-size: 2em; } }
 
-.infobox { margin-top: 15px; margin-bottom: 20px; }
+/* Utility Classes */
+.b { font-weight: bold; }
 
-#page {
-    padding-top: 160px;
-}
+.i { font-style: italic; }
 
-#dynamic-contents {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: grid;
-}
+.u { text-decoration: underline; }
 
-#servant-container, #banner-container {
-    text-align: center;
+.invisible { display: none; }
+
+.subtitle { margin-top: -30px; }
+
+hr { margin-top: 15px; margin-bottom: 15px; }
+
+/* Page Layout */
+#page { padding-top: 160px; }
+
+#pageContainer {
+    background-color: rgba(128, 128, 128, 0.9);
+    padding: 20px;
+    margin: 0 auto;
+    width: 90%;
 }
 
 #pageHeader {
@@ -56,38 +57,49 @@ body {
     margin-top: -110px;
 }
 
-#pageContainer {
-    background-color: rgba(128, 128, 128, 0.9);
-    padding: 20px;
-    margin: 0 auto;
-    width: 90%;
-    box-sizing: border-box; 
+#dynamic-contents {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: grid;
 }
 
+#servant-container, #banner-container { text-align: center; }
 
 #disclaimer { padding: 2%; display: none; }
 
-#toggler { background: transparent; border: 2px solid; color: black!important; padding: 10px; margin-bottom: 5px; }
+.infobox { margin-top: 15px; margin-bottom: 20px; }
 
-
-table {
-    border: 1px solid;
-    margin: 0px;
-    border-collapse: collapse;
+/* Buttons */
+#toggler {
+    background: transparent;
+    border: 2px solid;
+    color: black !important;
+    padding: 10px;
+    margin-bottom: 5px;
 }
 
-th {
-    border: 1px solid black!important;
+.svtButton {
+    transition-duration: 0.4s;
+    background-color: transparent;
     margin: 0px;
-    padding: 5px;
+    padding: 0px;
+    opacity: 0.3;
+    border: 0px;
 }
 
-td {
-    border: 1px solid;
-    margin: 0px;
-    padding: 5px;
-    background-color: #DDDDDD;
-}
+.svtButtonSelected { opacity: 1.0 !important; }
+
+.svtButtonSelected>img { opacity: 1.0 !important; }
+
+/* Table Styles */
+table { border: 1px solid; margin: 0px; border-collapse: collapse; }
+
+th, td { border: 1px solid; margin: 0px; padding: 5px; }
+
+th { border: 1px solid black !important; }
+
+td { background-color: #DDDDDD; }
 
 thead {
     font-weight: bold;
@@ -95,7 +107,7 @@ thead {
     color: white;
 }
 
-
+/* Blinds */
 #blinds {
     height: 0;
     overflow: hidden;
@@ -122,9 +134,14 @@ thead {
     height: auto;
 }
 
-.container {
-    display: block;
-    margin-left: -5px;
+/* Container and Items */
+.container { display: block; margin-left: -5px; }
+
+.outer-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .item {
@@ -138,26 +155,7 @@ thead {
 
 .item img { display: block; }
 
-.invisible { display: none; }
-
-.atlas { 
-    text-align: center;
-    background-color: white;
-    width: 125%;
-    border: 2px solid black;
-    border-radius: 3px;
-    margin-top: 15px;
-    margin-left: -10px;
-    margin-right: -10px;
-}
-
-.outer-container {
-    width: 100%;
-    justify-contents: center;
-    align-items: center;
-    display: flex;
-}
-
+/* Servant Styles */
 .svtImg {
     transform: scale(1.2, 1.2);
     display: block;
@@ -170,30 +168,14 @@ thead {
     overflow-wrap: break-word;
 }
 
-.svtButton {
-    transition-duration: 0.4s;
-    background-color: transparent;
-    margin: 0px;
-    padding: 0px;
-    opacity: 0.3;
-    border: 0px;
+/* Atlas */
+.atlas {
+    text-align: center;
+    background-color: white;
+    width: 125%;
+    border: 2px solid black;
+    border-radius: 3px;
+    margin-top: 15px;
+    margin-left: -10px;
+    margin-right: -10px;
 }
-
-.svtButtonSelected { opacity: 1.0!important; }
-.svtButtonSelected>img { opacity: 1.0!important; }
-
-.b { font-weight: bold; }
-
-.i { font-style: italic; }
-
-.u { text-decoration: underline; }
-
-hr { margin-top: 15px; margin-bottom: 15px; }
-
-.medium { font-size: 1.4em; }
-
-.small { font-size: 0.7em; }
-
-.xsmall { font-size: 0.6em; }
-
-.subtitle { margin-top: -30px; }
