@@ -1,118 +1,72 @@
-// Globals {
-    // Load the Visualization API and the corechart package.
-    google.charts.load('current', {'packages':['corechart']});
-
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(initialize);
-
-    // Servant IDs, names, and profile image links
-    Object.defineProperty(window, 'servantData', {
-        value: undefined,
-        writable: true,
-        configurable: true
-    });
-    const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
-    const bannerSheetRowOffset = 370;
-    Object.defineProperty(window, 'bannersDataTable', {
-        value: undefined,
-        writable: true,
-        configurable: true
-    });
-    Object.defineProperty(window, 'bannerRelationships', {
-        value: undefined,
-        writable: true,
-        configurable: true
-    });
-    Object.defineProperty(window, 'globalThreshold', {
-        value: undefined,
-        writable: true,
-        configurable: true
-    });
-    const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-    const versionNumber = '0.4.2';
-    const classNumbers = new Map([
-        ["Saber", 1],
-        ["Archer", 2],
-        ["Lancer", 3],
-        ["Rider", 4],
-        ["Caster", 5],
-        ["Assassin", 6],
-        ["Berserker", 7],
-        ["Ruler", 9],
-        ["Alter-Ego", 10],
-        ["Avenger", 11],
-        ["Moon-Cancer", 23],
-        ["Foreigner", 25],
-        ["Pretender", 28],
-        ["Beast", 33]
-    ]);
+// GLOBALS & INIT {
+// Global declarations {
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(initialize);
+Object.defineProperty(window, 'servantData', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'bannersDataTable', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'bannerRelationships', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'globalThreshold', { value: undefined, writable: true, configurable: true });
+const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
+const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
+const bannerSheetRowOffset = 370;
+const versionNumber = '0.4.5';
+const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
+        ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
+        ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
+        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ]);
 // }
 
-// Set stuff up once the DOM is fully loaded and do initial load of Servants
+
+// Page initialization {
 function initialize() {
-    // Fetch the global threshold value for NA-released units
-    fetchGlobalThreshold();
-    // Fetch banner information to keep in memory
-    Promise.all([fetchBanners(), fetchBannerRelationships()])
+    fetchGlobalThreshold(); // Fetch the global threshold value for NA-released units
+    Promise.all([fetchBanners(), fetchBannerRelationships()]) // Fetch banner information to keep in memory
         .then(() => {
-            // Add event listeners to buttons
-            document.getElementById('fetchSaber').addEventListener('click', () => fetchAllServantsInClass('Saber'));
-            document.getElementById('fetchLancer').addEventListener('click', () => fetchAllServantsInClass('Lancer'));
-            document.getElementById('fetchArcher').addEventListener('click', () => fetchAllServantsInClass('Archer'));
-            document.getElementById('fetchRider').addEventListener('click', () => fetchAllServantsInClass('Rider'));
-            document.getElementById('fetchCaster').addEventListener('click', () => fetchAllServantsInClass('Caster'));
-            document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
-            document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
-            document.getElementById('fetchEXTRA').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
-            document.getElementById('toggler').addEventListener('click', function() {
-                const blinds = document.getElementById('blinds');
-                const isVisible = blinds.classList.toggle('visible');
-                blinds.style.height = isVisible ? '141px' : '0';
-            });
-            if (servantData == undefined) {
-                const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
-                // Query Servant names, IDs and profile images
-                servantQuery.send(function (response) {
-                    const dataTable = response.getDataTable();
-                    Object.defineProperty(window, 'servantData', {
-                        value: servantArrayToObject(filterSheetData(dataTable, [0, 1, 4, 3])),
-                        writable: false,
-                        configurable: false
-                    });
-                });
-            }
+            addListeners()
+            if (servantData == undefined) fetchServantData();
         });
+    displayVersionNumber();
+}
+// }
+
+
+// Event listeners {
+function addListeners() {
+    document.getElementById('fetchSaber').addEventListener('click', () => fetchAllServantsInClass('Saber'));
+    document.getElementById('fetchLancer').addEventListener('click', () => fetchAllServantsInClass('Lancer'));
+    document.getElementById('fetchArcher').addEventListener('click', () => fetchAllServantsInClass('Archer'));
+    document.getElementById('fetchRider').addEventListener('click', () => fetchAllServantsInClass('Rider'));
+    document.getElementById('fetchCaster').addEventListener('click', () => fetchAllServantsInClass('Caster'));
+    document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
+    document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
+    document.getElementById('fetchEXTRA').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
+    document.getElementById('toggler').addEventListener('click', function() {
+        const blinds = document.getElementById('blinds');
+        const isVisible = blinds.classList.toggle('visible');
+        blinds.style.height = isVisible ? '141px' : '0';
+    });
+}
+// }
+// }
+
+
+// HELPERS {
+// Display version number {
+function displayVersionNumber() {
     document.title += ` v${versionNumber}`;
     document.getElementById('versionNumber').textContent = versionNumber;
-    const metaTags = [{ selector: 'meta[property="og:title"]', prefix: 'FGO Servant Banners ' },
-        { selector: 'meta[name="twitter:title"]', prefix: 'FGO Servant Banners ' }];
+    const metaTags = [
+        { selector: 'meta[property="og:title"]', prefix: 'FGO Servant Banners ' },
+        { selector: 'meta[name="twitter:title"]', prefix: 'FGO Servant Banners ' }
+    ];
     metaTags.forEach(tag => {
         const element = document.querySelector(tag.selector);
         if (element) { element.setAttribute('content', `${tag.prefix}v${versionNumber}`); }
     });
 }
+// }
 
-// Gets the ID of the latest released unit in NA, used to build links to Atlas Database
-async function fetchGlobalThreshold() {
-    try {
-        const threshold = (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
-            .then(r => r.json())).map(s => s.collectionNo).at(-1);
-        Object.defineProperty(window, 'globalThreshold', {
-            value: threshold,
-            writable: false,
-            configurable: false
-        });
-    } catch (error) {
-        Object.defineProperty(window, 'globalThreshold', {
-            value: 0,
-            writable: false,
-            configurable: false
-        });
-        console.error('Error fetching global NA threshold from Atlas, will only display JP links!');
-    }
-}
-
-// Clean out the page
+// Clean out the page {
 function resetAll() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
     document.getElementById('banner-container').innerHTML = '&nbsp;';
@@ -124,8 +78,10 @@ function resetAll() {
         elem.setAttribute('class', 'svtButton');
     });
 }
+// }
 
-// Get specific columns only from specified sheet in spreadsheet
+
+// Get specific columns only from provided sheet in spreadsheet {
 function filterSheetData(dataTable, columnIndices) {
     if (!dataTable) {
         console.error('Invalid dataTable passed to filterSheetData');
@@ -142,8 +98,94 @@ function filterSheetData(dataTable, columnIndices) {
     }
     return filteredData;
 }
+// }
 
-// Button trigger function to load all units in a class
+
+// Converts fetched servant array to named objects {
+function servantArrayToObject(servantArray) {
+    return servantArray.map(servant => ({
+        id: servant[0],
+        name: servant[1],
+        imageUrl: servant[2],
+        sClass: servant[3]
+    }));
+}
+// }
+// }
+
+
+// DATA FETCH {
+// Fetch full list of units {
+function fetchServantData() {
+    const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
+    servantQuery.send(function (response) {
+        const dataTable = response.getDataTable();
+        Object.defineProperty(window, 'servantData', {
+            value: servantArrayToObject(filterSheetData(dataTable, [0, 1, 4, 3])),
+            writable: false,
+            configurable: false
+        });
+    });
+}
+// }
+
+// Get the full list of banners {
+function fetchBanners() {
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
+    bannerQuery.send(function(response) {
+        if (response.isError()) {
+            console.error('Error fetching banners data: ', response.getMessage());
+            reject('Error fetching banners data: ', response.getMessage());
+            alert('Error fetching banners data: ' + response.getMessage());
+            return;
+        }
+        const dataTable = response.getDataTable();
+        if (!dataTable) {
+            console.error('Invalid dataTable object for banners list');
+            reject('Invalid dataTable object for banners list');
+            alert('Invalid dataTable object for banners list');
+            return;
+        }
+        Object.defineProperty(window, 'bannersDataTable', {
+            value: filterSheetData(dataTable, [0, 1, 2, 4]),
+            writable: false,
+            configurable: false
+        });
+    });
+}
+// }
+
+// Get the correlations between banners and units {
+function fetchBannerRelationships() {
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
+    bannerQuery.send(function(response) {
+        if (response.isError()) {
+            console.error('Error fetching banner relationship data: ', response.getMessage());
+            reject('Error fetching banner relationship data: ', response.getMessage());
+            alert('Error fetching banner relationship data: ', response.getMessage());
+            return;
+        }
+        const dataTable = response.getDataTable();
+        if (!dataTable) {
+            console.error('Invalid dataTable object for banner relationships');
+            reject('Invalid dataTable object for banner relationships');
+            alert('Invalid dataTable object for banner relationships');
+            return;
+        }
+        const cols = [];
+        for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
+        { cols.push(i); }
+        Object.defineProperty(window, 'bannerRelationships', {
+            value: filterSheetData(dataTable, cols),
+            writable: false,
+            configurable: false
+        });
+    });
+}
+// }
+
+
+// Load all units in the selected class {
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
     
@@ -172,31 +214,21 @@ function fetchAllServantsInClass(className) {
         displayClassUnits(classData, this.className);
     }.bind({ className: className }));
 }
+// }
+// }
 
-// Converts fetched servant array to named objects
-function servantArrayToObject(servantArray) {
-    return servantArray.map(servant => ({
-        id: servant[0],
-        name: servant[1],
-        imageUrl: servant[2],
-        sClass: servant[3]
-    }));
-}
 
-// Displays all units from the selected class
+// DISPLAY FUNCTIONS {
+// Display all units from the selected class {
 function displayClassUnits(processedData, className) {
     resetAll();
     document.getElementById('fetch' + className).setAttribute('class', 'svtButton svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = ''; // Clear previous data
-    let classTitle = '';
-    switch (className) {
-        case 'EXTRA':
-            classTitle = 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)';
-            break;
-        default:
-            classTitle = className;
+    let classTitle = className;
+    if (className === 'EXTRA') {
+        classTitle = 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)';
     }
     document.getElementById('classTitle').innerHTML = `${classTitle}<br />`;
     processedData.forEach(row => {
@@ -224,8 +256,10 @@ function displayClassUnits(processedData, className) {
         container.appendChild(servantContainer);
     });
 }
+// }
 
-// Leaves only a single selected unit onscreen
+
+// Leave only a single selected unit onscreen {
 function displaySingleServantByID(id) {
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
     servantContainer.querySelector('img').style.marginTop = '15px';
@@ -263,61 +297,10 @@ function displaySingleServantByID(id) {
     servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
     displayBanners(id);
 }
+// }
 
-// Gets the full list of banners
-function fetchBanners() {
-    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
-    bannerQuery.send(function(response) {
-        if (response.isError()) {
-            console.error('Error fetching banners data: ', response.getMessage());
-            reject('Error fetching banners data: ', response.getMessage());
-            alert('Error fetching banners data: ' + response.getMessage());
-            return;
-        }
-        const dataTable = response.getDataTable();
-        if (!dataTable) {
-            console.error('Invalid dataTable object for banners list');
-            reject('Invalid dataTable object for banners list');
-            alert('Invalid dataTable object for banners list');
-            return;
-        }
-        Object.defineProperty(window, 'bannersDataTable', {
-            value: filterSheetData(dataTable, [0, 1, 2, 4]),
-            writable: false,
-            configurable: false
-        });
-    });
-}
 
-// Gets the correlations between banners and units
-function fetchBannerRelationships() {
-    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
-    bannerQuery.send(function(response) {
-        if (response.isError()) {
-            console.error('Error fetching banner relationship data: ', response.getMessage());
-            reject('Error fetching banner relationship data: ', response.getMessage());
-            alert('Error fetching banner relationship data: ', response.getMessage());
-            return;
-        }
-        const dataTable = response.getDataTable();
-        if (!dataTable) {
-            console.error('Invalid dataTable object for banner relationships');
-            reject('Invalid dataTable object for banner relationships');
-            alert('Invalid dataTable object for banner relationships');
-            return;
-        }
-        const cols = [];
-        for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
-        { cols.push(i); }
-        Object.defineProperty(window, 'bannerRelationships', {
-            value: filterSheetData(dataTable, cols),
-            writable: false,
-            configurable: false
-        });
-    });
-}
-
-// Displays the collated banners corresponding to a single servant ID
+// Display the collated banners corresponding to a single servant ID {
 function displayBanners(servantID) {
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
@@ -414,3 +397,5 @@ function displayBanners(servantID) {
         document.getElementById('banner-container').appendChild(msg);
     }
 }
+// }
+// }
