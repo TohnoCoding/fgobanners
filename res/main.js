@@ -115,6 +115,28 @@ function servantArrayToObject(servantArray) {
 
 
 // DATA FETCH {
+// Fetch last NA unit ID {
+async function fetchGlobalThreshold() {
+    try {
+        const threshold = (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
+            .then(r => r.json())).map(s => s.collectionNo).at(-1);
+        Object.defineProperty(window, 'globalThreshold', {
+            value: threshold,
+            writable: false,
+            configurable: false
+        });
+    } catch (error) {
+        Object.defineProperty(window, 'globalThreshold', {
+            value: 0,
+            writable: false,
+            configurable: false
+        });
+        console.error('Error fetching global NA threshold from Atlas, will only display JP links!');
+    }
+}
+// }
+
+
 // Fetch full list of units {
 function fetchServantData() {
     const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
