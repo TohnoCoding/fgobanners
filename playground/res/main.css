@@ -155,6 +155,8 @@ thead {
 
 .item img { display: block; }
 
+.yesno { vertical-align: middle; }
+
 /* Servant Styles */
 .svtImg {
     transform: scale(1.2, 1.2);
