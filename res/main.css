@@ -35,6 +35,8 @@ body {
 
 hr { margin-top: 15px; margin-bottom: 15px; }
 
+.yesno { vertical-align: middle; }
+
 /* Page Layout */
 #page { padding-top: 160px; }
 
@@ -154,8 +156,6 @@ thead {
 }
 
 .item img { display: block; }
-
-.yesno { vertical-align: middle; }
 
 /* Servant Styles */
 .svtImg {
