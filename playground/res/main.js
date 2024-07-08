@@ -8,7 +8,7 @@ Object.defineProperty(window, 'bannerRelationships', { value: undefined, writabl
 Object.defineProperty(window, 'globalThreshold', { value: undefined, writable: true, configurable: true });
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-const bannerSheetRowOffset = 370;
+const bannerSheetRowOffset = 395;
 const versionNumber = '1.0';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
