@@ -420,29 +420,21 @@ function displayBanners(servantID) {
         let unitCat = "";
         switch (bannersObject.unitCategory.toString()) {
             case "Limited":
-                unitCat = " <span class='b'>Limited</span>";
-                break;
-            case "FP":
-                unitCat = " <span class='i'>Friend Point</span>";
+                unitCat = "<span class='b'>Limited</span>";
                 break;
             case "FP Limited":
-                unitCat = " <span class='b i'>Limited Friend Point</span>";
+                unitCat = "<span class='i'>Limited Friend Point</span>";
                 break;
             case "Perma":
-                unitCat = " Permanent";
+                unitCat = "Permanent";
                 break;
             case "Story":
-                unitCat = " <span class='u'>Storylocked</span>";
+                unitCat = "<span class='u'>Storylocked</span>";
                 break;
-            case "Welfare":
-                unitCat = 'n Event prize ("Welfare")';
-                break;
-            default:
-                unitCat = "n Unsummonable (lol)";
         }
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Currently active and projected future banners for [" + bannersObject.unitName + "], who is a" + unitCat + " Unit:";
+        titleText.innerHTML = "Currently active and projected future banners for [" + bannersObject.unitName + "], who is a " + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');
