@@ -8,18 +8,12 @@ Object.defineProperty(window, 'bannerRelationships', { value: undefined, writabl
 Object.defineProperty(window, 'globalThreshold', { value: undefined, writable: true, configurable: true });
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-const bannerSheetRowOffset = 395;
-const versionNumber = '1.0';
+const bannerSheetRowOffset = 400;
+const versionNumber = '1.1';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
         ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ]);
-const freeUnitIDs = [1, 4, 16, 19, 21, 24, 25, 33, 34, 36, 39, 40, 43, 44,
-        45, 53, 54, 57, 61, 69, 73, 83, 92, 107, 111, 115, 133, 137, 138,
-        141, 151, 152, 162, 166, 168, 174, 182, 190, 191, 197, 208, 211,
-        219, 225, 233, 240, 243, 252, 255, 256, 257, 258, 259, 260, 264,
-        271, 283, 288, 301, 304, 308, 315, 320, 326, 328, 330, 333, 338,
-        359, 360, 361, 364, 367, 379, 389, 399, 401, 405, 414];
 // }
 
 
@@ -180,13 +174,23 @@ async function fetchGlobalThreshold() {
 function fetchServantData() {
     const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
     servantQuery.send(function (response) {
-        const dataTable = response.getDataTable();
-        let nonFreeServants = servantArrayToObject(filterSheetData(dataTable, [0, 1, 4, 3]))
-        nonFreeServants = nonFreeServants.filter(svt => !freeUnitIDs.includes(svt.id));
-        Object.defineProperty(window, 'servantData', {
-            value: nonFreeServants,
-            writable: false,
-            configurable: false
+        const servantDataTable = response.getDataTable();
+        let servantData = servantArrayToObject(filterSheetData(servantDataTable, [0, 1, 4, 3]));
+        const statusQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
+        statusQuery.send(function (response) {
+            const statusDataTable = response.getDataTable();
+            let statusData = filterSheetData(statusDataTable, [0, 1, 2]);
+            const unwantedStatusIds = statusData
+                .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
+                .map(row => row[0]);
+            servantData = servantData.slice(1);
+            statusData = statusData.slice(1);
+            servantData = servantData.filter(row => !unwantedStatusIds.includes(row.id));
+            Object.defineProperty(window, 'servantData', {
+                value: servantData,
+                writable: false,
+                configurable: false
+            });
         });
     });
 }
@@ -420,21 +424,21 @@ function displayBanners(servantID) {
         let unitCat = "";
         switch (bannersObject.unitCategory.toString()) {
             case "Limited":
-                unitCat = "<span class='b'>Limited</span>";
+                unitCat = " <span class='b'>Limited</span>";
                 break;
             case "FP Limited":
-                unitCat = "<span class='i'>Limited Friend Point</span>";
+                unitCat = " <span class='b i'>Limited Friend Point</span>";
                 break;
             case "Perma":
-                unitCat = "Permanent";
+                unitCat = " Permanent";
                 break;
             case "Story":
-                unitCat = "<span class='u'>Storylocked</span>";
+                unitCat = " <span class='u'>Storylocked</span>";
                 break;
         }
         const br = document.createElement('br');
         const titleText = document.createElement('h2');
-        titleText.innerHTML = "Currently active and projected future banners for [" + bannersObject.unitName + "], who is a " + unitCat + " Unit:";
+        titleText.innerHTML = "Currently active and projected future banners for [" + bannersObject.unitName + "], who is a" + unitCat + " Unit:";
         bannersArea.appendChild(titleText);
         const tbl = document.createElement('table');
         const thead = document.createElement('thead');

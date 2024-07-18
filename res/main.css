@@ -129,9 +129,7 @@ thead {
 }
 
 #blinds img {
-    background-color: black;
-    border: 3px solid black;
-    border-radius: 30px;
+    border-radius: 5px;
     max-width: 100%;
     height: auto;
 }
