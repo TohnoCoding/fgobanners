@@ -38,20 +38,17 @@ function initialize() {
  * Adds all event listeners to the DOM elements that require them.
  */
 function addListeners() {
-    document.getElementById('fetchSaber').addEventListener('click', () => fetchAllServantsInClass('Saber'));
-    document.getElementById('fetchLancer').addEventListener('click', () => fetchAllServantsInClass('Lancer'));
-    document.getElementById('fetchArcher').addEventListener('click', () => fetchAllServantsInClass('Archer'));
-    document.getElementById('fetchRider').addEventListener('click', () => fetchAllServantsInClass('Rider'));
-    document.getElementById('fetchCaster').addEventListener('click', () => fetchAllServantsInClass('Caster'));
-    document.getElementById('fetchAssassin').addEventListener('click', () => fetchAllServantsInClass('Assassin'));
-    document.getElementById('fetchBerserker').addEventListener('click', () => fetchAllServantsInClass('Berserker'));
-    document.getElementById('fetchEXTRA').addEventListener('click', () => fetchAllServantsInClass('EXTRA'));
+    const classes = ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin', 'Berserker', 'EXTRA'];
+    classes.forEach(cls => {
+        document.getElementById(`fetch${cls}`).addEventListener('click', () => fetchAllServantsInClass(cls));
+    });
     document.getElementById('toggler').addEventListener('click', function() {
         const blinds = document.getElementById('blinds');
         const isVisible = blinds.classList.toggle('visible');
         blinds.style.height = isVisible ? '141px' : '0';
     });
 }
+
 // }
 // }
 
@@ -172,28 +169,27 @@ async function fetchGlobalThreshold() {
  * Fetches all the currently released Servants (including JP-only units) from the Google spreadsheet.
  */
 function fetchServantData() {
-    const servantQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
-    servantQuery.send(function (response) {
-        const servantDataTable = response.getDataTable();
-        let servantData = servantArrayToObject(filterSheetData(servantDataTable, [0, 1, 4, 3]));
+    const query = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
+    query.send(servantResponse => {
+        const servantData = 
+            servantArrayToObject(filterSheetData(servantResponse.getDataTable(), [0, 1, 4, 3]).slice(1));
         const statusQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
-        statusQuery.send(function (response) {
-            const statusDataTable = response.getDataTable();
-            let statusData = filterSheetData(statusDataTable, [0, 1, 2]);
-            const unwantedStatusIds = statusData
+        statusQuery.send(statusResponse => {
+            const unwantedIds = new Set(
+                filterSheetData(statusResponse.getDataTable(), [0, 1, 2]).slice(1)
                 .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
-                .map(row => row[0]);
-            servantData = servantData.slice(1);
-            statusData = statusData.slice(1);
-            servantData = servantData.filter(row => !unwantedStatusIds.includes(row.id));
+                .map(row => row[0])
+            );
+            const filteredServantData = servantData.filter(row => !unwantedIds.has(row.id));
             Object.defineProperty(window, 'servantData', {
-                value: servantData,
+                value: filteredServantData,
                 writable: false,
                 configurable: false
             });
         });
     });
 }
+
 // }
 
 
@@ -267,8 +263,6 @@ function fetchBannerRelationships() {
  */
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
-    
-    // Send the query with a callback function
     classQuery.send(function (response) {
         if (response.isError()) {
             console.error('Error fetching class data: ', response.getMessage());
@@ -306,37 +300,29 @@ function fetchAllServantsInClass(className) {
  */
 function displayClassUnits(processedData, className) {
     resetAll();
-    document.getElementById('fetch' + className).setAttribute('class', 'svtButton svtButtonSelected');
+    document.getElementById('fetch' + className).classList.add('svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
-    container.innerHTML = ''; // Clear previous data
-    let classTitle = className;
-    if (className === 'EXTRA') {
-        classTitle = 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)';
-    }
-    document.getElementById('classTitle').innerHTML = `${classTitle}<br />`;
+    container.innerHTML = '';
+    const classTitleMap = {
+        'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)'
+    };
+    document.getElementById('classTitle').innerHTML = `${classTitleMap[className] || className}<br />`;
+    
     processedData.forEach(row => {
-        // Get the servant info
-        let servant = servantData.find((svt) => svt.id === row.id);
-        // Create HTML display table elements
+        let servant = servantData.find(svt => svt.id === row.id);
         const servantContainer = document.createElement('div');
-        const clickHandler = displaySingleServantByID.bind(null, servant.id);
-        servantContainer.addEventListener('click', clickHandler);
-        servantContainer.clickHandler = clickHandler;
-        servantContainer.setAttribute('class', 'item');
-        // Create unit image
-        const servantImg = document.createElement('img');
-        servantImg.setAttribute('src', servant.imageUrl.substring(0, servant.imageUrl.length - 4) + "_bordered.png");
-        servantImg.setAttribute('class', 'svtImg');
-        // Create invisible area with servant name
-        const servantName = document.createElement('span');
-        servantName.setAttribute('class', 'svtName invisible');
-        servantName.setAttribute('id', 'svtName' + servant.id);
-        servantName.innerHTML = servant.name;
-        // Render sevant container into the DOM
+        servantContainer.addEventListener('click', () => displaySingleServantByID(servant.id));
+        servantContainer.classList.add('item');
         servantContainer.setAttribute('aria-servantId', servant.id);
-        servantContainer.appendChild(servantImg);
-        servantContainer.appendChild(servantName);
+        const servantImg = document.createElement('img');
+        servantImg.src = servant.imageUrl.replace('.png', '_bordered.png');
+        servantImg.classList.add('svtImg');
+        const servantName = document.createElement('span');
+        servantName.classList.add('svtName', 'invisible');
+        servantName.id = 'svtName' + servant.id;
+        servantName.innerHTML = servant.name;
+        servantContainer.append(servantImg, servantName);
         container.appendChild(servantContainer);
     });
 }
@@ -349,37 +335,31 @@ function displayClassUnits(processedData, className) {
  */
 function displaySingleServantByID(id) {
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
-    servantContainer.querySelector('img').style.marginTop = '15px';
+    const servantImg = servantContainer.querySelector('img');
+    servantImg.style.marginTop = '15px';
     if (servantContainer.clickHandler) {
         servantContainer.removeEventListener('click', servantContainer.clickHandler);
         delete servantContainer.clickHandler;
     }
     const container = document.getElementById('servant-container');
-    const childNodes = container.childNodes;
-    for (let i = childNodes.length - 1; i >= 0; i--) {
-        const child = childNodes[i];
-        if (child.nodeType === 1 && child.getAttribute('aria-servantId') != id) {
+    Array.from(container.children).forEach(child => {
+        if (child.getAttribute('aria-servantId') != id) {
             child.remove();
         }
-    }
+    });
     document.getElementById('classTitle').style.display = 'none';
-    // Create the DOM container for the Atlas link, and output JP link
     const linkSpan = document.createElement('div');
-    linkSpan.setAttribute('class', 'atlas');
-    const jp = document.createElement('a');
-    jp.href = atlasLink.replace('REGION', 'JP') + id;
-    jp.setAttribute('target', '_blank');
-    jp.textContent = 'Atlas (JP)';
-    linkSpan.appendChild(jp);
-    // If the current unit ID is lower or equal than globalThreshold, create the NA link
+    linkSpan.classList.add('atlas');
+    const createLink = (region) => {
+        const link = document.createElement('a');
+        link.href = atlasLink.replace('REGION', region) + id;
+        link.target = '_blank';
+        link.textContent = `Atlas (${region})`;
+        return link;
+    };
+    linkSpan.appendChild(createLink('JP'));
     if (id <= globalThreshold) {
-        const br = document.createElement('br');
-        const na = document.createElement('a');
-        na.href = atlasLink.replace('REGION', 'NA') + id;
-        na.setAttribute('target', '_blank');
-        na.textContent = 'Atlas (NA)';
-        linkSpan.appendChild(br);
-        linkSpan.appendChild(na);
+        linkSpan.append(document.createElement('br'), createLink('NA'));
     }
     servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
     displayBanners(id);
@@ -395,94 +375,64 @@ function displaySingleServantByID(id) {
 function displayBanners(servantID) {
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
-    
-    let bannersForUnit = bannerRelationships.filter(row => row[0] == servantID);
-    bannersForUnit = bannersForUnit[0].filter(col => col !== null);
-    
-    if (bannersForUnit.length > 3) {
-        document.getElementById('disclaimer').style.display = 'block';
-        const bannersObject = {
-            unitName: document.getElementById('svtName' + servantID).textContent,
-            unitCategory: bannersForUnit[1],
-            banners: []
-        };
-        for (let i = 3; i < bannersForUnit.length; i = i + 2) {
-            const currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i] );
-            bannersObject.banners.push({ 
-                 bannerID: bannersForUnit[i]
-                ,bannerName: '<a target="_blank" href="' + currentBanner[4] + '">' + currentBanner[0] + '</a>'
-                ,bannerStartDate: currentBanner[1]
-                ,bannerEndDate: currentBanner[2]
-                ,soloBanner: bannersForUnit[i + 1] == "Yes" ?
-                    "<span class='b'>" + bannersForUnit[i + 1] + "</span>" :
-                    "<span class='i'>No, shared</span>"
-                ,isNAConfirmed: bannersForUnit[i].toString().includes('.') ? 
-                    "<span class='b'>Yes! <img class='yesno' src='./img/yes.png' /></span>" :
-                    "<span class='i'>No <img class='yesno' src='./img/no.png' /></span>"
-            });
-        }
-        let unitCat = "";
-        switch (bannersObject.unitCategory.toString()) {
-            case "Limited":
-                unitCat = " <span class='b'>Limited</span>";
-                break;
-            case "FP Limited":
-                unitCat = " <span class='b i'>Limited Friend Point</span>";
-                break;
-            case "Perma":
-                unitCat = " Permanent";
-                break;
-            case "Story":
-                unitCat = " <span class='u'>Storylocked</span>";
-                break;
-        }
-        const br = document.createElement('br');
-        const titleText = document.createElement('h2');
-        titleText.innerHTML = "Currently active and projected future banners for [" + bannersObject.unitName + "], who is a" + unitCat + " Unit:";
-        bannersArea.appendChild(titleText);
-        const tbl = document.createElement('table');
-        const thead = document.createElement('thead');
-        const headRow = document.createElement('tr');
-        const headers = ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Dates confirmed for Global?'];
-        headers.forEach(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            headRow.appendChild(th);
-        });
-        thead.appendChild(headRow);
-        tbl.appendChild(thead);
-        const tbody = document.createElement('tbody');
-        bannersObject.banners.forEach(item => {
-            const row = document.createElement('tr');
-            row.setAttribute('class', 'small');
-            const tdName = document.createElement('td');
-            tdName.innerHTML = item.bannerName;
-            const tdStart = document.createElement('td');
-            tdStart.textContent = item.bannerStartDate;
-            const tdEnd = document.createElement('td');
-            tdEnd.textContent = item.bannerEndDate;
-            const tdSolo = document.createElement('td');
-            tdSolo.innerHTML = item.soloBanner;
-            const tdConfirmed = document.createElement('td');
-            tdConfirmed.innerHTML = item.isNAConfirmed;
-            row.appendChild(tdName);
-            row.appendChild(tdStart);
-            row.appendChild(tdEnd);
-            row.appendChild(tdSolo);
-            row.appendChild(tdConfirmed);        
-            tbody.appendChild(row);
-        });
-        tbl.appendChild(tbody);
-        const nameBox = document.getElementsByClassName('svtName');
-        [...nameBox].forEach(name => {
-            name.remove();
-        });
-        document.getElementById('banner-container').appendChild(tbl);
-    } else {
+    let bannersForUnit = bannerRelationships.find(row => row[0] == servantID);
+    bannersForUnit = bannersForUnit.filter(col => col !== null);
+    if (bannersForUnit.length <= 3) {
         const msg = document.createElement('h1');
         msg.innerText = "There are no projected banners for this unit for EN in the foreseeable future.";
-        document.getElementById('banner-container').appendChild(msg);
+        bannersArea.appendChild(msg);
+        return;
     }
+    document.getElementById('disclaimer').style.display = 'block';
+    const bannersObject = {
+        unitName: document.getElementById('svtName' + servantID).textContent,
+        unitCategory: bannersForUnit[1],
+        banners: []
+    };
+    for (let i = 3; i < bannersForUnit.length; i += 2) {
+        const currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
+        if (!currentBanner) {
+            console.error(`No matching banner found for ID: ${bannersForUnit[i]}`);
+            continue;
+        }
+        bannersObject.banners.push({
+            bannerID: bannersForUnit[i],
+            bannerName: `<a target="_blank" href="${currentBanner[4]}">${currentBanner[0]}</a>`,
+            bannerStartDate: currentBanner[1],
+            bannerEndDate: currentBanner[2],
+            soloBanner: bannersForUnit[i + 1] === "Yes" ? "<span class='b'>Yes</span>" : "<span class='i'>No, shared</span>",
+            isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "<span class='b'>Yes! <img class='yesno' src='./img/yes.png' /></span>" : "<span class='i'>No <img class='yesno' src='./img/no.png' /></span>"
+        });
+    }
+    const unitCategories = {
+        "Limited": "<span class='b'>Limited</span>",
+        "FP Limited": "<span class='b i'>Limited Friend Point</span>",
+        "Perma": "Permanent",
+        "Story": "<span class='u'>Storylocked</span>"
+    };
+    const classTitle = document.createElement('h2');
+    classTitle.innerHTML = `Recently ended, currently active and projected future banners for [${bannersObject.unitName}], who is a ${unitCategories[bannersObject.unitCategory]} Unit:`;
+    bannersArea.appendChild(classTitle);
+    const tbl = document.createElement('table');
+    const thead = tbl.createTHead();
+    const headRow = thead.insertRow();
+    ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Dates confirmed for Global?'].forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headRow.appendChild(th);
+    });
+    const tbody = document.createElement('tbody');
+    bannersObject.banners.forEach(item => {
+        const row = tbody.insertRow();
+        row.classList.add('small');
+        ['bannerName', 'bannerStartDate', 'bannerEndDate', 'soloBanner', 'isNAConfirmed'].forEach(field => {
+            const cell = row.insertCell();
+            cell.innerHTML = item[field];
+        });
+    });
+    tbl.appendChild(tbody);
+    bannersArea.appendChild(tbl);
+    Array.from(document.getElementsByClassName('svtName')).forEach(name => name.remove());
 }
 // }
 // }
