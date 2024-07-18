@@ -391,10 +391,6 @@ function displayBanners(servantID) {
     };
     for (let i = 3; i < bannersForUnit.length; i += 2) {
         const currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
-        if (!currentBanner) {
-            console.error(`No matching banner found for ID: ${bannersForUnit[i]}`);
-            continue;
-        }
         bannersObject.banners.push({
             bannerID: bannersForUnit[i],
             bannerName: `<a target="_blank" href="${currentBanner[4]}">${currentBanner[0]}</a>`,
