@@ -2,11 +2,16 @@
 // Global declarations {
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(initialize);
-Object.defineProperty(window, 'servantData', { value: undefined, writable: true, configurable: true });
-Object.defineProperty(window, 'bannersDataTable', { value: undefined, writable: true, configurable: true });
-Object.defineProperty(window, 'bannerRelationships', { value: undefined, writable: true, configurable: true });
-Object.defineProperty(window, 'globalThreshold', { value: undefined, writable: true, configurable: true });
-const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
+Object.defineProperty(window,
+    'servantData', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window,
+    'bannersDataTable', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window,
+    'bannerRelationships', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window,
+    'globalThreshold', { value: undefined, writable: true, configurable: true });
+const spreadsheetLink =
+    'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const bannerSheetRowOffset = 400;
 const versionNumber = '1.1';
@@ -19,11 +24,12 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
 
 // Page initialization {
 /**
- * Initializes all required elements by calling all necessary functions when the DOM is finished loading.
+ * Initializes all required elements by calling all necessary functions when the DOM is finished
+ * loading.
  */
 function initialize() {
     fetchGlobalThreshold(); // Fetch the global threshold value for NA-released units
-    Promise.all([fetchBanners(), fetchBannerRelationships()]) // Fetch banner information to keep in memory
+    Promise.all([fetchBanners(), fetchBannerRelationships()]) // Fetch banner data to keep in ram
         .then(() => {
             addListeners();
             if (servantData == undefined) { fetchServantData(); }
@@ -38,9 +44,11 @@ function initialize() {
  * Adds all event listeners to the DOM elements that require them.
  */
 function addListeners() {
-    const classes = ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin', 'Berserker', 'EXTRA'];
+    const classes =
+        ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin', 'Berserker', 'EXTRA'];
     classes.forEach(cls => {
-        document.getElementById(`fetch${cls}`).addEventListener('click', () => fetchAllServantsInClass(cls));
+        document.getElementById(`fetch${cls}`)
+            .addEventListener('click', () => fetchAllServantsInClass(cls));
     });
     document.getElementById('toggler').addEventListener('click', function() {
         const blinds = document.getElementById('blinds');
@@ -122,7 +130,8 @@ function filterSheetData(dataTable, columnIndices) {
 /**
  * Creates a plain Javascript object from the specified Servant array.
  * @param {Array} servantArray - The array of Servants to create an object from.
- * @returns {Object} A plain Javascript object containing the Servant data (internal game ID, name, portrait image URL and class number).
+ * @returns {Object} A plain Javascript object containing the Servant data (internal game ID,
+ *                   name, portrait image URL and class number).
  */
 function servantArrayToObject(servantArray) {
     return servantArray.map(servant => ({
@@ -139,8 +148,9 @@ function servantArrayToObject(servantArray) {
 // DATA FETCH {
 // Fetch last NA unit ID {
 /**
- * Uses the Atlas Academy API to get the internal game ID of the latest unit released in the global/EN
- * server, in order to know when to construct NA/EN links to the the Atlas Academy Database unit pages.
+ * Uses the Atlas Academy API to get the internal game ID of the latest unit released in the
+ * global/EN server, in order to know when to construct NA/EN links to the the Atlas Academy
+ * Database unit pages.
  * @returns {Promise<void>} A promise that resolves when the fetch is complete.
  */
 async function fetchGlobalThreshold() {
@@ -158,7 +168,8 @@ async function fetchGlobalThreshold() {
             writable: false,
             configurable: false
         });
-        console.error('Error fetching global NA threshold from Atlas, will only display JP links!');
+        console
+            .error('Error fetching global NA threshold from Atlas, will only display JP links!');
     }
 }
 // }
@@ -166,13 +177,15 @@ async function fetchGlobalThreshold() {
 
 // Fetch full list of units {
 /**
- * Fetches all the currently released Servants (including JP-only units) from the Google spreadsheet.
+ * Fetches all the currently released Servants (including JP-only units) from the Google
+ * spreadsheet.
  */
 function fetchServantData() {
     const query = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
     query.send(servantResponse => {
         const servantData = 
-            servantArrayToObject(filterSheetData(servantResponse.getDataTable(), [0, 1, 4, 3]).slice(1));
+            servantArrayToObject(filterSheetData(servantResponse
+                .getDataTable(), [0,1,4,3]).slice(1));
         const statusQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new Set(
@@ -198,7 +211,8 @@ function fetchServantData() {
  * Fetches all the banner data from the Google spreadsheet.
  */
 function fetchBanners() {
-    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
+    const bannerQuery = new google.visualization
+        .Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
             console.error('Error fetching banners data: ', response.getMessage());
@@ -259,7 +273,9 @@ function fetchBannerRelationships() {
 // Load all units in the selected class {
 /**
  * Fetches all the Servants in a given class.
- * @param {string} className - the name of the class. If 'EXTRA' is provided, displays all Extra-class units in this order: Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast.
+ * @param {string} className - The name of the class. If 'EXTRA' is provided, displays all
+ *                 Extra-class units in this order: Ruler, Alter-Ego, Avenger, Moon-Cancer,
+ *                 Foreigner, Pretender, Beast.
  */
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
@@ -279,7 +295,8 @@ function fetchAllServantsInClass(className) {
         }
         let classData;
         if (className == "EXTRA") {
-            classData = servantData.filter(servant => servant.sClass > 8).sort((a, b) => a.sClass - b.sClass);
+            classData = servantData
+                .filter(servant => servant.sClass > 8).sort((a, b) => a.sClass - b.sClass);
         } else {
             const classNumber = classNumbers.get(className);            
             classData = servantData.filter(servant => servant.sClass === classNumber);
@@ -294,9 +311,11 @@ function fetchAllServantsInClass(className) {
 // DISPLAY FUNCTIONS {
 // Display all units from the selected class {
 /**
- * Displays all the units in the selected class. If 'EXTRA' is selected, displays all Extra-class units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast).
+ * Displays all the units in the selected class. If 'EXTRA' is selected, displays all Extra-class
+ * units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast).
  * @param {Array} processedData - The collection of units to display.
- * @param {string} className - The name of the class to display. If 'EXTRA' is provided, displays 'EXTRA' followed by the names of all the subclasses contained in the Extra group.
+ * @param {string} className - The name of the class to display. If 'EXTRA' is provided, displays
+ *                 'EXTRA' followed by the names of all the subclasses grouped under Extra.
  */
 function displayClassUnits(processedData, className) {
     resetAll();
@@ -307,8 +326,8 @@ function displayClassUnits(processedData, className) {
     const classTitleMap = {
         'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)'
     };
-    document.getElementById('classTitle').innerHTML = `${classTitleMap[className] || className}<br />`;
-    
+    document.getElementById('classTitle').innerHTML = 
+        `${classTitleMap[className] || className}<br />`;
     processedData.forEach(row => {
         let servant = servantData.find(svt => svt.id === row.id);
         const servantContainer = document.createElement('div');
@@ -379,7 +398,8 @@ function displayBanners(servantID) {
     bannersForUnit = bannersForUnit.filter(col => col !== null);
     if (bannersForUnit.length <= 3) {
         const msg = document.createElement('h1');
-        msg.innerText = "There are no projected banners for this unit for EN in the foreseeable future.";
+        msg.innerText =
+            "There are no projected banners for this unit for EN in the foreseeable future.";
         bannersArea.appendChild(msg);
         return;
     }
@@ -396,8 +416,11 @@ function displayBanners(servantID) {
             bannerName: `<a target="_blank" href="${currentBanner[4]}">${currentBanner[0]}</a>`,
             bannerStartDate: currentBanner[1],
             bannerEndDate: currentBanner[2],
-            soloBanner: bannersForUnit[i + 1] === "Yes" ? "<span class='b'>Yes</span>" : "<span class='i'>No, shared</span>",
-            isNAConfirmed: bannersForUnit[i].toString().includes('.') ? "<span class='b'>Yes! <img class='yesno' src='./img/yes.png' /></span>" : "<span class='i'>No <img class='yesno' src='./img/no.png' /></span>"
+            soloBanner: bannersForUnit[i + 1] === "Yes" ?
+                "<span class='b'>Yes</span>" : "<span class='i'>No, shared</span>",
+            isNAConfirmed: bannersForUnit[i].toString().includes('.') ? 
+                "<span class='b'>Yes! <img class='yesno' src='./img/yes.png' /></span>" : 
+                "<span class='i'>No <img class='yesno' src='./img/no.png' /></span>"
         });
     }
     const unitCategories = {
@@ -407,12 +430,15 @@ function displayBanners(servantID) {
         "Story": "<span class='u'>Storylocked</span>"
     };
     const classTitle = document.createElement('h2');
-    classTitle.innerHTML = `Recently ended, currently active and projected future banners for [${bannersObject.unitName}], who is a ${unitCategories[bannersObject.unitCategory]} Unit:`;
+    classTitle.innerHTML = `Recently ended, currently active and projected future banners for ` +
+        `[${bannersObject.unitName}], who is a ` +
+        `${unitCategories[bannersObject.unitCategory]} Unit:`;
     bannersArea.appendChild(classTitle);
     const tbl = document.createElement('table');
     const thead = tbl.createTHead();
     const headRow = thead.insertRow();
-    ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?', 'Dates confirmed for Global?'].forEach(header => {
+    ['Banner Name', 'Banner Start Date', 'Banner End Date', 'Solo Banner?',
+        'Dates confirmed for Global?'].forEach(header => {
         const th = document.createElement('th');
         th.textContent = header;
         headRow.appendChild(th);
@@ -421,7 +447,8 @@ function displayBanners(servantID) {
     bannersObject.banners.forEach(item => {
         const row = tbody.insertRow();
         row.classList.add('small');
-        ['bannerName', 'bannerStartDate', 'bannerEndDate', 'soloBanner', 'isNAConfirmed'].forEach(field => {
+        ['bannerName', 'bannerStartDate', 'bannerEndDate', 'soloBanner',
+            'isNAConfirmed'].forEach(field => {
             const cell = row.insertCell();
             cell.innerHTML = item[field];
         });
