@@ -28,8 +28,8 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
  * loading.
  */
 function initialize() {
-    fetchGlobalThreshold(); // Fetch the global threshold value for NA-released units
-    Promise.all([fetchBanners(), fetchBannerRelationships()]) // Fetch banner data to keep in ram
+    fetchGlobalThreshold(); // Get global threshold value for NA-released units
+    Promise.all([fetchBanners(), fetchBannerRelationships()]) // Get banner data to keep in memory
         .then(() => {
             addListeners();
             if (servantData == undefined) { fetchServantData(); }
@@ -155,7 +155,8 @@ function servantArrayToObject(servantArray) {
  */
 async function fetchGlobalThreshold() {
     try {
-        const threshold = (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
+        const threshold = 
+            (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
             .then(r => r.json())).map(s => s.collectionNo).at(-1);
         Object.defineProperty(window, 'globalThreshold', {
             value: threshold,
@@ -168,8 +169,8 @@ async function fetchGlobalThreshold() {
             writable: false,
             configurable: false
         });
-        console
-            .error('Error fetching global NA threshold from Atlas, will only display JP links!');
+        console.error
+            ('Error fetching global NA threshold from Atlas, will only display JP links!');
     }
 }
 // }
@@ -185,15 +186,16 @@ function fetchServantData() {
     query.send(servantResponse => {
         const servantData = 
             servantArrayToObject(filterSheetData(servantResponse
-                .getDataTable(), [0,1,4,3]).slice(1));
+                .getDataTable(), [0, 1, 4, 3]));
         const statusQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new Set(
-                filterSheetData(statusResponse.getDataTable(), [0, 1, 2]).slice(1)
+                filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
                 .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0])
             );
-            const filteredServantData = servantData.filter(row => !unwantedIds.has(row.id));
+            const filteredServantData = 
+                servantData.slice(1).filter(row => !unwantedIds.has(row.id));
             Object.defineProperty(window, 'servantData', {
                 value: filteredServantData,
                 writable: false,
