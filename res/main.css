@@ -148,9 +148,10 @@ thead {
     display: inline-block;
     justify-content: center;
     text-align: center;
-    overflow-wrap: break-word;
     width: 130px;
     margin: 30px;
+    height: 250px;
+    vertical-align: top;
 }
 
 .item img { display: block; }

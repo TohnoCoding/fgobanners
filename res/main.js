@@ -14,7 +14,7 @@ const spreadsheetLink =
     'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const bannerSheetRowOffset = 400;
-const versionNumber = '1.2';
+const versionNumber = '1.3';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
@@ -341,7 +341,6 @@ function displayClassUnits(processedData, className) {
         const servantName = document.createElement('span');
         servantName.id = 'svtName' + servant.id;
         servantName.innerHTML = servant.name;
-        servantName.setAttribute('class', 'invisible');
         servantContainer.append(servantImg, servantName);
         container.appendChild(servantContainer);
     });
@@ -386,8 +385,7 @@ function displaySingleServantByID(id) {
         delete itemContainer.clickHandler;
     }
     displayBanners(id);
-    const svtName = document.getElementById('svtName' + id);
-    svtName.setAttribute('class', 'invisible');
+    document.getElementById('svtName' + id).setAttribute('class', 'invisible');
 }
 // }
 
