@@ -14,7 +14,7 @@ const spreadsheetLink =
     'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const bannerSheetRowOffset = 400;
-const versionNumber = '1.1';
+const versionNumber = '1.2';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
@@ -56,7 +56,6 @@ function addListeners() {
         blinds.style.height = isVisible ? '141px' : '0';
     });
 }
-
 // }
 // }
 
@@ -194,6 +193,7 @@ function fetchServantData() {
                 .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0])
             );
+            unwantedIds.add(83).add(152);
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
             Object.defineProperty(window, 'servantData', {
@@ -204,7 +204,6 @@ function fetchServantData() {
         });
     });
 }
-
 // }
 
 
@@ -340,9 +339,9 @@ function displayClassUnits(processedData, className) {
         servantImg.src = servant.imageUrl.replace('.png', '_bordered.png');
         servantImg.classList.add('svtImg');
         const servantName = document.createElement('span');
-        servantName.classList.add('svtName', 'invisible');
         servantName.id = 'svtName' + servant.id;
         servantName.innerHTML = servant.name;
+        servantName.setAttribute('class', 'invisible');
         servantContainer.append(servantImg, servantName);
         container.appendChild(servantContainer);
     });
@@ -358,16 +357,14 @@ function displaySingleServantByID(id) {
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
     const servantImg = servantContainer.querySelector('img');
     servantImg.style.marginTop = '15px';
-    if (servantContainer.clickHandler) {
-        servantContainer.removeEventListener('click', servantContainer.clickHandler);
-        delete servantContainer.clickHandler;
-    }
     const container = document.getElementById('servant-container');
     Array.from(container.children).forEach(child => {
         if (child.getAttribute('aria-servantId') != id) {
             child.remove();
         }
     });
+    const atlasLinks = document.querySelectorAll(`[class='atlas']`);
+    atlasLinks.forEach(atlasItem => { atlasItem.remove(); });
     document.getElementById('classTitle').style.display = 'none';
     const linkSpan = document.createElement('div');
     linkSpan.classList.add('atlas');
@@ -383,7 +380,14 @@ function displaySingleServantByID(id) {
         linkSpan.append(document.createElement('br'), createLink('NA'));
     }
     servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
+    const itemContainer = document.querySelector(`[class='item']`);
+    if (itemContainer.clickHandler) {
+        itemContainer.removeEventListener('click', itemContainer.clickHandler);
+        delete itemContainer.clickHandler;
+    }
     displayBanners(id);
+    const svtName = document.getElementById('svtName' + id);
+    svtName.setAttribute('class', 'invisible');
 }
 // }
 
