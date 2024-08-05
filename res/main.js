@@ -13,8 +13,7 @@ Object.defineProperty(window,
 const spreadsheetLink =
     'https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-const bannerSheetRowOffset = 400;
-const versionNumber = '1.4';
+const versionNumber = '1.4.1';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
@@ -212,8 +211,7 @@ function fetchServantData() {
  * Fetches all the banner data from the Google spreadsheet.
  */
 function fetchBanners() {
-    const bannerQuery = new google.visualization
-        .Query(`${spreadsheetLink}?sheet=Data&q=select * offset ${bannerSheetRowOffset}`);
+    const bannerQuery = new google.visualization.Query(`${spreadsheetLink}?sheet=Data`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
             console.error('Error fetching banners data: ', response.getMessage());
@@ -415,7 +413,8 @@ function displayBanners(servantID) {
         banners: []
     };
     for (let i = 3; i < bannersForUnit.length; i += 2) {
-        const currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
+        let currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
+        if (currentBanner[4] === null || currentBanner[4] == "") { currentBanner[4] = "#";}
         bannersObject.banners.push({
             bannerID: bannersForUnit[i],
             bannerName: `<a target="_blank" href="${currentBanner[4]}">${currentBanner[0]}</a>`,
