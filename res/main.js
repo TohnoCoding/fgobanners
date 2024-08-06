@@ -10,22 +10,21 @@ Object.defineProperty(window,
     'bannerRelationships', { value: undefined, writable: true, configurable: true });
 Object.defineProperty(window,
     'globalThreshold', { value: undefined, writable: true, configurable: true });
-const spreadsheetLink =
-    'https://docs.google.com/spreadsheets/d/' +
+const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/' +
     '1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const versionNumber = '1.4.1';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
-        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ]);
+        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ], ["Beast", 38]);
 // }
 
 
 // Page initialization {
 /**
- * Initializes all required elements by calling all necessary functions when the DOM is
- * finished loading.
+ * Initializes all required elements by calling all necessary functions when 
+ * the DOM is finished loading.
  */
 function initialize() {
     fetchGlobalThreshold(); // Get global threshold value for NA-released units
@@ -132,8 +131,8 @@ function filterSheetData(dataTable, columnIndices) {
 /**
  * Creates a plain Javascript object from the specified Servant array.
  * @param {Array} servantArray - The array of Servants to create an object from.
- * @returns {Object} A plain Javascript object containing the Servant data
- *                   (internal game ID, name, portrait image URL and class number).
+ * @returns {Object} A plain Javascript object containing the Servant data (internal
+ *                   game ID, name, portrait image URL and class number).
  */
 function servantArrayToObject(servantArray) {
     return servantArray.map(servant => ({
@@ -158,8 +157,7 @@ function servantArrayToObject(servantArray) {
 async function fetchGlobalThreshold() {
     try {
         const threshold = 
-            (await
-            fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
+            (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
             .then(r => r.json())).map(s => s.collectionNo).at(-1);
         Object.defineProperty(window, 'globalThreshold', {
             value: threshold,
@@ -172,9 +170,8 @@ async function fetchGlobalThreshold() {
             writable: false,
             configurable: false
         });
-        console.error
-            ('Error fetching global NA threshold from Atlas, ' +
-            'will only display JP links!');
+        console.error('Error fetching global NA threshold from Atlas, will only ' +
+            'display JP links!');
     }
 }
 // }
@@ -186,14 +183,13 @@ async function fetchGlobalThreshold() {
  * Google spreadsheet.
  */
 function fetchServantData() {
-    const query = 
-        new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
+    const query = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
     query.send(servantResponse => {
         const servantData = 
             servantArrayToObject(filterSheetData(servantResponse
                 .getDataTable(), [0, 1, 4, 3]));
-        const statusQuery = 
-            new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
+        const statusQuery = new google.visualization.
+            Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new Set(
                 filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
@@ -219,12 +215,11 @@ function fetchServantData() {
  * Fetches all the banner data from the Google spreadsheet.
  */
 function fetchBanners() {
-    const bannerQuery =
-        new google.visualization.Query(`${spreadsheetLink}?sheet=Data`);
+    const bannerQuery = new google.visualization.
+        Query(`${spreadsheetLink}?sheet=Data`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
-            console.error('Error fetching banners data: ',
-                response.getMessage());
+            console.error('Error fetching banners data: ', response.getMessage());
             reject('Error fetching banners data: ', response.getMessage());
             alert('Error fetching banners data: ' + response.getMessage());
             return;
@@ -248,11 +243,11 @@ function fetchBanners() {
 
 // Get the correlations between banners and units {
 /**
- * Gets the relationships between the banners and the units appearing in each.
+ * Gets the relationships between the fetched banners and the units that appear in each.
  */
 function fetchBannerRelationships() {
-    const bannerQuery =
-        new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
+    const bannerQuery = new google.visualization.
+        Query(`${spreadsheetLink}?sheet=Data2`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
             console.error('Error fetching banner relationship data: ',
@@ -265,8 +260,7 @@ function fetchBannerRelationships() {
         }
         const dataTable = response.getDataTable();
         if (!dataTable) {
-            console.
-                error('Invalid dataTable object for banner relationships');
+            console.error('Invalid dataTable object for banner relationships');
             reject('Invalid dataTable object for banner relationships');
             alert('Invalid dataTable object for banner relationships');
             return;
@@ -287,13 +281,13 @@ function fetchBannerRelationships() {
 // Load all units in the selected class {
 /**
  * Fetches all the Servants in a given class.
- * @param {string} className - The name of the class. If 'EXTRA' is provided,
- *                 displays all Extra-class units in this order: Ruler,
- *                 Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast.
+ * @param {string} className - The name of the class. If 'EXTRA' is provided, displays all
+ *                 Extra-class units in this order: Ruler, Alter-Ego, Avenger, Moon-Cancer,
+ *                 Foreigner, Pretender, Beast.
  */
 function fetchAllServantsInClass(className) {
-    const classQuery =
-        new google.visualization.Query(`${spreadsheetLink}?sheet=${className}`);
+    const classQuery = new google.visualization.
+        Query(`${spreadsheetLink}?sheet=${className}`);
     classQuery.send(function (response) {
         if (response.isError()) {
             console.error('Error fetching class data: ', response.getMessage());
@@ -311,12 +305,10 @@ function fetchAllServantsInClass(className) {
         let classData;
         if (className == "EXTRA") {
             classData = servantData
-                .filter(servant => servant.sClass > 8)
-                .sort((a, b) => a.sClass - b.sClass);
+                .filter(servant => servant.sClass > 8).sort((a, b) => a.sClass - b.sClass);
         } else {
             const classNumber = classNumbers.get(className);            
-            classData =
-                servantData.filter(servant => servant.sClass === classNumber);
+            classData = servantData.filter(servant => servant.sClass === classNumber);
         }
         displayClassUnits(classData, this.className);
     }.bind({ className: className }));
@@ -328,33 +320,27 @@ function fetchAllServantsInClass(className) {
 // DISPLAY FUNCTIONS {
 // Display all units from the selected class {
 /**
- * Displays all the units in the selected class. If 'EXTRA' is selected, displays
- * all Extra-class units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner,
- * Pretender, Beast).
+ * Displays all the units in the selected class. If 'EXTRA' is selected, displays all Extra-class
+ * units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast).
  * @param {Array} processedData - The collection of units to display.
- * @param {string} className - The name of the class to display. If 'EXTRA' is
- *                 provided, displays 'EXTRA' followed by the names of all the 
- *                 subclasses grouped under Extra.
+ * @param {string} className - The name of the class to display. If 'EXTRA' is provided, displays
+ *                 'EXTRA' followed by the names of all the subclasses grouped under Extra.
  */
 function displayClassUnits(processedData, className) {
     resetAll();
-    document.getElementById('fetch' + className)
-        .classList.add('svtButtonSelected');
+    document.getElementById('fetch' + className).classList.add('svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = '';
     const classTitleMap = {
-        'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, ' +
-        'Foreigner, Pretender, Beast)'
+        'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)'
     };
     document.getElementById('classTitle').innerHTML = 
         `${classTitleMap[className] || className}<br />`;
     processedData.forEach(row => {
         let servant = servantData.find(svt => svt.id === row.id);
         const servantContainer = document.createElement('div');
-        servantContainer
-            .addEventListener('click', () => 
-            displaySingleServantByID(servant.id));
+        servantContainer.addEventListener('click', () => displaySingleServantByID(servant.id));
         servantContainer.classList.add('item');
         servantContainer.setAttribute('aria-servantId', servant.id);
         const servantImg = document.createElement('img');
@@ -376,12 +362,11 @@ function displayClassUnits(processedData, className) {
  * Removes all units other than the selected one from the page.
  */
 function displaySingleServantByID(id) {
-    const servantContainer =
-        document.querySelector(`[aria-servantId="${id}"]`);
+    const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
     const servantImg = servantContainer.querySelector('img');
     servantImg.style.marginTop = '15px';
     const container = document.getElementById('servant-container');
-    Array.from(container.children).forEach(child => {
+    [...container.children].forEach(child => {
         if (child.getAttribute('aria-servantId') != id) {
             child.remove();
         }
@@ -402,26 +387,21 @@ function displaySingleServantByID(id) {
     if (id <= globalThreshold) {
         linkSpan.append(document.createElement('br'), createLink('NA'));
     }
-    servantContainer.insertBefore(linkSpan,
-        servantContainer.querySelector('span'));
+    servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
     const itemContainer = document.querySelector(`[class='item']`);
     if (itemContainer.clickHandler) {
-        itemContainer.removeEventListener('click',
-            itemContainer.clickHandler);
+        itemContainer.removeEventListener('click', itemContainer.clickHandler);
         delete itemContainer.clickHandler;
     }
     if (document.getElementById('disclaimer').style.display != 'block')
     { displayBanners(id); }
-    document.getElementById('svtName' + id)
-        .setAttribute('class', 'invisible');
 }
 // }
 
 
 // Display the collated banners corresponding to a single servant ID {
 /**
- * Displays a table with the banners found in the Google spreadsheet for the
- * selected unit.
+ * Displays a table with the banners found in the Google spreadsheet for the selected unit.
  * @param {number} servantID - The internal game ID of the unit to isolate.
  */
 function displayBanners(servantID) {
@@ -432,8 +412,8 @@ function displayBanners(servantID) {
     if (bannersForUnit.length <= 3) {
         const msg = document.createElement('h1');
         msg.innerText =
-            "There are no projected banners for this unit for EN " +
-            "in the foreseeable future.";
+            "There are no projected banners for this unit for EN in the foreseeable " +
+            " future.";
         bannersArea.appendChild(msg);
         return;
     }
@@ -444,23 +424,19 @@ function displayBanners(servantID) {
         banners: []
     };
     for (let i = 3; i < bannersForUnit.length; i += 2) {
-        let currentBanner =
-            bannersDataTable.find(row => row[3] == bannersForUnit[i]);
-        if (currentBanner[4] === null || currentBanner[4] == "")
-        { currentBanner[4] = "#";}
+        let currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
+        if (currentBanner[4] === null || currentBanner[4] == "") { currentBanner[4] = "#";}
         bannersObject.banners.push({
             bannerID: bannersForUnit[i],
-            bannerName: `<a target="_blank" href="${currentBanner[4]}">` +
-                `${currentBanner[0]}</a>`,
+            bannerName:
+                `<a target="_blank" href="${currentBanner[4]}">${currentBanner[0]}</a>`,
             bannerStartDate: currentBanner[1],
             bannerEndDate: currentBanner[2],
             soloBanner: bannersForUnit[i + 1] === "Yes" ?
                 "<span class='b'>Yes</span>" : "<span class='i'>No, shared</span>",
             isNAConfirmed: bannersForUnit[i].toString().includes('.') ? 
-                "<span class='b'>Yes! <img class='yesno' " +
-                    "src='./img/yes.png' /></span>" : 
-                "<span class='i'>No <img class='yesno' " +
-                    "src='./img/no.png' /></span>"
+                "<span class='b'>Yes! <img class='yesno' src='./img/yes.png' /></span>" : 
+                "<span class='i'>No <img class='yesno' src='./img/no.png' /></span>"
         });
     }
     const unitCategories = {
@@ -470,9 +446,8 @@ function displayBanners(servantID) {
         "Story": "<span class='u'>Storylocked</span>"
     };
     const classTitle = document.createElement('h2');
-    classTitle.innerHTML =
-        `Recently ended, currently active and projected future banners for ` +
-        `[${bannersObject.unitName}], who is a ` +
+    classTitle.innerHTML = `Recently ended, currently active and projected future banners ` +
+        `for [${bannersObject.unitName}], who is a ` +
         `${unitCategories[bannersObject.unitCategory]} Unit:`;
     bannersArea.appendChild(classTitle);
     const tbl = document.createElement('table');
@@ -496,8 +471,7 @@ function displayBanners(servantID) {
     });
     tbl.appendChild(tbody);
     bannersArea.appendChild(tbl);
-    Array.from(document.getElementsByClassName('svtName'))
-        .forEach(name => name.remove());
+   [...document.getElementsByClassName('svtName')].forEach(name => name.remove());
 }
 // }
 // }
