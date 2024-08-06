@@ -17,7 +17,7 @@ const versionNumber = '1.4.1';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
-        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ], ["Beast", 38]);
+        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ]);
 // }
 
 
