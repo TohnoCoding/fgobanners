@@ -44,10 +44,8 @@ function initialize() {
  * Adds all event listeners to the DOM elements that require them.
  */
 function addListeners() {
-    const classes =
-        ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin',
-        'Berserker', 'EXTRA'];
-    classes.forEach(cls => {
+    ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin',
+        'Berserker', 'EXTRA'].forEach(cls => {
         document.getElementById(`fetch${cls}`)
             .addEventListener('click', () => fetchAllServantsInClass(cls));
     });
@@ -125,24 +123,6 @@ function filterSheetData(dataTable, columnIndices) {
     return filteredData;
 }
 // }
-
-
-// Converts fetched servant array to named objects {
-/**
- * Creates a plain Javascript object from the specified Servant array.
- * @param {Array} servantArray - The array of Servants to create an object from.
- * @returns {Object} A plain Javascript object containing the Servant data (internal
- *                   game ID, name, portrait image URL and class number).
- */
-function servantArrayToObject(servantArray) {
-    return servantArray.map(servant => ({
-        id: servant[0],
-        name: servant[1],
-        imageUrl: servant[2],
-        sClass: servant[3]
-    }));
-}
-// }
 // }
 
 
@@ -186,8 +166,13 @@ function fetchServantData() {
     const query = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
     query.send(servantResponse => {
         const servantData = 
-            servantArrayToObject(filterSheetData(servantResponse
-                .getDataTable(), [0, 1, 4, 3]));
+            filterSheetData(servantResponse.getDataTable(), [0, 1, 4, 3])
+            .map(servant => ({
+                id: servant[0],
+                name: servant[1],
+                imageUrl: servant[2],
+                sClass: servant[3]
+            }));
         const statusQuery = new google.visualization.
             Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
