@@ -13,7 +13,6 @@ Object.defineProperty(window,
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/' +
     '1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-const versionNumber = '1.4.1';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
@@ -34,7 +33,6 @@ function initialize() {
             addListeners();
             if (servantData == undefined) { fetchServantData(); }
         });
-    displayVersionNumber();
 }
 // }
 
@@ -60,26 +58,6 @@ function addListeners() {
 
 
 // HELPERS {
-// Display version number {
-/**
- * Updates the displayed version number in both the visible DOM and the meta tags.
- */
-function displayVersionNumber() {
-    document.title += ` v${versionNumber}`;
-    document.getElementById('versionNumber').textContent = versionNumber;
-    const metaTags = [
-        { selector: 'meta[property="og:title"]', prefix: 'FGO Servant Banners ' },
-        { selector: 'meta[name="twitter:title"]', prefix: 'FGO Servant Banners ' }
-    ];
-    metaTags.forEach(tag => {
-        const element = document.querySelector(tag.selector);
-        if (element) { element.setAttribute('content',
-            `${tag.prefix}v${versionNumber}`); }
-    });
-}
-// }
-
-
 // Clean out the page {
 /**
  * Resets all UI elements to their default state. Required when selecting a class.
@@ -176,12 +154,12 @@ function fetchServantData() {
         const statusQuery = new google.visualization.
             Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
-            const unwantedIds = new Set(
-                filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
+            const unwantedIds = new 
+                Set(filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
                 .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0])
             );
-            unwantedIds.add(83).add(152);
+            unwantedIds.add(83).add(152); // Solomon IDs
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
             Object.defineProperty(window, 'servantData', {
@@ -266,21 +244,23 @@ function fetchBannerRelationships() {
 // Load all units in the selected class {
 /**
  * Fetches all the Servants in a given class.
- * @param {string} className - The name of the class. If 'EXTRA' is provided, displays all
- *                 Extra-class units in this order: Ruler, Alter-Ego, Avenger, Moon-Cancer,
- *                 Foreigner, Pretender, Beast.
+ * @param {string} className - The name of the class. If 'EXTRA' is provided, displays
+ *                 all Extra-class units in this order: Ruler, Alter-Ego, Avenger,
+ *                 Moon-Cancer, Foreigner, Pretender, Beast.
  */
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.
         Query(`${spreadsheetLink}?sheet=${className}`);
     classQuery.send(function (response) {
         if (response.isError()) {
-            console.error('Error fetching class data: ', response.getMessage());
+            console
+                .error('Error fetching class data: ', response.getMessage());
             return;
         }
         const dataTable = response.getDataTable();
         if (!dataTable) {
-            console.error('Invalid dataTable object for class', this.className);
+            console
+                .error('Invalid dataTable object for class', this.className);
             return;
         }
         if (servantData === null) {
@@ -290,10 +270,12 @@ function fetchAllServantsInClass(className) {
         let classData;
         if (className == "EXTRA") {
             classData = servantData
-                .filter(servant => servant.sClass > 8).sort((a, b) => a.sClass - b.sClass);
+                .filter(servant => servant.sClass > 8)
+                .sort((a, b) => a.sClass - b.sClass);
         } else {
             const classNumber = classNumbers.get(className);            
-            classData = servantData.filter(servant => servant.sClass === classNumber);
+            classData = servantData
+                .filter(servant => servant.sClass === classNumber);
         }
         displayClassUnits(classData, this.className);
     }.bind({ className: className }));
@@ -305,11 +287,13 @@ function fetchAllServantsInClass(className) {
 // DISPLAY FUNCTIONS {
 // Display all units from the selected class {
 /**
- * Displays all the units in the selected class. If 'EXTRA' is selected, displays all Extra-class
- * units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast).
+ * Displays all the units in the selected class. If 'EXTRA' is selected, displays
+ * all Extra-class units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner,
+ * Pretender, Beast).
  * @param {Array} processedData - The collection of units to display.
- * @param {string} className - The name of the class to display. If 'EXTRA' is provided, displays
- *                 'EXTRA' followed by the names of all the subclasses grouped under Extra.
+ * @param {string} className - The name of the class to display. If 'EXTRA' is
+ *                 provided, displays 'EXTRA' followed by the names of all the
+ *                 subclasses grouped under Extra.
  */
 function displayClassUnits(processedData, className) {
     resetAll();
@@ -318,14 +302,16 @@ function displayClassUnits(processedData, className) {
     const container = document.getElementById('servant-container');
     container.innerHTML = '';
     const classTitleMap = {
-        'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender, Beast)'
+        'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, ' +
+        'Pretender, Beast)'
     };
     document.getElementById('classTitle').innerHTML = 
         `${classTitleMap[className] || className}<br />`;
     processedData.forEach(row => {
         let servant = servantData.find(svt => svt.id === row.id);
         const servantContainer = document.createElement('div');
-        servantContainer.addEventListener('click', () => displaySingleServantByID(servant.id));
+        servantContainer.addEventListener
+            ('click', () => displaySingleServantByID(servant.id));
         servantContainer.classList.add('item');
         servantContainer.setAttribute('aria-servantId', servant.id);
         const servantImg = document.createElement('img');
@@ -386,7 +372,8 @@ function displaySingleServantByID(id) {
 
 // Display the collated banners corresponding to a single servant ID {
 /**
- * Displays a table with the banners found in the Google spreadsheet for the selected unit.
+ * Displays a table with the banners found in the Google spreadsheet for the selected
+ * unit.
  * @param {number} servantID - The internal game ID of the unit to isolate.
  */
 function displayBanners(servantID) {
@@ -410,7 +397,8 @@ function displayBanners(servantID) {
     };
     for (let i = 3; i < bannersForUnit.length; i += 2) {
         let currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
-        if (currentBanner[4] === null || currentBanner[4] == "") { currentBanner[4] = "#";}
+        if (currentBanner[4] === null || currentBanner[4] == "")
+        { currentBanner[4] = "#"; }
         bannersObject.banners.push({
             bannerID: bannersForUnit[i],
             bannerName:
@@ -420,8 +408,8 @@ function displayBanners(servantID) {
             soloBanner: bannersForUnit[i + 1] === "Yes" ?
                 "<span class='b'>Yes</span>" : "<span class='i'>No, shared</span>",
             isNAConfirmed: bannersForUnit[i].toString().includes('.') ? 
-                "<span class='b'>Yes! <img class='yesno' src='./img/yes.png' /></span>" : 
-                "<span class='i'>No <img class='yesno' src='./img/no.png' /></span>"
+                "<span class='b'>Yes! <img class='yn' src='./img/y.png' /></span>" :
+                "<span class='i'>No <img class='yn' src='./img/n.png' /></span>"
         });
     }
     const unitCategories = {
@@ -431,8 +419,8 @@ function displayBanners(servantID) {
         "Story": "<span class='u'>Storylocked</span>"
     };
     const classTitle = document.createElement('h2');
-    classTitle.innerHTML = `Recently ended, currently active and projected future banners ` +
-        `for [${bannersObject.unitName}], who is a ` +
+    classTitle.innerHTML = `Recent, current and projected ` +
+        ` banners for [${bannersObject.unitName}], who is a ` +
         `${unitCategories[bannersObject.unitCategory]} Unit:`;
     bannersArea.appendChild(classTitle);
     const tbl = document.createElement('table');

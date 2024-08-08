@@ -35,7 +35,7 @@ body {
 
 hr { margin-top: 15px; margin-bottom: 15px; }
 
-.yesno { vertical-align: middle; }
+.yn { vertical-align: middle; }
 
 /* Page Layout */
 #page { padding-top: 160px; }
