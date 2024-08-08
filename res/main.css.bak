@@ -69,7 +69,7 @@ hr { margin-top: 15px; margin-bottom: 15px; }
 
 #servant-container { text-align: center; }
 
-#banner-container { text-align: center; margin-right: -3px; }
+#banner-container { text-align: center; margin-right: -2px; }
 
 #disclaimer { padding: 2%; display: none; }
 
