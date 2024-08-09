@@ -87,6 +87,7 @@ function resetAll() {
 function filterSheetData(dataTable, columnIndices) {
     if (!dataTable) {
         console.error('Invalid dataTable passed to filterSheetData');
+        alert('Invalid dataTable passed to filterSheetData');
         return [];
     }
     const numRows = dataTable.getNumberOfRows();
@@ -129,6 +130,8 @@ async function fetchGlobalThreshold() {
             configurable: false
         });
         console.error('Error fetching global NA threshold from Atlas, will only ' +
+            'display JP links!');
+        alert('Error fetching global NA threshold from Atlas, will only ' +
             'display JP links!');
     }
 }
@@ -183,14 +186,12 @@ function fetchBanners() {
     bannerQuery.send(function(response) {
         if (response.isError()) {
             console.error('Error fetching banners data: ', response.getMessage());
-            reject('Error fetching banners data: ', response.getMessage());
             alert('Error fetching banners data: ' + response.getMessage());
             return;
         }
         const dataTable = response.getDataTable();
         if (!dataTable) {
             console.error('Invalid dataTable object for banners list');
-            reject('Invalid dataTable object for banners list');
             alert('Invalid dataTable object for banners list');
             return;
         }
@@ -206,7 +207,8 @@ function fetchBanners() {
 
 // Get the correlations between banners and units {
 /**
- * Gets the relationships between the fetched banners and the units that appear in each.
+ * Gets the relationships between the fetched banners and the units that appear 
+ * in each.
  */
 function fetchBannerRelationships() {
     const bannerQuery = new google.visualization.
@@ -215,8 +217,6 @@ function fetchBannerRelationships() {
         if (response.isError()) {
             console.error('Error fetching banner relationship data: ',
                 response.getMessage());
-            reject('Error fetching banner relationship data: ',
-                response.getMessage());
             alert('Error fetching banner relationship data: ',
                 response.getMessage());
             return;
@@ -224,7 +224,6 @@ function fetchBannerRelationships() {
         const dataTable = response.getDataTable();
         if (!dataTable) {
             console.error('Invalid dataTable object for banner relationships');
-            reject('Invalid dataTable object for banner relationships');
             alert('Invalid dataTable object for banner relationships');
             return;
         }
@@ -244,9 +243,10 @@ function fetchBannerRelationships() {
 // Load all units in the selected class {
 /**
  * Fetches all the Servants in a given class.
- * @param {string} className - The name of the class. If 'EXTRA' is provided, displays
- *                 all Extra-class units in this order: Ruler, Alter-Ego, Avenger,
- *                 Moon-Cancer, Foreigner, Pretender, Beast.
+ * @param {string} className - The name of the class. If 'EXTRA' is provided,
+ *                 displays all Extra-class units in this order: Ruler,
+ *                 Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender,
+ *                 Beast.
  */
 function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.
@@ -255,16 +255,19 @@ function fetchAllServantsInClass(className) {
         if (response.isError()) {
             console
                 .error('Error fetching class data: ', response.getMessage());
+            alert('Error fetching class data: ', response.getMessage());
             return;
         }
         const dataTable = response.getDataTable();
         if (!dataTable) {
             console
                 .error('Invalid dataTable object for class', this.className);
+            alert('Invalid dataTable object for class', this.className);
             return;
         }
         if (servantData === null) {
             console.error('Error loading Servant list');
+            alert('Error loading Servant list');
             return;
         }
         let classData;
