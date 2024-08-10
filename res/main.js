@@ -150,7 +150,7 @@ function fetchServantData() {
             filterSheetData(servantResponse.getDataTable(), [0, 1, 4, 3])
             .map(servant => ({
                 id: servant[0],
-                name: servant[1],
+                name: servant[1].replace("Altria", "Artoria"),
                 imageUrl: servant[2],
                 sClass: servant[3]
             }));
