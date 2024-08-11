@@ -387,7 +387,7 @@ function displayBanners(servantID) {
     if (bannersForUnit.length <= 3) {
         const msg = document.createElement('h1');
         msg.innerText =
-            "There are no projected banners for this unit for EN in the foreseeable " +
+            "There are no projected banners for this Servant for EN in the foreseeable " +
             " future.";
         bannersArea.appendChild(msg);
         return;

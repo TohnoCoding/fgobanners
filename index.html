@@ -2,25 +2,37 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="FGO Servant Servant Banners v1.4.1" />
+    <meta property="og:title" content="FGO Servant Servant Banners v1.5" />
 	<meta property="og:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta property="og:image" content="./img/meta.jpg" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FGO Servant Servant Banners v1.4.1" />
+    <meta name="twitter:title" content="FGO Servant Servant Banners v1.5" />
 	<meta name="twitter:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
-	<meta name="twitter:image" content="./img/meta.jpg" />
+	<meta name="twitter:image" content="./img/metaimg.jpg" />
     <title>FGO Servant Banners for the EN/Global Server</title>
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="./res/main.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="./res/main.js"></script>
+    <script type="text/javascript">
+        google.load('visualization', '1', {packages: ['corechart', 'line']});
+        google.setOnLoadCallback(function () {
+            var spreadsheetUrl = "https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/edit?range=A7";
+            var query = new google.visualization.Query(spreadsheetUrl);
+            query.send(function (response) {
+                var dataTable = response.getDataTable();
+                document.getElementById("lastupdate").innerHTML = dataTable.getValue(0, 0);
+            });
+        });     
+    </script>
 </head>
 <body>
     <div id="page">
         <div id="pageHeader">
-            <h1 class="b title">FGO Servant Banners v<span id="versionNumber">X</span></h1>
-            <h3 class="subtitle">for the EN/Global server<h3>
+            <h1 class="b title">FGO Servant Banners</h1>
+            <h3 class="subtitle">for the EN/Global server</h3>
+            <h6 class="lastupdate">Spreadsheet last updated: <span id="lastupdate">[Loading...]</span></h6>
         </div>
         <div id="pageContainer">
             <button id="toggler" class="b">Click/Tap here to show/hide usage instructions!</button>
@@ -29,7 +41,7 @@
             picked your target, there will be links below them to Atlas Academy Database so you can
             quickly check their kits and features. <span class="b i">REMEMBER:</span> All displayed
             banner information is <span class="b i">strictly speculation</span> until confirmed via official
-            announcements. Site performance might be affected a bit depending on your network
+            announcements. Site performance might be affected a bit on initial load depending on your network
             conditions, since data needs to be live-fetched from both Atlas Academy and the Banners by
             Servant Google Spreadsheet.</p>
             <button id="fetchSaber" class="svtButton"><img src="./img/saber.png" /></button>&nbsp;&nbsp;
