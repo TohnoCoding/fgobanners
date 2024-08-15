@@ -191,3 +191,34 @@ thead {
 
 /* Counter */
 .counterlink { font-size: xx-small; }
+
+/* Loader */
+#loader {
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    font-size: 9.5vw;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: black;
+    -webkit-text-stroke: 5px white;
+}
+
+#loadertext::after {
+    content: "";
+    font-weight: bold;
+    /*font-family: 'Exo', cursive;*/
+    animation: dots 1.5s steps(1, end) infinite;
+}
+
+@keyframes dots {
+    0% { content: "Prefetching\Aimages"; }
+    25% { content: "Prefetching\Aimages."; }
+    50% { content: "Prefetching\Aimages.."; }
+    75% { content: "Prefetching\Aimages..."; }
+}

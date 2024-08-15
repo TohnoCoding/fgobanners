@@ -26,9 +26,11 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
  * the DOM is finished loading.
  */
 function initialize() {
-    fetchGlobalThreshold(); // Get global threshold value for NA-released units
-    Promise.all([fetchBanners(),
-        fetchBannerRelationships()]) // Get banner data to keep in memory
+    ; 
+    Promise.all([fetchLastUpdate(), // Gets last update timestamp
+        fetchGlobalThreshold(), // Get threshold value for NA units
+        fetchBanners(), // Gets raw banner data
+        fetchBannerRelationships()]) // Get collated banner data to keep in memory
         .then(() => {
             addListeners();
             if (servantData == undefined) { fetchServantData(); }
@@ -137,6 +139,20 @@ async function fetchGlobalThreshold() {
 }
 // }
 
+// Fetches the last update timestamp {
+/**
+ * Gets the recorded timestamp at which the spreadsheet was last updated.
+ */
+function fetchLastUpdate() {
+    const query = new google.visualization.
+        Query(spreadsheetLink.replace("gviz/tq", "edit?range=A7"));
+    query.send(function (response) {
+        const dataTable = response.getDataTable();
+        document.getElementById("lastupdate").innerHTML = dataTable.getValue(0, 0);
+    });
+}
+// }
+
 
 // Fetch full list of units {
 /**
@@ -144,18 +160,23 @@ async function fetchGlobalThreshold() {
  * Google spreadsheet.
  */
 function fetchServantData() {
-    const query = new google.visualization.Query(`${spreadsheetLink}?sheet=Servants`);
+    const query = new google.visualization.
+        Query(`${spreadsheetLink}?sheet=Servants`);
     query.send(servantResponse => {
         const servantData = 
             filterSheetData(servantResponse.getDataTable(), [0, 1, 4, 3])
-            .map(servant => ({
-                id: servant[0],
-                name: servant[1].replace("Altria", "Artoria"),
-                imageUrl: servant[2],
-                sClass: servant[3]
-            }));
-        const statusQuery = new google.visualization.
-            Query(`${spreadsheetLink}?sheet=Data2`);
+            .map(servant => {
+                const img = new Image();
+                img.src = servant[2].replace(".png", "_bordered.png");
+                return {
+                    id: servant[0],
+                    name: servant[1].replace("Altria", "Artoria"),
+                    sClass: servant[3],
+                    imageObject: img
+                };
+            });
+        const statusQuery = 
+            new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new 
                 Set(filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
@@ -165,6 +186,24 @@ function fetchServantData() {
             unwantedIds.add(83).add(152); // Solomon IDs
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
+                
+            const imagePromises = filteredServantData.map(s => {
+                return new Promise(resolve => {
+                    const img = s.imageObject;
+                    s.imageObject.onload = resolve;
+                    s.imageObject.onerror = resolve; // resolve even on failure
+                    img.src = img.src;
+                });
+            });
+            console.log(imagePromises.length + " promises set");
+            Promise.all(imagePromises).then(() => {
+                console.log("promises RESOLVED");
+            }).finally(() => {
+                console.log("forcing resolution");
+                document.getElementById('loader').style.visibility = 'hidden';
+            });
+            console.log("almost finishing");
+            
             Object.defineProperty(window, 'servantData', {
                 value: filteredServantData,
                 writable: false,
@@ -317,8 +356,7 @@ function displayClassUnits(processedData, className) {
             ('click', () => displaySingleServantByID(servant.id));
         servantContainer.classList.add('item');
         servantContainer.setAttribute('aria-servantId', servant.id);
-        const servantImg = document.createElement('img');
-        servantImg.src = servant.imageUrl.replace('.png', '_bordered.png');
+        const servantImg = servant.imageObject.cloneNode();
         servantImg.classList.add('svtImg');
         const servantName = document.createElement('div');
         servantName.setAttribute('class', 'svtName');
@@ -387,8 +425,8 @@ function displayBanners(servantID) {
     if (bannersForUnit.length <= 3) {
         const msg = document.createElement('h1');
         msg.innerText =
-            "There are no projected banners for this Servant for EN in the foreseeable " +
-            " future.";
+            "There are no projected banners for this Servant for EN in " + 
+            "the foreseeable future.";
         bannersArea.appendChild(msg);
         return;
     }
@@ -399,13 +437,15 @@ function displayBanners(servantID) {
         banners: []
     };
     for (let i = 3; i < bannersForUnit.length; i += 2) {
-        let currentBanner = bannersDataTable.find(row => row[3] == bannersForUnit[i]);
+        let currentBanner = bannersDataTable.
+            find(row => row[3] == bannersForUnit[i]);
         if (currentBanner[4] === null || currentBanner[4] == "")
         { currentBanner[4] = "#"; }
         bannersObject.banners.push({
             bannerID: bannersForUnit[i],
             bannerName:
-                `<a target="_blank" href="${currentBanner[4]}">${currentBanner[0]}</a>`,
+                `<a target="_blank" ` +
+                `href="${currentBanner[4]}">${currentBanner[0]}</a>`,
             bannerStartDate: currentBanner[1],
             bannerEndDate: currentBanner[2],
             soloBanner: bannersForUnit[i + 1] === "Yes" ?

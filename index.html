@@ -2,30 +2,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="FGO Servant Servant Banners v1.5" />
+    <meta property="og:title" content="FGO Servant Servant Banners v1.6" />
 	<meta property="og:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta property="og:image" content="./img/meta.jpg" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FGO Servant Servant Banners v1.5" />
+    <meta name="twitter:title" content="FGO Servant Servant Banners v1.6" />
 	<meta name="twitter:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta name="twitter:image" content="./img/metaimg.jpg" />
     <title>FGO Servant Banners for the EN/Global Server</title>
-    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="./res/main.css">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="./res/main.css" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="./res/main.js"></script>
-    <script type="text/javascript">
-        google.load('visualization', 'current', {packages: ['corechart', 'line']});
-        google.setOnLoadCallback(function () {
-            const spreadsheetUrl = "https://docs.google.com/spreadsheets/d/1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/edit?range=A7";
-            const query = new google.visualization.Query(spreadsheetUrl);
-            query.send(function (response) {
-                const dataTable = response.getDataTable();
-                document.getElementById("lastupdate").innerHTML = dataTable.getValue(0, 0);
-            });
-        });     
-    </script>
 </head>
 <body>
     <div id="page">
@@ -98,5 +87,6 @@
             </div>
         </div>
     </div>
+    <div id="loader"><span id="loadertext"></span></div>
 </body>
 </html>
