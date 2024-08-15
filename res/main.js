@@ -186,7 +186,6 @@ function fetchServantData() {
             unwantedIds.add(83).add(152); // Solomon IDs
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
-                
             const imagePromises = filteredServantData.map(s => {
                 return new Promise(resolve => {
                     const img = s.imageObject;
@@ -195,15 +194,9 @@ function fetchServantData() {
                     img.src = img.src;
                 });
             });
-            console.log(imagePromises.length + " promises set");
-            Promise.all(imagePromises).then(() => {
-                console.log("promises RESOLVED");
-            }).finally(() => {
-                console.log("forcing resolution");
+            Promise.all(imagePromises).then(() => {}).finally(() => {
                 document.getElementById('loader').style.visibility = 'hidden';
             });
-            console.log("almost finishing");
-            
             Object.defineProperty(window, 'servantData', {
                 value: filteredServantData,
                 writable: false,
