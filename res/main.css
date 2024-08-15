@@ -188,3 +188,8 @@ thead {
     margin-left: -15px;
     margin-right: -10px;
 }
+
+/* Counter */
+.counterimg { margin-bottom: -15px; }
+
+.counterlink { font-size: xx-small; }
