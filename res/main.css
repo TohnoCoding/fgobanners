@@ -20,6 +20,8 @@ body {
     overflow-x: hidden;
 }
 
+a { text-decoration: none; }
+
 @media (max-width: 445px) { body { font-size: 2em; } }
 
 /* Utility Classes */
@@ -38,6 +40,8 @@ body {
 .lastupdate { margin-top: 5px; padding-bottom: 5px; }
 
 .yn { vertical-align: middle; }
+
+.bannerstext { margin-top: 30px; margin-bottom: 5px; }
 
 h2 { font-weight: 150; }
 
@@ -82,14 +86,6 @@ hr { margin-top: 15px; margin-bottom: 15px; }
 .infobox { margin-top: 15px; margin-bottom: 20px; }
 
 /* Buttons */
-#toggler {
-    background: transparent;
-    border: 2px solid;
-    color: black !important;
-    padding: 10px;
-    margin-bottom: 5px;
-}
-
 .svtButton {
     transition-duration: 0.4s;
     background-color: transparent;
@@ -97,6 +93,7 @@ hr { margin-top: 15px; margin-bottom: 15px; }
     padding: 0px;
     opacity: 0.3;
     border: 0px;
+    cursor: grab;
 }
 
 .svtButtonSelected { opacity: 1.0 !important; }
@@ -118,31 +115,6 @@ thead {
     color: white;
 }
 
-/* Blinds */
-#blinds {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.5s ease-out;
-}
-
-#blinds.visible {
-    height: 151px;
-    transition: height 0.5s ease-out;
-}
-
-.blinds {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-#blinds img {
-    border-radius: 5px;
-    max-width: 100%;
-    height: auto;
-}
-
 /* Container and Items */
 .container { display: block; margin-left: -5px; }
 
@@ -159,7 +131,7 @@ thead {
     text-align: center;
     width: 130px;
     margin: 30px;
-    height: 250px;
+    height: 200px;
     vertical-align: top;
 }
 
@@ -194,31 +166,30 @@ thead {
 
 /* Loader */
 #loader {
-    background-color: rgba(0, 0, 0, 0.4);
-    height: 100%;
-    width: 100%;
-    z-index: 99999;
-    font-size: 9.5vw;
-    display: flex !important;
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100vw;
     position: fixed;
     top: 0;
     left: 0;
-    color: black;
-    -webkit-text-stroke: 5px white;
-}
-
-#loadertext::after {
-    content: "";
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999999;
+    font-size: 50px;
     font-weight: bold;
-    /*font-family: 'Exo', cursive;*/
-    animation: dots 1.5s steps(1, end) infinite;
+    color: black;
+    -webkit-text-stroke: 2px white;
 }
 
-@keyframes dots {
-    0% { content: "Prefetching\Aimages"; }
-    25% { content: "Prefetching\Aimages."; }
-    50% { content: "Prefetching\Aimages.."; }
-    75% { content: "Prefetching\Aimages..."; }
+#animation-frame {
+    width: 100px; /* Adjust as needed */
+    animation: animateFrames 1s steps(4) infinite;
+}
+
+@keyframes animateFrames {
+    0% { content: url('../img/load_icon_A01.png'); }
+    25% { content: url('../img/load_icon_A02.png'); }
+    50% { content: url('../img/load_icon_A03.png'); }
+    75% { content: url('../img/load_icon_A04.png'); }
 }

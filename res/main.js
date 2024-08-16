@@ -49,11 +49,6 @@ function addListeners() {
         document.getElementById(`fetch${cls}`)
             .addEventListener('click', () => fetchAllServantsInClass(cls));
     });
-    document.getElementById('toggler').addEventListener('click', function() {
-        const blinds = document.getElementById('blinds');
-        const isVisible = blinds.classList.toggle('visible');
-        blinds.style.height = isVisible ? '141px' : '0';
-    });
 }
 // }
 // }
@@ -170,7 +165,8 @@ function fetchServantData() {
                 img.src = servant[2].replace(".png", "_bordered.png");
                 return {
                     id: servant[0],
-                    name: servant[1].replace("Altria", "Artoria"),
+                    name: servant[1].
+                        replace("Altria", "Artoria"), // you can't change my mind
                     sClass: servant[3],
                     imageObject: img
                 };
@@ -191,11 +187,12 @@ function fetchServantData() {
                     const img = s.imageObject;
                     s.imageObject.onload = resolve;
                     s.imageObject.onerror = resolve; // resolve even on failure
-                    img.src = img.src;
+                    img.src = img.src; // source reload to force fire onload/onerror
                 });
             });
             Promise.all(imagePromises).then(() => {}).finally(() => {
                 document.getElementById('loader').style.visibility = 'hidden';
+                fetchAllServantsInClass('Saber');
             });
             Object.defineProperty(window, 'servantData', {
                 value: filteredServantData,
@@ -411,21 +408,24 @@ function displaySingleServantByID(id) {
  * @param {number} servantID - The internal game ID of the unit to isolate.
  */
 function displayBanners(servantID) {
+    [...document.getElementsByClassName('svtName')].forEach(name => name.remove());
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
     let bannersForUnit = bannerRelationships.find(row => row[0] == servantID);
     bannersForUnit = bannersForUnit.filter(col => col !== null);
     if (bannersForUnit.length <= 3) {
+        const svtName = servantData.find(svt => svt.id === servantID).name;
         const msg = document.createElement('h1');
-        msg.innerText =
-            "There are no projected banners for this Servant for EN in " + 
-            "the foreseeable future.";
+        msg.setAttribute('class', 'bannerstext');
+        msg.innerHTML =
+            "There are no projected banners for Servant<br />[" + svtName + 
+            "]<br /> for EN in the foreseeable future.";
         bannersArea.appendChild(msg);
         return;
     }
     document.getElementById('disclaimer').style.display = 'block';
     const bannersObject = {
-        unitName: document.getElementById('svtName' + servantID).textContent,
+        unitName: servantData.find(svt => svt.id === servantID).name,
         unitCategory: bannersForUnit[1],
         banners: []
     };
@@ -455,6 +455,7 @@ function displayBanners(servantID) {
         "Story": "<span class='u'>Storylocked</span>"
     };
     const classTitle = document.createElement('h2');
+    classTitle.setAttribute('class', 'bannerstext');
     classTitle.innerHTML = `Recent, current and projected ` +
         ` banners for ${unitCategories[bannersObject.unitCategory]} Servant ` +
         ` [${bannersObject.unitName}]:`;
@@ -480,7 +481,6 @@ function displayBanners(servantID) {
     });
     tbl.appendChild(tbody);
     bannersArea.appendChild(tbl);
-   [...document.getElementsByClassName('svtName')].forEach(name => name.remove());
 }
 // }
 // }
