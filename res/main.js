@@ -26,11 +26,10 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
  * the DOM is finished loading.
  */
 function initialize() {
-    ; 
-    Promise.all([fetchLastUpdate(), // Gets last update timestamp
-        fetchGlobalThreshold(), // Get threshold value for NA units
-        fetchBanners(), // Gets raw banner data
-        fetchBannerRelationships()]) // Get collated banner data to keep in memory
+    Promise.all([fetchLastUpdate(), // gets last update timestamp
+        fetchGlobalThreshold(), // get threshold value for NA units
+        fetchBanners(), // gets raw banner data
+        fetchBannerRelationships()]) // get collated banner data to keep in memory
         .then(() => {
             addListeners();
             if (servantData == undefined) { fetchServantData(); }
@@ -191,7 +190,6 @@ function fetchServantData() {
                 });
             });
             Promise.all(imagePromises).then(() => {}).finally(() => {
-                document.getElementById('loader').style.visibility = 'hidden';
                 fetchAllServantsInClass('Saber');
             });
             Object.defineProperty(window, 'servantData', {
@@ -355,6 +353,7 @@ function displayClassUnits(processedData, className) {
         servantContainer.append(servantImg, servantName);
         container.appendChild(servantContainer);
     });
+    document.getElementById('loader').style.visibility = 'hidden';
 }
 // }
 
@@ -408,6 +407,7 @@ function displaySingleServantByID(id) {
  * @param {number} servantID - The internal game ID of the unit to isolate.
  */
 function displayBanners(servantID) {
+    window.scrollTo(0, 0);
     [...document.getElementsByClassName('svtName')].forEach(name => name.remove());
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";

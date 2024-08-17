@@ -182,14 +182,13 @@ thead {
     -webkit-text-stroke: 2px white;
 }
 
-#animation-frame {
-    width: 100px; /* Adjust as needed */
-    animation: animateFrames 1s steps(4) infinite;
+#fou {
+    animation: runningFou 1s steps(4) infinite;
 }
 
-@keyframes animateFrames {
-    0% { content: url('../img/load_icon_A01.png'); }
-    25% { content: url('../img/load_icon_A02.png'); }
-    50% { content: url('../img/load_icon_A03.png'); }
-    75% { content: url('../img/load_icon_A04.png'); }
+@keyframes runningFou {
+    0%  { content: url('../img/fou1.png'); }
+    25% { content: url('../img/fou2.png'); }
+    50% { content: url('../img/fou3.png'); }
+    75% { content: url('../img/fou4.png'); }
 }

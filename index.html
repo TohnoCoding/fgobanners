@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="FGO Servant Servant Banners v1.7" />
+    <meta property="og:title" content="FGO Servant Servant Banners v1.7.2" />
 	<meta property="og:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta property="og:image" content="./img/meta.jpg" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FGO Servant Servant Banners v1.7" />
+    <meta name="twitter:title" content="FGO Servant Servant Banners v1.7.2" />
 	<meta name="twitter:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta name="twitter:image" content="./img/metaimg.jpg" />
     <title>FGO Servant Banners for the EN/Global Server</title>
@@ -17,6 +17,9 @@
     <script type="text/javascript" src="./res/main.js"></script>
 </head>
 <body>
+    <div id="loader">
+        Prefetching Servant portraits...&nbsp;&nbsp;<img src="./img/fou1.png" id="fou">
+    </div>
     <div id="page">
         <div id="pageHeader">
             <h1 class="b title">FGO Servant Banners</h1>
@@ -85,17 +88,6 @@
                 </p>
             </div>
         </div>
-    </div>
-    <!-- <div id="loadcontainer">
-    <div id="loading">
-        <img alt="Loading ..." className="fou f1" src="./img/load_icon_A01.png" />
-        <img alt="Loading ..." className="fou f2" src="./img/load_icon_A02.png" />
-        <img alt="Loading ..." className="fou f3" src="./img/load_icon_A03.png" />
-        <img alt="Loading ..." className="fou f4" src="./img/load_icon_A04.png" />
-    </div>
-    </div> -->
-    <div id="loader">
-        Prefetching Servant portraits...&nbsp;&nbsp;<img src="./img/load_icon_A01.png" id="animation-frame">
     </div>
 </body>
 </html>
