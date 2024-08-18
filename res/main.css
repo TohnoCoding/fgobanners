@@ -149,6 +149,16 @@ thead {
     text-align: center;
 }
 
+.summon { color: white; font-weight: 900; padding: 3px; }
+
+.limited { background-color: red; }
+
+.storylocked { background-color: green; }
+
+.permanent { background-color: blue; }
+
+.fp { background-color: brown; }
+
 /* Atlas */
 .atlas {
     text-align: center;
