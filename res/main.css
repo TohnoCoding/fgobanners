@@ -41,7 +41,7 @@ a { text-decoration: none; }
 
 .yn { vertical-align: middle; }
 
-.bannerstext { margin-top: 30px; margin-bottom: 5px; }
+.bannerstext { margin-top: 30px; margin-bottom: 5px; line-height: 1.5; }
 
 h2 { font-weight: 150; }
 
