@@ -449,10 +449,10 @@ function displayBanners(servantID) {
         });
     }
     const unitCategories = {
-        "Limited": "<br /><span class='summon limited'>&nbsp;Limited&nbsp;</span>",
-        "FP Limited": "<br /><span class='summon fp'>&nbsp;Limited Friend Point&nbsp;</span>",
-        "Perma": "<br /><span class='summon permanent'>&nbsp;Permanent&nbsp;</span>",
-        "Story": "<br /><span class='summon storylocked'>&nbsp;Storylocked&nbsp;</span>"
+        "Limited": "<br><span class='summon limited'>&nbsp;Limited&nbsp;</span>",
+        "FP Limited": "<br><span class='summon fp'>&nbsp;Limited Friend Point&nbsp;</span>",
+        "Perma": "<br><span class='summon permanent'>&nbsp;Permanent&nbsp;</span>",
+        "Story": "<br><span class='summon storylocked'>&nbsp;Storylocked&nbsp;</span>"
     };
     const classTitle = document.createElement('h2');
     classTitle.setAttribute('class', 'bannerstext');
