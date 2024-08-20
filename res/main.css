@@ -137,6 +137,18 @@ thead {
 
 .item img { display: block; margin-left: -5px; }
 
+#footer {
+    overflow: hidden;
+    max-height: 1px;
+    transition: max-height 0.4s ease-in-out;
+    font-size: medium;
+    text-align: justify;
+}
+
+#footer.open { max-height: 1000px; }
+
+#footerToggle { cursor: grab; text-align: center; background-color: transparent; border: none; }
+
 /* Servant Styles */
 .svtImg {
     transform: scale(1.2, 1.2);
@@ -172,7 +184,7 @@ thead {
 }
 
 /* Counter */
-.counterlink { font-size: xx-small; }
+.counterlink { font-size: xx-small; margin-top: 15px; }
 
 /* Loader */
 #loader {

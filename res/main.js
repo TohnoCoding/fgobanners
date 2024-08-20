@@ -48,6 +48,14 @@ function addListeners() {
         document.getElementById(`fetch${cls}`)
             .addEventListener('click', () => fetchAllServantsInClass(cls));
     });
+    const footTog = document.getElementById('footerToggle');
+    const foot = document.getElementById('footer');
+    footTog.addEventListener('click', () => {
+        foot.classList.toggle('open');
+        footTog.textContent = foot.classList.contains('open') ?
+            "Hide attributions, license and credits" :
+            "View attributions, license and credits";
+    });
 }
 // }
 // }
@@ -327,6 +335,7 @@ function fetchAllServantsInClass(className) {
  */
 function displayClassUnits(processedData, className) {
     resetAll();
+    document.getElementById('selector').style.visibility = 'visible';
     document.getElementById('fetch' + className).classList.add('svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
@@ -336,7 +345,7 @@ function displayClassUnits(processedData, className) {
         'Pretender, Beast)'
     };
     document.getElementById('classTitle').innerHTML = 
-        `${classTitleMap[className] || className}<br />`;
+        `${classTitleMap[className] || className}<br>`;
     processedData.forEach(row => {
         let servant = servantData.find(svt => svt.id === row.id);
         const servantContainer = document.createElement('div');
@@ -363,6 +372,7 @@ function displayClassUnits(processedData, className) {
  * Removes all units other than the selected one from the page.
  */
 function displaySingleServantByID(id) {
+    document.getElementById('selector').style.visibility = 'hidden';
     const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
     const servantImg = servantContainer.querySelector('img');
     servantImg.style.marginTop = '15px';
@@ -418,8 +428,8 @@ function displayBanners(servantID) {
         const msg = document.createElement('h1');
         msg.setAttribute('class', 'bannerstext');
         msg.innerHTML =
-            "There are no projected banners for Servant<br />[" + svtName + 
-            "]<br /> for EN in the foreseeable future.";
+            "There are no projected banners for Servant<br>[" + svtName + 
+            "]<br> for EN in the foreseeable future.";
         bannersArea.appendChild(msg);
         return;
     }
@@ -449,15 +459,15 @@ function displayBanners(servantID) {
         });
     }
     const unitCategories = {
-        "Limited": "<br><span class='summon limited'>&nbsp;Limited&nbsp;</span>",
-        "FP Limited": "<br><span class='summon fp'>&nbsp;Limited Friend Point&nbsp;</span>",
-        "Perma": "<br><span class='summon permanent'>&nbsp;Permanent&nbsp;</span>",
-        "Story": "<br><span class='summon storylocked'>&nbsp;Storylocked&nbsp;</span>"
+        "Limited": "<span class='summon limited'>&nbsp;Limited&nbsp;</span>",
+        "FP Limited": "<span class='summon fp'>&nbsp;Limited Friend Point&nbsp;</span>",
+        "Perma": "<span class='summon permanent'>&nbsp;Permanent&nbsp;</span>",
+        "Story": "<span class='summon storylocked'>&nbsp;Storylocked&nbsp;</span>"
     };
     const classTitle = document.createElement('h2');
     classTitle.setAttribute('class', 'bannerstext');
     classTitle.innerHTML = `Recent, current and projected ` +
-        ` banners for ${unitCategories[bannersObject.unitCategory]} Servant ` +
+        ` banners for <br>${unitCategories[bannersObject.unitCategory]} Servant ` +
         ` [${bannersObject.unitName}]:`;
     bannersArea.appendChild(classTitle);
     const tbl = document.createElement('table');

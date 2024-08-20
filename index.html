@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="FGO Servant Servant Banners v1.7.2" />
+    <meta property="og:title" content="FGO Servant Servant Banners v1.8" />
 	<meta property="og:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta property="og:image" content="./img/meta.jpg" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="FGO Servant Servant Banners v1.7.2" />
+    <meta name="twitter:title" content="FGO Servant Servant Banners v1.8" />
 	<meta name="twitter:description" content="A nice(r) front-end for the community-maintained spreadsheet of Fate/Grand Order gacha banners for the EN/Global version of the game." />
 	<meta name="twitter:image" content="./img/metaimg.jpg" />
     <title>FGO Servant Banners for the EN/Global Server</title>
@@ -27,13 +27,10 @@
             <h6 class="lastupdate">Spreadsheet last updated: <span id="lastupdate">[Loading...]</span></h6>
         </div>
         <div id="pageContainer">
-            <p class="infobox">Extra classes will be ordered by class ID, and then by Servant ID. Once you've
-            picked your target, there will be links below them to Atlas Academy Database so you can
-            quickly check their kits and features. <span class="b i">REMEMBER:</span> All displayed
+            <p class="infobox"><span class="b i">REMEMBER:</span> All displayed
             banner information is <span class="b i">strictly speculation</span> until confirmed via official
-            announcements. Site performance might be affected a bit on initial load depending on your network
-            conditions, since data needs to be live-fetched from both Atlas Academy and the Banners by
-            Servant Google Spreadsheet.</p>
+            announcements.</p>
+            <div id="selector">Select your desired Class and Servant:</div>
             <button id="fetchSaber" class="svtButton"><img src="./img/saber.png" /></button>&nbsp;&nbsp;
             <button id="fetchLancer" class="svtButton"><img src="./img/lancer.png" /></button>&nbsp;&nbsp;
             <button id="fetchArcher" class="svtButton"><img src="./img/archer.png" /></button>&nbsp;&nbsp;
@@ -41,7 +38,7 @@
             <button id="fetchCaster" class="svtButton"><img src="./img/caster.png" /></button>&nbsp;&nbsp;
             <button id="fetchAssassin" class="svtButton"><img src="./img/assassin.png" /></button>&nbsp;&nbsp;
             <button id="fetchBerserker" class="svtButton"><img src="./img/berserker.png" /></button>&nbsp;&nbsp;
-            <button id="fetchEXTRA" class="svtButton"><img src="./img/extra.png" /></button><br />
+            <button id="fetchEXTRA" class="svtButton"><img src="./img/extra.png" /></button><br>
             <div id="dynamic-contents">
                 <h2 id="classTitle" class="b"></h2>
                 <div id="servant-container" class="container">&nbsp;</div>
@@ -54,9 +51,10 @@
             taking place in the specified dates. Banners marked as <span class="i">NOT confirmed</span> implies
             the dates are just an extrapolation based on the dates when the banner happened in JP.</div>
             <hr />
-            <div class="small">
-                <p>
-                    Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a> on <a
+            <div>
+                <button id="footerToggle">View attributions, license and credits</button>
+                <div id="footer">
+                    <br>Code by <a target="_blank" href="https://github.com/TohnoCoding">TohnoCoding</a> on <a
                     href="https://github.com/TohnoCoding/fgobanners/" target="_blank">Github</a>. Find me in the
                     <a target="_blank"
                     href="https://discord.com/channels/502554574423457812/581357626579746836">Atlas Academy Discord
@@ -77,13 +75,12 @@
                     way affiliated to, endorsed by or related to any of the aforementioned companies. All use
                     of copyrighted materials is done so under the Fair Use doctrine. Icons by <a target="_blank"
                     href="https://www.flaticon.com/authors/alfredo-creates">Alfredo Creates @ FlatIcon</a>.
-                </p>
-                <br />
+                </div>
                 <p class="counterlink">
                     <script type='text/javascript'
                     src='https://www.freevisitorcounters.com/auth.php?id=63f260cceb43459bf103746f932cea6b52c24242'>
                     </script><img src="https://www.freevisitorcounters.com/en/counter/render/1199900/t/0"
-                    class="counterimg" /><br />
+                    class="counterimg" /><br>
                     <a href='https://www.free-counters.org/'>Free-Counters</a>
                 </p>
             </div>
