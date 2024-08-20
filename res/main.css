@@ -18,11 +18,20 @@ body {
     background-repeat: no-repeat;
     margin-top: -90px;
     overflow-x: hidden;
+    font-size: 1em;
 }
 
 a { text-decoration: none; }
 
-@media (max-width: 445px) { body { font-size: 2em; } }
+@media (max-width: 1080px) { 
+    body { 
+        font-size: 2em;
+        margin-top: -100px;
+    }
+    #footer { font-size: xx-large!important; }
+    #pageHeader { font-size: 0.9em!important; }
+    .bannerstext { margin-top: 30px!important; padding-bottom: 5px!important; }
+}
 
 /* Utility Classes */
 .b { font-weight: bold; }
@@ -41,7 +50,7 @@ a { text-decoration: none; }
 
 .yn { vertical-align: middle; }
 
-.bannerstext { margin-top: 15px; margin-bottom: 5px; line-height: 1.5; }
+.bannerstext { margin-top: 20px; padding-bottom: 20px; line-height: 1.5; }
 
 h2 { font-weight: 150; }
 
@@ -61,12 +70,19 @@ hr { margin-top: 15px; margin-bottom: 15px; }
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: no-repeat 2% center, linear-gradient(to bottom, rgba(2,41,88,1) 0%, rgba(9,77,157,1) 87%, rgba(9,77,157,1) 100%);
+    background: no-repeat 2% center, 
+        linear-gradient(
+            to bottom, 
+            rgba(2,41,88,1) 0%, 
+            rgba(9,77,157,1) 87%, 
+            rgba(9,77,157,1) 100%
+        );
     color: white;
     width: 100vw;
     text-align: center;
     margin: 0 auto;
     margin-top: -110px;
+    font-size: 1.3em;
 }
 
 #dynamic-contents {
@@ -111,7 +127,13 @@ td { background-color: #DDDDDD; }
 
 thead {
     font-weight: bold;
-    background: no-repeat 2% center, linear-gradient(to bottom, rgba(2,41,88,1) 0%, rgba(9,77,157,1) 87%, rgba(9,77,157,1) 100%);
+    background: no-repeat 2% center, 
+        linear-gradient(
+            to bottom, 
+            rgba(2,41,88,1) 0%, 
+            rgba(9,77,157,1) 87%, 
+            rgba(9,77,157,1) 100%
+        );
     color: white;
 }
 
@@ -149,6 +171,8 @@ thead {
 #footer.open { max-height: 1000px; }
 
 #footerToggle { cursor: grab; text-align: center; background-color: transparent; border: none; }
+#footerToggle:hover { border: none; }
+#footerToggle:active { border: none; }
 
 /* Servant Styles */
 .svtImg {

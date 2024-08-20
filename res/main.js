@@ -51,10 +51,10 @@ function addListeners() {
     const footTog = document.getElementById('footerToggle');
     const foot = document.getElementById('footer');
     footTog.addEventListener('click', () => {
-        foot.classList.toggle('open');
         footTog.textContent = foot.classList.contains('open') ?
             "Collapse attributions, license and credits" :
             "View attributions, license and credits";
+        foot.classList.toggle('open');
     });
 }
 // }
@@ -422,6 +422,16 @@ function displayBanners(servantID) {
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
     let bannersForUnit = bannerRelationships.find(row => row[0] == servantID);
+    if (bannersForUnit === undefined) {
+        const svtName = servantData.find(svt => svt.id === servantID).name;
+        const msg = document.createElement('h1');
+        msg.setAttribute('class', 'bannerstext');
+        msg.innerHTML =
+            "Servant [" + svtName + "] is extremely new at this time<br>" +
+            "and hasn't had banners logged in the spreadsheet yet.";
+        bannersArea.appendChild(msg);
+        return;
+    }
     bannersForUnit = bannersForUnit.filter(col => col !== null);
     if (bannersForUnit.length <= 3) {
         const svtName = servantData.find(svt => svt.id === servantID).name;
