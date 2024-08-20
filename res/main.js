@@ -194,7 +194,7 @@ function fetchServantData() {
                     const img = s.imageObject;
                     s.imageObject.onload = resolve;
                     s.imageObject.onerror = resolve; // resolve even on failure
-                    img.src = img.src; // source reload to force fire onload/onerror
+                    img.src = img.src; // src reload to force fire onload/onerror
                 });
             });
             Promise.all(imagePromises).then(() => {}).finally(() => {
