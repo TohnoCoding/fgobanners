@@ -53,7 +53,7 @@ function addListeners() {
     footTog.addEventListener('click', () => {
         foot.classList.toggle('open');
         footTog.textContent = foot.classList.contains('open') ?
-            "Hide attributions, license and credits" :
+            "Collapse attributions, license and credits" :
             "View attributions, license and credits";
     });
 }

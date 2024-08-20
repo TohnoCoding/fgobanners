@@ -41,7 +41,7 @@ a { text-decoration: none; }
 
 .yn { vertical-align: middle; }
 
-.bannerstext { margin-top: 30px; margin-bottom: 5px; line-height: 1.5; }
+.bannerstext { margin-top: 15px; margin-bottom: 5px; line-height: 1.5; }
 
 h2 { font-weight: 150; }
 
@@ -81,7 +81,7 @@ hr { margin-top: 15px; margin-bottom: 15px; }
 
 #banner-container { text-align: center; margin-right: -3px; }
 
-#disclaimer { padding: 2%; display: none; }
+#disclaimer { padding: 2%; display: none; margin-top: 35px; margin-bottom: -2%; }
 
 .infobox { margin-top: 15px; margin-bottom: 20px; }
 
@@ -123,6 +123,7 @@ thead {
     justify-content: center;
     align-items: center;
     display: flex;
+    margin-bottom: -45px;
 }
 
 .item {
