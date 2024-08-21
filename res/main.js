@@ -52,8 +52,8 @@ function addListeners() {
     const foot = document.getElementById('footer');
     footTog.addEventListener('click', () => {
         footTog.textContent = foot.classList.contains('open') ?
-            "Collapse attributions, license and credits" :
-            "View attributions, license and credits";
+            "View attributions, license and credits" :
+            "Collapse attributions, license and credits";
         foot.classList.toggle('open');
     });
 }
