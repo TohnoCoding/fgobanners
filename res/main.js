@@ -48,13 +48,8 @@ function addListeners() {
         document.getElementById(`fetch${cls}`)
             .addEventListener('click', () => fetchAllServantsInClass(cls));
     });
-    const footTog = document.getElementById('footerToggle');
-    const foot = document.getElementById('footer');
-    footTog.addEventListener('click', () => {
-        footTog.textContent = foot.classList.contains('open') ?
-            "View attributions, license and credits" :
-            "Collapse attributions, license and credits";
-        foot.classList.toggle('open');
+    document.getElementById('footerToggle').addEventListener('click', () => {
+        document.getElementById('footer').classList.toggle('open');
     });
 }
 // }
