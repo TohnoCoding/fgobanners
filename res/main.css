@@ -18,14 +18,14 @@ body {
     background-repeat: no-repeat;
     margin-top: -90px;
     overflow-x: hidden;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 a { text-decoration: none; }
 
 @media (max-width: 1080px) { 
     body { 
-        font-size: 2em;
+        font-size: 2rem;
         margin-top: -100px;
     }
     #footer { font-size: xx-large!important; }
@@ -82,7 +82,7 @@ hr { margin-top: 15px; margin-bottom: 15px; }
     text-align: center;
     margin: 0 auto;
     margin-top: -110px;
-    font-size: 1.3em;
+    font-size: 1.3rem;
 }
 
 #dynamic-contents {
