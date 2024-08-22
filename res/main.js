@@ -422,8 +422,8 @@ function displayBanners(servantID) {
         const msg = document.createElement('h1');
         msg.setAttribute('class', 'bannerstext');
         msg.innerHTML =
-            "Servant [" + svtName + "] is extremely new at this time<br>" +
-            "and hasn't had banners logged in the spreadsheet yet.";
+            "[" + svtName + "]<br>is an extremely new Servant at this time " +
+            "and<br>hasn't had banners logged in the spreadsheet yet.";
         bannersArea.appendChild(msg);
         return;
     }
