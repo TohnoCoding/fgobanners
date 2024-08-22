@@ -177,11 +177,9 @@ function fetchServantData() {
             new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new 
-                Set(filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
+                Set([...filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
                 .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
-                .map(row => row[0])
-            );
-            unwantedIds.add(83).add(152); // Solomon IDs
+                .map(row => row[0]), 83, 152]); // includes Solomon IDs
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
             const imagePromises = filteredServantData.map(s => {
@@ -192,7 +190,7 @@ function fetchServantData() {
                     img.src = img.src; // src reload to force fire onload/onerror
                 });
             });
-            Promise.all(imagePromises).then(() => {}).finally(() => {
+            Promise.all(imagePromises).finally(() => {
                 fetchAllServantsInClass('Saber');
             });
             Object.defineProperty(window, 'servantData', {
