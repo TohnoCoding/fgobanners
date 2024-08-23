@@ -30,7 +30,7 @@ function initialize() {
         fetchGlobalThreshold(), // get threshold value for NA units
         fetchBanners(), // gets raw banner data
         fetchBannerRelationships()]) // get collated banner data to keep in memory
-        .then(() => {
+        .finally(() => {
             addListeners();
             if (servantData == undefined) { fetchServantData(); }
         });
