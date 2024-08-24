@@ -161,8 +161,10 @@ function fetchServantData() {
         Query(`${spreadsheetLink}?sheet=Servants`);
     query.send(servantResponse => {
         const servantData = 
-            filterSheetData(servantResponse.getDataTable(), [0, 1, 4, 3])
-            .map(servant => {
+            filterSheetData(
+                servantResponse.getDataTable(),
+                [0, 1, 4, 3]    // servant ID, EN name, Atlas image, class number           
+            ).map(servant => {
                 const img = new Image();
                 img.src = servant[2].replace(".png", "_bordered.png");
                 return {
@@ -177,8 +179,10 @@ function fetchServantData() {
             new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new 
-                Set([...filterSheetData(statusResponse.getDataTable(), [0, 1, 2])
-                .filter(row => row[1] === 'FP' || row[1] === 'Welfare')
+                Set([...filterSheetData(
+                    statusResponse.getDataTable(),
+                    [0, 1]       // servant ID, category type
+                ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0]), 83, 152]); // includes Solomon IDs
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
