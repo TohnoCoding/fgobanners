@@ -143,7 +143,7 @@ async function fetchGlobalThreshold() {
 function fetchLastUpdate() {
     const query = new google.visualization.
         Query(spreadsheetLink.replace("gviz/tq", "edit?range=A7"));
-    query.send(function (response) {
+    query.send(response => {
         const dataTable = response.getDataTable();
         document.getElementById("lastupdate").innerHTML = dataTable.getValue(0, 0);
     });
