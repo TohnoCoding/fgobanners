@@ -181,7 +181,7 @@ function fetchServantData() {
             const unwantedIds = new 
                 Set([...filterSheetData(
                     statusResponse.getDataTable(),
-                    [0, 1]       // servant ID, category (perma,, limited, etc.)
+                    [0, 1]       // servant ID, category (perma, limited, etc.)
                 ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0]), 83, 152]); // includes Solomon IDs
             const filteredServantData = 
