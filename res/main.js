@@ -116,7 +116,8 @@ async function fetchGlobalThreshold() {
     try {
         const threshold = 
             (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
-            .then(r => r.json())).map(s => s.collectionNo).at(-1);
+            .then(r => r.json()))
+            .map(s => s.collectionNo).at(-1);   // get last valid index
         Object.defineProperty(window, 'globalThreshold', {
             value: threshold,
             writable: false,
