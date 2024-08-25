@@ -28,11 +28,11 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
 function initialize() {
     Promise.all([fetchLastUpdate(), // gets last update timestamp
         fetchGlobalThreshold(), // get threshold value for NA units
-        fetchBanners(), // gets raw banner data
-        fetchBannerRelationships()]) // get collated banner data to keep in memory
+        fetchBannerDatesAndLinks(), // gets raw banner data
+        fetchBannerCorrelations()]) // get collated banner data to keep in memory
         .finally(() => {
             addListeners();
-            if (servantData == undefined) { fetchServantData(); }
+            if (servantData == undefined) { fetchServantsAndCategories(); }
         });
 }
 // }
@@ -83,10 +83,10 @@ function resetAll() {
  * @param {number[]} columnIndices - The columns to include in the filtered data.
  * @returns {Array} The filtered data as a two-dimensional array.
  */
-function filterSheetData(dataTable, columnIndices) {
+function filterDataTable(dataTable, columnIndices) {
     if (!dataTable) {
-        console.error('Invalid dataTable passed to filterSheetData');
-        alert('Invalid dataTable passed to filterSheetData');
+        console.error('Invalid dataTable passed to filterDataTable');
+        alert('Invalid dataTable passed to filterDataTable');
         return [];
     }
     const numRows = dataTable.getNumberOfRows();
@@ -157,12 +157,12 @@ function fetchLastUpdate() {
  * Fetches all the currently released Servants (including JP-only units) from the
  * Google spreadsheet.
  */
-function fetchServantData() {
+function fetchServantsAndCategories() {
     const query = new google.visualization.
         Query(`${spreadsheetLink}?sheet=Servants`);
     query.send(servantResponse => {
         const servantData = 
-            filterSheetData(
+            filterDataTable(
                 servantResponse.getDataTable(),
                 [0, 1, 4, 3]    // servant ID, EN name, Atlas image, class code           
             ).map(servant => {
@@ -180,23 +180,23 @@ function fetchServantData() {
             new google.visualization.Query(`${spreadsheetLink}?sheet=Data2`);
         statusQuery.send(statusResponse => {
             const unwantedIds = new 
-                Set([...filterSheetData(
+                Set([...filterDataTable(
                     statusResponse.getDataTable(),
-                    [0, 1]       // servant ID, category (perma, limited, etc.)
+                    [0, 1]      // servant ID, category (perma, limited, etc.)
                 ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
-                .map(row => row[0]), 83, 152]); // includes Solomon IDs
+                .map(row => row[0]), 83, 152]);     // includes Solomon IDs
             const filteredServantData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
             const imagePromises = filteredServantData.map(s => {
                 return new Promise(resolve => {
                     const img = s.imageObject;
                     s.imageObject.onload = resolve;
-                    s.imageObject.onerror = resolve; // resolve even on failure
-                    img.src = img.src; // src reload to force fire onload/onerror
+                    s.imageObject.onerror = resolve;    // resolve even on failure
+                    img.src = img.src;  // src reload to force fire onload/onerror
                 });
             });
-            Promise.all(imagePromises).finally(() => {
-                fetchAllServantsInClass('Saber');
+            Promise.all(imagePromises).finally(() => {  // after all imgs preload...
+                fetchAllServantsInClass('Saber');       // ...load Sabers by default
             });
             Object.defineProperty(window, 'servantData', {
                 value: filteredServantData,
@@ -213,7 +213,7 @@ function fetchServantData() {
 /**
  * Fetches all the banner data from the Google spreadsheet.
  */
-function fetchBanners() {
+function fetchBannerDatesAndLinks() {
     const bannerQuery = new google.visualization.
         Query(`${spreadsheetLink}?sheet=Data`);
     bannerQuery.send(function(response) {
@@ -229,7 +229,7 @@ function fetchBanners() {
             return;
         }
         Object.defineProperty(window, 'bannersDataTable', {
-            value: filterSheetData(dataTable, [0, 1, 2, 4, 5]),
+            value: filterDataTable(dataTable, [0, 1, 2, 4, 5]),
             writable: false,
             configurable: false
         });
@@ -243,28 +243,28 @@ function fetchBanners() {
  * Gets the relationships between the fetched banners and the units that appear 
  * in each.
  */
-function fetchBannerRelationships() {
+function fetchBannerCorrelations() {
     const bannerQuery = new google.visualization.
         Query(`${spreadsheetLink}?sheet=Data2`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
-            console.error('Error fetching banner relationship data: ',
+            console.error('Error fetching banner correlation data: ',
                 response.getMessage());
-            alert('Error fetching banner relationship data: ',
+            alert('Error fetching banner correlation data: ',
                 response.getMessage());
             return;
         }
         const dataTable = response.getDataTable();
         if (!dataTable) {
-            console.error('Invalid dataTable object for banner relationships');
-            alert('Invalid dataTable object for banner relationships');
+            console.error('Invalid dataTable object for banner correlations');
+            alert('Invalid dataTable object for banner correlations');
             return;
         }
         const cols = [];
         for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
         { cols.push(i); }
         Object.defineProperty(window, 'bannerRelationships', {
-            value: filterSheetData(dataTable, cols),
+            value: filterDataTable(dataTable, cols),
             writable: false,
             configurable: false
         });
@@ -285,6 +285,7 @@ function fetchAllServantsInClass(className) {
     const classQuery = new google.visualization.
         Query(`${spreadsheetLink}?sheet=${className}`);
     classQuery.send(function (response) {
+        let classData, selectedClassName = className;
         if (response.isError()) {
             console
                 .error('Error fetching class data: ', response.getMessage());
@@ -294,8 +295,8 @@ function fetchAllServantsInClass(className) {
         const dataTable = response.getDataTable();
         if (!dataTable) {
             console
-                .error('Invalid dataTable object for class', this.className);
-            alert('Invalid dataTable object for class', this.className);
+                .error('Invalid dataTable object for class', selectedClassName);
+            alert('Invalid dataTable object for class', selectedClassName);
             return;
         }
         if (servantData === null) {
@@ -303,18 +304,17 @@ function fetchAllServantsInClass(className) {
             alert('Error loading Servant list');
             return;
         }
-        let classData;
-        if (className == "EXTRA") {
+        if (selectedClassName == "EXTRA") {
             classData = servantData
                 .filter(servant => servant.sClass > 8)
                 .sort((a, b) => a.sClass - b.sClass);
         } else {
-            const classNumber = classNumbers.get(className);            
+            const classNumber = classNumbers.get(selectedClassName);            
             classData = servantData
                 .filter(servant => servant.sClass === classNumber);
         }
-        displayClassUnits(classData, this.className);
-    }.bind({ className: className }));
+        displayClassServants(classData, selectedClassName);
+    });
 }
 // }
 // }
@@ -331,7 +331,7 @@ function fetchAllServantsInClass(className) {
  *                 provided, displays 'EXTRA' followed by the names of all the
  *                 subclasses grouped under Extra.
  */
-function displayClassUnits(processedData, className) {
+function displayClassServants(processedData, className) {
     resetAll();
     document.getElementById('selector').style.visibility = 'visible';
     document.getElementById('fetch' + className).classList.add('svtButtonSelected');
@@ -380,11 +380,11 @@ function displaySingleServantByID(id) {
             child.remove();
         }
     });
-    const atlasLinks = document.querySelectorAll(`[class='atlas']`);
+    let atlasLinks = document.querySelectorAll(`[class='atlas']`);
     atlasLinks.forEach(atlasItem => { atlasItem.remove(); });
     document.getElementById('classTitle').style.display = 'none';
-    const linkSpan = document.createElement('div');
-    linkSpan.classList.add('atlas');
+    atlasLinks = document.createElement('div');
+    atlasLinks.classList.add('atlas');
     const createLink = (region) => {
         const link = document.createElement('a');
         link.href = atlasLink.replace('REGION', region) + id;
@@ -392,18 +392,18 @@ function displaySingleServantByID(id) {
         link.textContent = `Atlas (${region})`;
         return link;
     };
-    linkSpan.appendChild(createLink('JP'));
+    atlasLinks.appendChild(createLink('JP'));
     if (id <= globalThreshold) {
-        linkSpan.append(document.createElement('br'), createLink('NA'));
+        atlasLinks.append(document.createElement('br'), createLink('NA'));
     }
-    servantContainer.insertBefore(linkSpan, servantContainer.querySelector('span'));
+    servantContainer.insertBefore(atlasLinks, servantContainer.querySelector('span'));
     const itemContainer = document.querySelector(`[class='item']`);
     if (itemContainer.clickHandler) {
         itemContainer.removeEventListener('click', itemContainer.clickHandler);
         delete itemContainer.clickHandler;
     }
     if (document.getElementById('disclaimer').style.display != 'block')
-    { displayBanners(id); }
+    { displayBannersForServant(id); }
 }
 // }
 
@@ -414,7 +414,7 @@ function displaySingleServantByID(id) {
  * unit.
  * @param {number} servantID - The internal game ID of the unit to isolate.
  */
-function displayBanners(servantID) {
+function displayBannersForServant(servantID) {
     window.scrollTo(0, 0);
     [...document.getElementsByClassName('svtName')].forEach(name => name.remove());
     const bannersArea = document.getElementById('banner-container');
