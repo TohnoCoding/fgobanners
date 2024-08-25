@@ -163,7 +163,7 @@ function fetchServantData() {
         const servantData = 
             filterSheetData(
                 servantResponse.getDataTable(),
-                [0, 1, 4, 3]    // servant ID, EN name, Atlas image, class number           
+                [0, 1, 4, 3]    // servant ID, EN name, Atlas image, class code           
             ).map(servant => {
                 const img = new Image();
                 img.src = servant[2].replace(".png", "_bordered.png");
@@ -181,7 +181,7 @@ function fetchServantData() {
             const unwantedIds = new 
                 Set([...filterSheetData(
                     statusResponse.getDataTable(),
-                    [0, 1]       // servant ID, category type
+                    [0, 1]       // servant ID, category (perma,, limited, etc.)
                 ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0]), 83, 152]); // includes Solomon IDs
             const filteredServantData = 
