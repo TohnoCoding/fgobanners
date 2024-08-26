@@ -27,7 +27,7 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
  */
 function initialize() {
     Promise.all([fetchLastUpdate(), // gets last update timestamp
-        fetchGlobalThreshold(), // get threshold value for NA units
+        fetchGlobalThreshold(), // get threshold value for NA Servants
         fetchBannerDatesAndLinks(), // gets raw banner data
         fetchBannerCorrelations()]) // get collated banner data to keep in memory
         .finally(() => {
@@ -105,11 +105,11 @@ function filterDataTable(dataTable, columnIndices) {
 
 
 // DATA FETCH {
-// Fetch last NA unit ID {
+// Fetch last NA Servant ID {
 /**
- * Uses the Atlas Academy API to get the internal game ID of the latest unit released
- * in the global/EN server, in order to know when to construct NA/EN links to the the
- * Atlas Academy Database unit pages.
+ * Uses the Atlas Academy API to get the internal game ID of the latest Servant
+ * released, in the global/EN server, in order to know when to construct NA/EN
+ * links to the the Atlas Academy Database Servant pages.
  * @returns {Promise<void>} A promise that resolves when the fetch is complete.
  */
 async function fetchGlobalThreshold() {
@@ -152,10 +152,11 @@ function fetchLastUpdate() {
 // }
 
 
-// Fetch full list of units {
+// Fetch full list of Servants {
 /**
- * Fetches all the currently released Servants (including JP-only units) from the
- * Google spreadsheet.
+ * Fetches all the currently released Servants (including JP-only Servants) from the
+ * Google spreadsheet, along with their corresponding categories (permanent,
+ * limited, welfare, et al).
  */
 function fetchServantsAndCategories() {
     const query = new google.visualization.
@@ -164,7 +165,7 @@ function fetchServantsAndCategories() {
         const servantData = 
             filterDataTable(
                 servantResponse.getDataTable(),
-                [0, 1, 4, 3]    // servant ID, EN name, Atlas image, class code           
+                [0, 1, 4, 3]    // Servant ID, EN name, Atlas image, class code           
             ).map(servant => {
                 const img = new Image();
                 img.src = servant[2].replace(".png", "_bordered.png");
@@ -182,7 +183,7 @@ function fetchServantsAndCategories() {
             const unwantedIds = new 
                 Set([...filterDataTable(
                     statusResponse.getDataTable(),
-                    [0, 1]      // servant ID, category (perma, limited, etc.)
+                    [0, 1]      // Servant ID, category (perma, limited, etc.)
                 ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0]), 83, 152]);     // includes Solomon IDs
             const filteredServantData = 
@@ -211,7 +212,7 @@ function fetchServantsAndCategories() {
 
 // Get the full list of banners {
 /**
- * Fetches all the banner data from the Google spreadsheet.
+ * Fetches dates and link data for all banners from the Google spreadsheet.
  */
 function fetchBannerDatesAndLinks() {
     const bannerQuery = new google.visualization.
@@ -238,10 +239,9 @@ function fetchBannerDatesAndLinks() {
 // }
 
 
-// Get the correlations between banners and units {
+// Get the correlations between banners and Servants {
 /**
- * Gets the relationships between the fetched banners and the units that appear 
- * in each.
+ * Gets the correlations between the fetched banners and the Servants in each.
  */
 function fetchBannerCorrelations() {
     const bannerQuery = new google.visualization.
@@ -273,11 +273,11 @@ function fetchBannerCorrelations() {
 // }
 
 
-// Load all units in the selected class {
+// Load all Servants in the selected class {
 /**
  * Fetches all the Servants in a given class.
  * @param {string} className - The name of the class. If 'EXTRA' is provided,
- *                 displays all Extra-class units in this order: Ruler,
+ *                 displays all Extra-class Servants in this order: Ruler,
  *                 Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender,
  *                 Beast.
  */
@@ -321,12 +321,12 @@ function fetchAllServantsInClass(className) {
 
 
 // DISPLAY FUNCTIONS {
-// Display all units from the selected class {
+// Display all Servants from the selected class {
 /**
- * Displays all the units in the selected class. If 'EXTRA' is selected, displays
- * all Extra-class units (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner,
- * Pretender, Beast).
- * @param {Array} processedData - The collection of units to display.
+ * Displays all the Servants in the selected class. If 'EXTRA' is selected,
+ * displays all Extra-class Servants (Ruler, Alter-Ego, Avenger, Moon-Cancer,
+ * Foreigner, Pretender, Beast).
+ * @param {Array} processedData - The collection of Servants to display.
  * @param {string} className - The name of the class to display. If 'EXTRA' is
  *                 provided, displays 'EXTRA' followed by the names of all the
  *                 subclasses grouped under Extra.
@@ -365,9 +365,9 @@ function displayClassServants(processedData, className) {
 // }
 
 
-// Leave only a single selected unit onscreen {
+// Leave only a single selected Servant onscreen {
 /**
- * Removes all units other than the selected one from the page.
+ * Removes all Servants other than the selected one from the viewing area.
  */
 function displaySingleServantByID(id) {
     document.getElementById('selector').style.visibility = 'hidden';
@@ -408,11 +408,11 @@ function displaySingleServantByID(id) {
 // }
 
 
-// Display the collated banners corresponding to a single servant ID {
+// Display the collated banners corresponding to a single Servant ID {
 /**
  * Displays a table with the banners found in the Google spreadsheet for the selected
- * unit.
- * @param {number} servantID - The internal game ID of the unit to isolate.
+ * Servant.
+ * @param {number} servantID - The internal game ID of the Servant to isolate.
  */
 function displayBannersForServant(servantID) {
     window.scrollTo(0, 0);
