@@ -154,8 +154,8 @@ function fetchLastUpdate() {
 
 // Fetch full list of Servants {
 /**
- * Fetches all the currently released Servants (including JP-only Servants) from the
- * Google spreadsheet, along with their corresponding categories (permanent,
+ * Fetches all the currently released Servants (including JP-only Servants) from
+ * the Google spreadsheet, along with their corresponding categories (permanent,
  * limited, welfare, et al).
  */
 function fetchServantsAndCategories() {
