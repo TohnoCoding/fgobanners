@@ -474,7 +474,7 @@ function displayBannersForServant(servantID) {
     };
     const classTitle = document.createElement('h2');
     classTitle.setAttribute('class', 'bannerstext');
-    classTitle.innerHTML = `Recent, current and projected ` +
+    classTitle.innerHTML = `Recent/current/projected ` +
         ` banners for <br>${unitCategories[bannersObject.unitCategory]} Servant ` +
         ` [${bannersObject.unitName}]:`;
     bannersArea.appendChild(classTitle);
