@@ -114,10 +114,11 @@ function filterDataTable(dataTable, columnIndices) {
  */
 async function fetchGlobalThreshold() {
     try {
-        const threshold = 
+        const NAreleases = 
             (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
             .then(r => r.json()))
-            .map(s => s.collectionNo).at(-1);   // get last valid index
+            .map(s => s.collectionNo);   // get last valid index
+        const threshold = NAreleases[NAreleases.length - 1];
         Object.defineProperty(window, 'globalThreshold', {
             value: threshold,
             writable: false,
@@ -130,9 +131,9 @@ async function fetchGlobalThreshold() {
             configurable: false
         });
         console.error('Error fetching global NA threshold from Atlas, will only ' +
-            'display JP links!');
+            'display JP Atlas links!');
         alert('Error fetching global NA threshold from Atlas, will only ' +
-            'display JP links!');
+            'display JP Atlas links!');
     }
 }
 // }
