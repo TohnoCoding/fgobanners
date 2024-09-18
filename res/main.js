@@ -61,15 +61,14 @@ function addListeners() {
 /**
  * Resets all UI elements to their default state. Required when selecting a class.
  */
-function resetAll() {
+function resetUIComponents() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
     document.getElementById('banner-container').innerHTML = '&nbsp;';
     document.getElementById('classTitle').innerHTML = '&nbsp;';
     document.getElementById('classTitle').style.display = 'block';
     document.getElementById('disclaimer').style.display = 'none';
     [...document.getElementsByClassName('svtButton')].forEach(elem => {
-        elem.removeAttribute('class');
-        elem.setAttribute('class', 'svtButton');
+        elem.removeAttribute('class').setAttribute('class', 'svtButton');
     });
 }
 // }
@@ -114,11 +113,11 @@ function filterDataTable(dataTable, columnIndices) {
  */
 async function fetchGlobalThreshold() {
     try {
-        const NAreleases = 
+        const NAreleases = // get all NA indexes
             (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
             .then(r => r.json()))
-            .map(s => s.collectionNo);   // get last valid index
-        const threshold = NAreleases[NAreleases.length - 1];
+            .map(s => s.collectionNo);
+        const threshold = NAreleases[NAreleases.length - 1]; // get last valid index
         Object.defineProperty(window, 'globalThreshold', {
             value: threshold,
             writable: false,
@@ -333,7 +332,7 @@ function fetchAllServantsInClass(className) {
  *                 subclasses grouped under Extra.
  */
 function displayClassServants(processedData, className) {
-    resetAll();
+    resetUIComponents();
     document.getElementById('selector').style.visibility = 'visible';
     document.getElementById('fetch' + className).classList.add('svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
