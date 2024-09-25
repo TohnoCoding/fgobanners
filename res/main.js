@@ -222,9 +222,9 @@ function fetchServantsAndCategories() {
                     [0, 1]      // Servant ID, category (perma, limited, etc.)
                 ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
                 .map(row => row[0]), 83, 152]);     // includes Solomon IDs
-            const filteredServantData = 
+            const filteredSvtData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
-            const imagePromises = filteredServantData.map(s => {
+            const imgPromises = filteredSvtData.map(s => {
                 return new Promise(resolve => {
                     const img = s.imageObject;
                     s.imageObject.onload = resolve;
@@ -232,14 +232,12 @@ function fetchServantsAndCategories() {
                     img.src = img.src;  // src reload to force fire "on" events
                 });
             });
-            Promise.all(imagePromises).finally(() => {  // preload images...
+            Promise.all(imgPromises).finally(() => {  // preload images...
                 fetchAllServantsInClass('Saber');  // then default load Sabers
                 document.getElementById("loader").style.visibility = "hidden";
             });
             Object.defineProperty(window, 'servantData', {
-                value: filteredServantData,
-                writable: false,
-                configurable: false
+                value: filteredSvtData, writable: false, configurable: false
             });
         });
     });
