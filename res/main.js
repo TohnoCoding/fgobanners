@@ -39,7 +39,7 @@ function initialize() {
                 let errorMessage = "There has been an error fetching " +
                     "spreadsheet data or Servant portraits:<br>" +
                     error.toString();
-                showErrorToUser(errorMessage);
+                killPageWithErrorMessage(errorMessage);
             });
     } catch (error) {
         document.getElementById('loader').style.visibility = 'hidden';
@@ -49,7 +49,7 @@ function initialize() {
             "errors tend to occur on Google's side, so correcting the " +
             "problem is entirely out of my hands.<br><br>Please try again " +
             "later.<br><br>The received error message was:" + error.toString();
-            showErrorToUser(errorMessage);
+            killPageWithErrorMessage(errorMessage);
     }
 }
 // }
@@ -82,7 +82,7 @@ function addListeners() {
  * Shows an error message to the user when something goes wrong.
  * @param {string} errorContents The message to display in the page body.
  */
-function showErrorToUser(errorContents) {
+function killPageWithErrorMessage(errorContents) {
     document.getElementById('loader').style.visibility = 'hidden';
     document.getElementById("pageContainer")
         .innerHTML(`<h3>${errorContents}</h3>`);
