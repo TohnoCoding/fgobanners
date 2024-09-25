@@ -2,14 +2,14 @@
 // Global declarations {
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(initialize);
-Object.defineProperty(window,
-    'servantData', { value: undefined, writable: true, configurable: true });
-Object.defineProperty(window,
-    'bannersDataTable', { value: undefined, writable: true, configurable: true });
-Object.defineProperty(window,
-    'bannerRelationships', { value: undefined, writable: true, configurable: true });
-Object.defineProperty(window,
-    'globalThreshold', { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'servantData',
+    { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'bannersDataTable',
+    { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'bannerRelationships',
+    { value: undefined, writable: true, configurable: true });
+Object.defineProperty(window, 'globalThreshold',
+    { value: undefined, writable: true, configurable: true });
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/' +
     '1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
@@ -26,14 +26,31 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
  * the DOM is finished loading.
  */
 function initialize() {
-    Promise.all([fetchLastUpdate(), // gets last update timestamp
-        fetchGlobalThreshold(), // get threshold value for NA Servants
-        fetchBannerDatesAndLinks(), // gets raw banner data
-        fetchBannerCorrelations()]) // get collated banner data to keep in memory
-        .finally(() => {
-            addListeners();
-            if (servantData == undefined) { fetchServantsAndCategories(); }
-        });
+    try {
+        Promise.all([fetchLastUpdate(), // get last update timestamp
+            fetchGlobalThreshold(), // get threshold value for NA Servants
+            fetchBannerDatesAndLinks(), // get raw banner data
+            fetchBannerCorrelations()]) // get collated data to keep in memory
+            .then(() => {
+                addListeners();
+                if (servantData == undefined) { fetchServantsAndCategories(); }
+            }).catch((error) => {
+                console.error("Data fetch error: ", error);
+                let errorMessage = "There has been an error fetching " +
+                    "spreadsheet data or Servant portraits:<br>" +
+                    error.toString();
+                showErrorToUser(errorMessage);
+            });
+    } catch (error) {
+        document.getElementById('loader').style.visibility = 'hidden';
+        let errorMessage = "There has been an error loading the Google " +
+            "Charts API, and as such, the spreadsheet data cannot be loaded." +
+            "<br><br>I apologize for the inconvenience, but usually these " +
+            "errors tend to occur on Google's side, so correcting the " +
+            "problem is entirely out of my hands.<br><br>Please try again " +
+            "later.<br><br>The received error message was:" + error.toString();
+            showErrorToUser(errorMessage);
+    }
 }
 // }
 
@@ -46,7 +63,10 @@ function addListeners() {
     ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin',
         'Berserker', 'EXTRA'].forEach(cls => {
         document.getElementById(`fetch${cls}`)
-            .addEventListener('click', () => fetchAllServantsInClass(cls));
+            .addEventListener('click', (e) => { 
+                e.stopPropagation(); // Prevent event bubbling
+                fetchAllServantsInClass(cls);
+            });
     });
     document.getElementById('footerToggle').addEventListener('click', () => {
         document.getElementById('footer').classList.toggle('open');
@@ -59,7 +79,18 @@ function addListeners() {
 // HELPERS {
 // Clean out the page {
 /**
- * Resets all UI elements to their default state. Required when selecting a class.
+ * Shows an error message to the user when something goes wrong.
+ * @param {string} errorContents The message to display in the page body.
+ */
+function showErrorToUser(errorContents) {
+    document.getElementById('loader').style.visibility = 'hidden';
+    document.getElementById("pageContainer")
+        .innerHTML(`<h3>${errorContents}</h3>`);
+}
+
+/**
+ * Resets all UI elements to their default state. Required when selecting a
+ * class.
  */
 function resetUIComponents() {
     document.getElementById('servant-container').innerHTML = '&nbsp;';
@@ -68,7 +99,8 @@ function resetUIComponents() {
     document.getElementById('classTitle').style.display = 'block';
     document.getElementById('disclaimer').style.display = 'none';
     [...document.getElementsByClassName('svtButton')].forEach(elem => {
-        elem.removeAttribute('class').setAttribute('class', 'svtButton');
+        elem.removeAttribute('class');
+        elem.setAttribute('class', 'svtButton');
     });
 }
 // }
@@ -76,10 +108,10 @@ function resetUIComponents() {
 
 // Get specific columns only from provided sheet in spreadsheet {
 /**
- * Filters the information from the provided dataTable object to return only the
- * information in the specified column indices.
- * @param {Object} dataTable - The dataTable object to extract the information from.
- * @param {number[]} columnIndices - The columns to include in the filtered data.
+ * Filters the information from the provided dataTable object to return only
+ * the information in the specified column indices.
+ * @param {Object} dataTable - The dataTable to extract the information from.
+ * @param {number[]} columnIndices - The columns to include in the final data.
  * @returns {Array} The filtered data as a two-dimensional array.
  */
 function filterDataTable(dataTable, columnIndices) {
@@ -114,12 +146,13 @@ function filterDataTable(dataTable, columnIndices) {
 async function fetchGlobalThreshold() {
     try {
         const NAreleases = // get all NA indexes
-            (await fetch("https://api.atlasacademy.io/export/NA/basic_servant.json")
+            (await fetch
+                ("https://api.atlasacademy.io/export/NA/basic_servant.json")
             .then(r => r.json()))
             .map(s => s.collectionNo);
-        const threshold = NAreleases[NAreleases.length - 1]; // get last valid index
+        const th = NAreleases[NAreleases.length - 1]; // last valid NA index
         Object.defineProperty(window, 'globalThreshold', {
-            value: threshold,
+            value: th,
             writable: false,
             configurable: false
         });
@@ -129,8 +162,8 @@ async function fetchGlobalThreshold() {
             writable: false,
             configurable: false
         });
-        console.error('Error fetching global NA threshold from Atlas, will only ' +
-            'display JP Atlas links!');
+        console.error('Error fetching global NA threshold from Atlas, will ' +
+            'only display JP Atlas links!');
         alert('Error fetching global NA threshold from Atlas, will only ' +
             'display JP Atlas links!');
     }
@@ -142,21 +175,24 @@ async function fetchGlobalThreshold() {
  * Gets the recorded timestamp at which the spreadsheet was last updated.
  */
 function fetchLastUpdate() {
-    const query = new google.visualization.
-        Query(spreadsheetLink.replace("gviz/tq", "edit?range=A7"));
-    query.send(response => {
-        const dataTable = response.getDataTable();
-        document.getElementById("lastupdate").innerHTML = dataTable.getValue(0, 0);
-    });
+    try {
+        const query = new google.visualization.
+            Query(spreadsheetLink.replace("gviz/tq", "edit?range=A7"));
+        query.send(response => {
+            const dataTable = response.getDataTable();
+            document.getElementById("lastupdate").innerHTML =
+                dataTable.getValue(0, 0);
+        });
+    } catch { document.getElementById("lastupdate").innerHTML = "[Error]"; }
 }
 // }
 
 
 // Fetch full list of Servants {
 /**
- * Fetches all the currently released Servants (including JP-only Servants) from
- * the Google spreadsheet, along with their corresponding categories (permanent,
- * limited, welfare, et al).
+ * Fetches all the currently released Servants (including JP-only Servants)
+ * from the Google spreadsheet, along with their corresponding categories
+ * (permanent, limited, welfare, et al).
  */
 function fetchServantsAndCategories() {
     const query = new google.visualization.
@@ -165,14 +201,14 @@ function fetchServantsAndCategories() {
         const servantData = 
             filterDataTable(
                 servantResponse.getDataTable(),
-                [0, 1, 4, 3]    // Servant ID, EN name, Atlas image, class code           
+                [0, 1, 4, 3]  // Servant ID, EN name, Atlas image, class code           
             ).map(servant => {
                 const img = new Image();
                 img.src = servant[2].replace(".png", "_bordered.png");
                 return {
                     id: servant[0],
                     name: servant[1].
-                        replace("Altria", "Artoria"), // you can't change my mind
+                        replace("Altria", "Artoria"), // u can't change me mind
                     sClass: servant[3],
                     imageObject: img
                 };
@@ -192,12 +228,13 @@ function fetchServantsAndCategories() {
                 return new Promise(resolve => {
                     const img = s.imageObject;
                     s.imageObject.onload = resolve;
-                    s.imageObject.onerror = resolve;    // resolve even on failure
-                    img.src = img.src;  // src reload to force fire onload/onerror
+                    s.imageObject.onerror = resolve;    // resolve even on fail
+                    img.src = img.src;  // src reload to force fire "on" events
                 });
             });
-            Promise.all(imagePromises).finally(() => {  // after all imgs preload...
-                fetchAllServantsInClass('Saber');       // ...load Sabers by default
+            Promise.all(imagePromises).finally(() => {  // preload images...
+                fetchAllServantsInClass('Saber');  // then default load Sabers
+                document.getElementById("loader").style.visibility = "hidden";
             });
             Object.defineProperty(window, 'servantData', {
                 value: filteredServantData,
@@ -219,7 +256,8 @@ function fetchBannerDatesAndLinks() {
         Query(`${spreadsheetLink}?sheet=Data`);
     bannerQuery.send(function(response) {
         if (response.isError()) {
-            console.error('Error fetching banners data: ', response.getMessage());
+            console.error('Error fetching banners data: ',
+                response.getMessage());
             alert('Error fetching banners data: ' + response.getMessage());
             return;
         }
@@ -244,32 +282,37 @@ function fetchBannerDatesAndLinks() {
  * Gets the correlations between the fetched banners and the Servants in each.
  */
 function fetchBannerCorrelations() {
-    const bannerQuery = new google.visualization.
-        Query(`${spreadsheetLink}?sheet=Data2`);
-    bannerQuery.send(function(response) {
-        if (response.isError()) {
-            console.error('Error fetching banner correlation data: ',
-                response.getMessage());
-            alert('Error fetching banner correlation data: ',
-                response.getMessage());
-            return;
+    return new Promise((resolve, reject) => {
+        try {
+            const query = new google.visualization.Query
+                (`${spreadsheetLink}?sheet=Data2`);
+            query.send(function(response) {
+                if (response.isError()) {
+                    return reject(new Error('Error fetching banner ' +
+                        'correlations: ' + response.getMessage()));
+                }
+                const dataTable = response.getDataTable();
+                if (!dataTable) {
+                    return reject(new Error('Invalid dataTable for ' +
+                        'banner correlations'));
+                }
+                const cols = [];
+                for (let i = 0; i < dataTable.getNumberOfColumns(); i++) {
+                    cols.push(i);
+                }
+                Object.defineProperty(window, 'bannerRelationships', {
+                    value: filterDataTable(dataTable, cols),
+                    writable: false,
+                    configurable: false
+                });
+                resolve();
+            });
+        } catch (error) {
+            reject(error);  // Catch any synchronous errors
         }
-        const dataTable = response.getDataTable();
-        if (!dataTable) {
-            console.error('Invalid dataTable object for banner correlations');
-            alert('Invalid dataTable object for banner correlations');
-            return;
-        }
-        const cols = [];
-        for (let i = 0; i < dataTable.getNumberOfColumns(); i++)
-        { cols.push(i); }
-        Object.defineProperty(window, 'bannerRelationships', {
-            value: filterDataTable(dataTable, cols),
-            writable: false,
-            configurable: false
-        });
     });
 }
+    
 // }
 
 
@@ -294,8 +337,8 @@ function fetchAllServantsInClass(className) {
         }
         const dataTable = response.getDataTable();
         if (!dataTable) {
-            console
-                .error('Invalid dataTable object for class', selectedClassName);
+            console.error('Invalid dataTable object for class',
+                selectedClassName);
             alert('Invalid dataTable object for class', selectedClassName);
             return;
         }
@@ -334,7 +377,8 @@ function fetchAllServantsInClass(className) {
 function displayClassServants(processedData, className) {
     resetUIComponents();
     document.getElementById('selector').style.visibility = 'visible';
-    document.getElementById('fetch' + className).classList.add('svtButtonSelected');
+    document.getElementById('fetch' + className).classList.
+        add('svtButtonSelected');
     document.getElementById('dynamic-contents').style.display = "block";
     const container = document.getElementById('servant-container');
     container.innerHTML = '';
@@ -371,7 +415,8 @@ function displayClassServants(processedData, className) {
  */
 function displaySingleServantByID(id) {
     document.getElementById('selector').style.visibility = 'hidden';
-    const servantContainer = document.querySelector(`[aria-servantId="${id}"]`);
+    const servantContainer = document.
+        querySelector(`[aria-servantId="${id}"]`);
     const servantImg = servantContainer.querySelector('img');
     servantImg.style.marginTop = '15px';
     const container = document.getElementById('servant-container');
@@ -396,7 +441,8 @@ function displaySingleServantByID(id) {
     if (id <= globalThreshold) {
         atlasLinks.append(document.createElement('br'), createLink('NA'));
     }
-    servantContainer.insertBefore(atlasLinks, servantContainer.querySelector('span'));
+    servantContainer.insertBefore(atlasLinks,
+        servantContainer.querySelector('span'));
     const itemContainer = document.querySelector(`[class='item']`);
     if (itemContainer.clickHandler) {
         itemContainer.removeEventListener('click', itemContainer.clickHandler);
@@ -410,13 +456,14 @@ function displaySingleServantByID(id) {
 
 // Display the collated banners corresponding to a single Servant ID {
 /**
- * Displays a table with the banners found in the Google spreadsheet for the selected
- * Servant.
+ * Displays a table with the banners found in the Google spreadsheet for the
+ * selected Servant.
  * @param {number} servantID - The internal game ID of the Servant to isolate.
  */
 function displayBannersForServant(servantID) {
     window.scrollTo(0, 0);
-    [...document.getElementsByClassName('svtName')].forEach(name => name.remove());
+    [...document.getElementsByClassName('svtName')]
+        .forEach(name => name.remove());
     const bannersArea = document.getElementById('banner-container');
     bannersArea.innerHTML = "";
     let bannersForUnit = bannerRelationships.find(row => row[0] == servantID);
@@ -460,23 +507,30 @@ function displayBannersForServant(servantID) {
             bannerStartDate: currentBanner[1],
             bannerEndDate: currentBanner[2],
             soloBanner: bannersForUnit[i + 1] === "Yes" ?
-                "<span class='b'>Yes</span>" : "<span class='i'>No, shared</span>",
+                "<span class='b'>Yes</span>" :
+                "<span class='i'>No, shared</span>",
             isNAConfirmed: bannersForUnit[i].toString().includes('.') ? 
-                "<span class='b'>Yes! <img class='yn' src='./img/y.png' /></span>" :
-                "<span class='i'>No <img class='yn' src='./img/n.png' /></span>"
+                "<span class='b'>Yes! <img class='yn' " +
+                    "src='./img/y.png' /></span>" :
+                "<span class='i'>No <img class='yn' " +
+                    "src='./img/n.png' /></span>"
         });
     }
     const unitCategories = {
-        "Limited": "<span class='summon limited'>&nbsp;Limited&nbsp;</span>",
-        "FP Limited": "<span class='summon fp'>&nbsp;Limited Friend Point&nbsp;</span>",
-        "Perma": "<span class='summon permanent'>&nbsp;Permanent&nbsp;</span>",
-        "Story": "<span class='summon storylocked'>&nbsp;Storylocked&nbsp;</span>"
+        "Limited": "<span class='summon " +
+            "limited'>&nbsp;Limited&nbsp;</span>",
+        "FP Limited": "<span class='summon " +
+            "fp'>&nbsp;Limited Friend Point&nbsp;</span>",
+        "Perma": "<span class='summon " +
+            "permanent'>&nbsp;Permanent&nbsp;</span>",
+        "Story": "<span class='summon " +
+            "storylocked'>&nbsp;Storylocked&nbsp;</span>"
     };
     const classTitle = document.createElement('h2');
     classTitle.setAttribute('class', 'bannerstext');
     classTitle.innerHTML = `Recent/current/projected ` +
-        ` banners for <br>${unitCategories[bannersObject.unitCategory]} Servant ` +
-        ` [${bannersObject.unitName}]:`;
+        ` banners for <br>${unitCategories[bannersObject.unitCategory]}` +
+        ` Servant [${bannersObject.unitName}]:`;
     bannersArea.appendChild(classTitle);
     const tbl = document.createElement('table');
     const thead = tbl.createTHead();
