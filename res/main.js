@@ -2,6 +2,15 @@
 // Global declarations {
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(initialize);
+/**
+ * Global properties storing critical read-only data for the application.
+ * Initially declared as writable, then made read-only as soon as values
+ * are injected into them.
+ * @property {Array} servantData - Stores all Servant data
+ * @property {Array} bannersDataTable - Stores banner data
+ * @property {Object} bannerRelationships - Servant/banner correlations
+ * @property {number} globalThreshold - Threshold for NA Servant IDs
+ */
 Object.defineProperty(window, 'servantData',
     { value: undefined, writable: true, configurable: true });
 Object.defineProperty(window, 'bannersDataTable',
