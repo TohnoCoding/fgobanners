@@ -99,8 +99,7 @@ function resetUIComponents() {
     document.getElementById('classTitle').style.display = 'block';
     document.getElementById('disclaimer').style.display = 'none';
     [...document.getElementsByClassName('svtButton')].forEach(elem => {
-        elem.removeAttribute('class');
-        elem.setAttribute('class', 'svtButton');
+        elem.classList.remove("svtButtonSelected");
     });
 }
 // }
@@ -208,7 +207,7 @@ function fetchServantsAndCategories() {
                 return {
                     id: servant[0],
                     name: servant[1].
-                        replace("Altria", "Artoria"), // u can't change me mind
+                        replace("Altria", "Artoria"),  // can't change my mind
                     sClass: servant[3],
                     imageObject: img
                 };
