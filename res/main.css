@@ -57,7 +57,7 @@ h2 { font-weight: 150; }
 
 hr { margin-top: 15px; margin-bottom: 15px; }
 
-tbody { color: black; }
+tbody { color: #333; }
 
 /* Page Layout */
 #page { padding-top: 160px; }
