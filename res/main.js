@@ -513,13 +513,11 @@ function displayBannersForServant(servantID) {
             bannerStartDate: currentBanner[1],
             bannerEndDate: currentBanner[2],
             soloBanner: bannersForUnit[i + 1] === "Yes" ?
-                "<span class='b'>Yes</span>" :
-                "<span class='i'>No, shared</span>",
+                "<img class='yn' src='./img/y.png' />" :
+                "<img class='yn' src='./img/n.png' />",
             isNAConfirmed: bannersForUnit[i].toString().includes('.') ? 
-                "<span class='b'>Yes! <img class='yn' " +
-                    "src='./img/y.png' /></span>" :
-                "<span class='i'>No <img class='yn' " +
-                    "src='./img/n.png' /></span>"
+                "<img class='yn' src='./img/y.png' />" :
+                "<img class='yn' src='./img/n.png' />"
         });
     }
     const unitCategories = {
