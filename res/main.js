@@ -478,8 +478,9 @@ function displayBannersForServant(servantID) {
         const msg = document.createElement('h1');
         msg.setAttribute('class', 'bannerstext');
         msg.innerHTML =
-            "[" + svtName + "]<br>is an extremely new Servant at this time " +
-            "and<br>hasn't had banners logged in the spreadsheet yet.";
+            "[" + svtName + "],<br>at the time of the last spreadsheet " +
+            "update,<br>is/was an extremely new Servant and hasn't had<br>" +
+            "banners logged yet.";
         bannersArea.appendChild(msg);
         return;
     }
