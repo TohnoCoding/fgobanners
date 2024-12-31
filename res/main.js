@@ -20,7 +20,7 @@ Object.defineProperty(window, 'bannerRelationships',
 Object.defineProperty(window, 'globalThreshold',
     { value: undefined, writable: true, configurable: true });
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/' +
-    '1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
+    '1YBt7g2_BIHDE2G-rkiZJAq5etneK8LeujVYbxtIfk7I/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
@@ -331,39 +331,17 @@ function fetchBannerCorrelations() {
  *                 Beast.
  */
 function fetchAllServantsInClass(className) {
-    const classQuery = new google.visualization.
-        Query(`${spreadsheetLink}?sheet=${className}`);
-    classQuery.send(function (response) {
-        let classData, selectedClassName = className;
-        if (response.isError()) {
-            console
-                .error('Error fetching class data: ', response.getMessage());
-            alert('Error fetching class data: ', response.getMessage());
-            return;
-        }
-        const dataTable = response.getDataTable();
-        if (!dataTable) {
-            console.error('Invalid dataTable object for class',
-                selectedClassName);
-            alert('Invalid dataTable object for class', selectedClassName);
-            return;
-        }
-        if (servantData === null) {
-            console.error('Error loading Servant list');
-            alert('Error loading Servant list');
-            return;
-        }
-        if (selectedClassName == "EXTRA") {
-            classData = servantData
-                .filter(servant => servant.sClass > 8)
-                .sort((a, b) => a.sClass - b.sClass);
-        } else {
-            const classNumber = classNumbers.get(selectedClassName);            
-            classData = servantData
-                .filter(servant => servant.sClass === classNumber);
-        }
-        displayClassServants(classData, selectedClassName);
-    });
+    let classData = null;
+    if (className.includes("EXTRA")) {
+        classData = servantData
+            .filter(servant => servant.sClass > 8)
+            .sort((a, b) => a.sClass - b.sClass);
+    } else {
+        const classNumber = classNumbers.get(className);            
+        classData = servantData
+            .filter(servant => servant.sClass === classNumber);
+    }
+    displayClassServants(classData, className);
 }
 // }
 // }
