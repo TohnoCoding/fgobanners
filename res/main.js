@@ -331,92 +331,18 @@ function fetchBannerCorrelations() {
  *                 Beast.
  */
 function fetchAllServantsInClass(className) {
-    const classQuery = new google.visualization.
-        Query(`${spreadsheetLink}?sheet=${className}`);
-    let classData, selectedClassName = className;
-    classQuery.send(function (response) {
-        if (response.isError()) {
-            console
-                .error('Error fetching class data: ', response.getMessage());
-            alert('Error fetching class data: ', response.getMessage());
-            return;
-        }
-        const dataTable = response.getDataTable();
-        if (!dataTable) {
-            console.error('Invalid dataTable object for class',
-                selectedClassName);
-            alert('Invalid dataTable object for class', selectedClassName);
-            return;
-        }
-        if (servantData === null) {
-            console.error('Error loading Servant list');
-            alert('Error loading Servant list');
-            return;
-        }
-        if (selectedClassName.includes("EXTRA")) {
-            classData = servantData
-                .filter(servant => servant.sClass > 8)
-                .sort((a, b) => a.sClass - b.sClass);
-        } else {
-            const classNumber = classNumbers.get(selectedClassName);            
-            classData = servantData
-                .filter(servant => servant.sClass === classNumber);
-        }
-        displayClassServants(classData, selectedClassName);
-    });
+    let classData = null;
+    if (className.includes("EXTRA")) {
+        classData = servantData
+            .filter(servant => servant.sClass > 8)
+            .sort((a, b) => a.sClass - b.sClass);
+    } else {
+        const classNumber = classNumbers.get(className);            
+        classData = servantData
+            .filter(servant => servant.sClass === classNumber);
+    }
+    displayClassServants(classData, className);
 }
-
-function fetchAllServantsInClass_new(className) {
-    let classData = []; // Accumulate data from all sheets
-    const selectedClassNames = className === "EXTRA" 
-        ? ["EXTRA I", "EXTRA II"] 
-        : [className];
-    let pendingQueries = selectedClassNames.length; // Track pending queries
-
-    selectedClassNames.forEach(sheet => {
-        const classQuery = new google.visualization.
-            Query(`${spreadsheetLink}?sheet=${sheet}`);
-        classQuery.send(function (response) {
-            if (response.isError()) {
-                console.error
-                    (`Error fetching ${sheet} data:`, response.getMessage());
-                alert
-                    (`Error fetching ${sheet} data: ${response.getMessage()}`);
-                pendingQueries--;
-                if (pendingQueries === 0) {
-                    displayClassServants(classData, className); }
-                return;
-            }
-            const dataTable = response.getDataTable();
-            if (!dataTable) {
-                console.error(`Invalid dataTable object for sheet: ${sheet}`);
-                alert(`Invalid dataTable object for sheet: ${sheet}`);
-                pendingQueries--;
-                if (pendingQueries === 0) {
-                    displayClassServants(classData, className); }
-                return;
-            }
-            const filteredData = servantData.filter(servant => {
-                if (className === "EXTRA") {
-                    return servant.sClass > 8; // EXTRA class Servants
-                }
-                return servant.sClass === classNumbers.get(className);
-            });
-            classData = classData.concat(filteredData);
-            pendingQueries--;
-            if (pendingQueries === 0) {
-                if (className === "EXTRA") {
-                    classData = Array.from(
-                        new Map(classData.
-                            map(servant => [servant.id, servant])).values()
-                    ).sort((a, b) => a.sClass - b.sClass);
-                }
-                displayClassServants(classData, className);
-            }
-        });
-    });
-}
-
 // }
 // }
 
