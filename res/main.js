@@ -20,7 +20,7 @@ Object.defineProperty(window, 'bannerRelationships',
 Object.defineProperty(window, 'globalThreshold',
     { value: undefined, writable: true, configurable: true });
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/' +
-    '1YBt7g2_BIHDE2G-rkiZJAq5etneK8LeujVYbxtIfk7I/gviz/tq';
+    '1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
