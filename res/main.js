@@ -334,8 +334,8 @@ function fetchAllServantsInClass(className) {
     let classData = null;
     if (className.includes("EXTRA")) {
         classData = servantData
-            .filter(servant => servant.sClass > 8)
-            .sort((a, b) => a.sClass - b.sClass);
+            .filter(servant => servant.sClass > 8);
+            //.sort((a, b) => a.sClass - b.sClass);
     } else {
         const classNumber = classNumbers.get(className);            
         classData = servantData
