@@ -318,7 +318,6 @@ function fetchBannerCorrelations() {
         }
     });
 }
-    
 // }
 
 
@@ -336,12 +335,18 @@ function fetchAllServantsInClass(className) {
         if(className == "EXTRAI")
         {
             classData = servantData
-                .filter(servant => [9, 11, 23].includes(servant.sClass));
+                .filter(servant => 
+                    [classNumbers.get('Ruler'), classNumbers.get('Avenger'),
+                        classNumbers.get('Moon-Cancer')]
+                    .includes(servant.sClass));
         }
         else
         {
             classData = servantData
-                .filter(servant => [10, 25, 28, 33].includes(servant.sClass));
+                .filter(servant => 
+                    [classNumbers.get('Alter-Ego'), classNumbers.get('Foreigner'),
+                        classNumbers.get('Pretender'), classNumbers.get('Beast')]
+                    .includes(servant.sClass));
         }
         // classData = servantData
         //     .filter(servant => servant.sClass > 8);
