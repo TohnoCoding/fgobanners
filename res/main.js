@@ -331,30 +331,26 @@ function fetchBannerCorrelations() {
  */
 function fetchAllServantsInClass(className) {
     let classData = null;
-    if (className.includes("EXTRA")) {
-        if(className == "EXTRAI")
-        {
+    switch(className)
+    {
+        case "EXTRAI":
             classData = servantData
-                .filter(servant => 
-                    [classNumbers.get('Ruler'), classNumbers.get('Avenger'),
-                        classNumbers.get('Moon-Cancer')]
-                    .includes(servant.sClass));
-        }
-        else
-        {
+            .filter(servant => 
+                [classNumbers.get('Ruler'), classNumbers.get('Avenger'),
+                    classNumbers.get('Moon-Cancer')]
+                .includes(servant.sClass));
+            break;
+        case "EXTRAII":
             classData = servantData
-                .filter(servant => 
-                    [classNumbers.get('Alter-Ego'), classNumbers.get('Foreigner'),
-                        classNumbers.get('Pretender'), classNumbers.get('Beast')]
-                    .includes(servant.sClass));
-        }
-        // classData = servantData
-        //     .filter(servant => servant.sClass > 8);
-        //     //.sort((a, b) => a.sClass - b.sClass);
-    } else {
-        const classNumber = classNumbers.get(className);            
-        classData = servantData
-            .filter(servant => servant.sClass === classNumber);
+            .filter(servant => 
+                [classNumbers.get('Alter-Ego'), classNumbers.get('Foreigner'),
+                    classNumbers.get('Pretender'), classNumbers.get('Beast')]
+                .includes(servant.sClass));
+            break;
+        default:
+            classData = servantData
+                .filter(servant => servant.sClass === classNumbers.get(className));
+            break;
     }
     displayClassServants(classData, className);
 }
