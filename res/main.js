@@ -70,7 +70,7 @@ function initialize() {
  */
 function addListeners() {
     ['Saber', 'Lancer', 'Archer', 'Rider', 'Caster', 'Assassin',
-        'Berserker', 'EXTRA'].forEach(cls => {
+        'Berserker', 'EXTRAI', 'EXTRAII'].forEach(cls => {
         document.getElementById(`fetch${cls}`)
             .addEventListener('click', (e) => { 
                 e.stopPropagation(); // Prevent event bubbling
@@ -325,17 +325,27 @@ function fetchBannerCorrelations() {
 // Load all Servants in the selected class {
 /**
  * Fetches all the Servants in a given class.
- * @param {string} className - The name of the class. If 'EXTRA' is provided,
- *                 displays all Extra-class Servants in this order: Ruler,
- *                 Alter-Ego, Avenger, Moon-Cancer, Foreigner, Pretender,
+ * @param {string} className - The name of the class. If 'EXTRAI' is provided,
+ *                 displays Ruler, Avenger and Moon-Cancer. If 'EXTRAII' is
+ *                 provided, displays Alter-Ego, Foreigner, Pretender,
  *                 Beast.
  */
 function fetchAllServantsInClass(className) {
     let classData = null;
     if (className.includes("EXTRA")) {
-        classData = servantData
-            .filter(servant => servant.sClass > 8);
-            //.sort((a, b) => a.sClass - b.sClass);
+        if(className == "EXTRAI")
+        {
+            classData = servantData
+                .filter(servant => [9, 11, 23].includes(servant.sClass));
+        }
+        else
+        {
+            classData = servantData
+                .filter(servant => [10, 25, 28, 33].includes(servant.sClass));
+        }
+        // classData = servantData
+        //     .filter(servant => servant.sClass > 8);
+        //     //.sort((a, b) => a.sClass - b.sClass);
     } else {
         const classNumber = classNumbers.get(className);            
         classData = servantData
@@ -367,8 +377,8 @@ function displayClassServants(processedData, className) {
     const container = document.getElementById('servant-container');
     container.innerHTML = '';
     const classTitleMap = {
-        'EXTRA': 'EXTRA (Ruler, Alter-Ego, Avenger, Moon-Cancer, Foreigner, ' +
-        'Pretender, Beast)'
+        'EXTRAI': 'EXTRA I (Ruler, Avenger, Moon-Cancer)',
+        'EXTRAII': 'EXTRA II (Alter-Ego, Foreigner, Pretender, Beast)'
     };
     document.getElementById('classTitle').innerHTML = 
         `${classTitleMap[className] || className}<br>`;
