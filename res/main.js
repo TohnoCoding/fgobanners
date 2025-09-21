@@ -349,7 +349,8 @@ function fetchAllServantsInClass(className) {
             break;
         default:
             classData = servantData
-                .filter(servant => servant.sClass === classNumbers.get(className));
+                .filter(servant => 
+                    servant.sClass === classNumbers.get(className));
             break;
     }
     displayClassServants(classData, className);
