@@ -1,5 +1,8 @@
-// GLOBALS & INIT {
-// Global declarations {
+//#region GLOBALS & INIT 
+
+/***********************/
+/* GLOBAL DECLARATIONS */
+/***********************/
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(initialize);
 /**
@@ -26,10 +29,11 @@ const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
         ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ]);
-// }
 
 
-// Page initialization {
+/***********************/
+/* PAGE INITIALIZATION */
+/***********************/
 /**
  * Initializes all required elements by calling all necessary functions when 
  * the DOM is finished loading.
@@ -61,10 +65,11 @@ function initialize() {
             killPageWithErrorMessage(errorMessage);
     }
 }
-// }
 
 
-// Event listeners {
+/*******************/
+/* EVENT LISTENERS */
+/*******************/
 /**
  * Adds all event listeners to the DOM elements that require them.
  */
@@ -81,12 +86,14 @@ function addListeners() {
         document.getElementById('footer').classList.toggle('open');
     });
 }
-// }
-// }
+//#endregion
 
 
-// HELPERS {
-// Clean out the page {
+//#region HELPERS
+
+/****************/
+/* PAGE CLEANUP */
+/****************/
 /**
  * Shows an error message to the user when something goes wrong.
  * @param {string} errorContents The message to display in the page body.
@@ -111,10 +118,11 @@ function resetUIComponents() {
         elem.classList.remove("svtButtonSelected");
     });
 }
-// }
 
 
-// Get specific columns only from provided sheet in spreadsheet {
+/**********************************/
+/* SPECIFIC COLUMN DATA RETRIEVAL */
+/**********************************/
 /**
  * Filters the information from the provided dataTable object to return only
  * the information in the specified column indices.
@@ -139,12 +147,14 @@ function filterDataTable(dataTable, columnIndices) {
     }
     return filteredData;
 }
-// }
-// }
+//#endregion
 
 
-// DATA FETCH {
-// Fetch last NA Servant ID {
+//#region DATA FETCH
+
+/****************************/
+/* FETCH LAST NA SERVANT ID */
+/****************************/
 /**
  * Uses the Atlas Academy API to get the internal game ID of the latest Servant
  * released, in the global/EN server, in order to know when to construct NA/EN
@@ -176,9 +186,10 @@ async function fetchGlobalThreshold() {
             'display JP Atlas links!');
     }
 }
-// }
 
-// Fetches the last update timestamp {
+/*******************************************/
+/* FETCH LAST SPREADSHEET UPDATE TIMESTAMP */
+/*******************************************/
 /**
  * Gets the recorded timestamp at which the spreadsheet was last updated.
  */
@@ -193,10 +204,11 @@ function fetchLastUpdate() {
         });
     } catch { document.getElementById("lastupdate").innerHTML = "[Error]"; }
 }
-// }
 
 
-// Fetch full list of Servants {
+/****************************/
+/* FETCH FULL SERVANTS LIST */
+/****************************/
 /**
  * Fetches all the currently released Servants (including JP-only Servants)
  * from the Google spreadsheet, along with their corresponding categories
@@ -250,10 +262,10 @@ function fetchServantsAndCategories() {
         });
     });
 }
-// }
 
-
-// Get the full list of banners {
+/***************************/
+/* FETCH FULL BANNERS LIST */
+/***************************/
 /**
  * Fetches dates and link data for all banners from the Google spreadsheet.
  */
@@ -280,10 +292,11 @@ function fetchBannerDatesAndLinks() {
         });
     });
 }
-// }
 
 
-// Get the correlations between banners and Servants {
+/**********************************/
+/* CORRELATE BANNERS AND SERVANTS */
+/**********************************/
 /**
  * Gets the correlations between the fetched banners and the Servants in each.
  */
@@ -318,10 +331,11 @@ function fetchBannerCorrelations() {
         }
     });
 }
-// }
 
 
-// Load all Servants in the selected class {
+/***************************************/
+/* LOAD ALL SERVANTS IN SELECTED CLASS */
+/***************************************/
 /**
  * Fetches all the Servants in a given class.
  * @param {string} className - The name of the class. If 'EXTRAI' is provided,
@@ -355,12 +369,15 @@ function fetchAllServantsInClass(className) {
     }
     displayClassServants(classData, className);
 }
-// }
-// }
+//#endregion
 
 
-// DISPLAY FUNCTIONS {
-// Display all Servants from the selected class {
+
+//#region DISPLAY FUNCTIONS
+
+/********************************************/
+/* DISPLAY ALL SERVANTS FROM SELECTED CLASS */
+/********************************************/
 /**
  * Displays all the Servants in the selected class. If 'EXTRA' is selected,
  * displays all Extra-class Servants (Ruler, Alter-Ego, Avenger, Moon-Cancer,
@@ -402,10 +419,11 @@ function displayClassServants(processedData, className) {
     });
     document.getElementById('loader').style.visibility = 'hidden';
 }
-// }
 
 
-// Leave only a single selected Servant onscreen {
+/**************************/
+/* DISPLAY SINGLE SERVANT */
+/**************************/
 /**
  * Removes all Servants other than the selected one from the viewing area.
  */
@@ -447,10 +465,11 @@ function displaySingleServantByID(id) {
     if (document.getElementById('disclaimer').style.display != 'block')
     { displayBannersForServant(id); }
 }
-// }
 
 
-// Display the collated banners corresponding to a single Servant ID {
+/***************************************************************/
+/* DISPLAY COLLATED BANNERS CORRESPONDING TO SINGLE SERVANT ID */
+/***************************************************************/
 /**
  * Displays a table with the banners found in the Google spreadsheet for the
  * selected Servant.
@@ -549,5 +568,4 @@ function displayBannersForServant(servantID) {
     tbl.appendChild(tbody);
     bannersArea.appendChild(tbl);
 }
-// }
-// }
+//#endregion
