@@ -198,14 +198,14 @@
         }
 
         function summon(pool, roll, nat20 = false) {
-            if (!nat20) return weightedPickFromRoll(pool, roll).servant;
+            if (!nat20) return weightedPickFromRoll(pool, roll).value;
             if (!Array.isArray(pool)) {
                 console.error("Summon pool is not an array:", pool);
                 throw new Error("Invalid summon pool");
                 alert("Invalid summon pool. Check console for details.");
             }
-            return [weightedPickFromRoll(pool, roll[0]).servant,
-                weightedPickFromRoll(pool, roll[1]).servant];
+            return [weightedPickFromRoll(pool, roll[0]).value,
+                weightedPickFromRoll(pool, roll[1]).value];
         }
 
         /* ---------- Public API ---------- */
@@ -299,32 +299,15 @@
             console.log("Building pool for class " + players[n - 1].class + " and rarity " + players[n - 1].rarity);
             console.log("Summon pool: " + JSON.stringify(players[n - 1].summonPool));
         }
-        function summonServantForPlayer(n, roll) {
-            if (players[n].servant) {
-                alert("This player already summoned.");
-                return;
-            }
-            let servant = GrailWar.summon(players[n - 1].summonPool, roll, players[n - 1].jackpot);
-            let result = "";
-            if (Array.isArray(servant)) {
-                result = servant[0].name + " OR " + servant[1].name;
-                console.log("Player summoned jackpot: " + servant[0].name + " or " + servant[1].name);
-            } else {
-                result = servant.name;
-                console.log("Player summoned: " + servant.name);
-            }
-            document.getElementById('servant' + n + 'result').textContent = result;
-        }
         function summonServantForPlayer(n) {
             const player = players[n - 1];
-
             if (player.servant) {
                 alert("This player already summoned.");
                 return;
             }
-
             const roll = Number(document.getElementById('servant' + n).value);
-
+            console.log("--------------------------------------------------------------------");
+            console.log(roll);
             let servant;
             if (player.jackpot) {
                 // UI should collect two rolls, example:
@@ -333,7 +316,9 @@
             } else {
                 servant = GrailWar.summon(player.summonPool, roll, false);
             }
-
+            console.log("--------------------------------------------------------------------");
+            console.log(servant);
+            console.log("--------------------------------------------------------------------");
             if (Array.isArray(servant)) {
                 document.getElementById('servant' + n + 'result').textContent =
                     servant[0].name + " OR " + servant[1].name;
@@ -341,7 +326,6 @@
                 document.getElementById('servant' + n + 'result').textContent =
                     servant.name;
             }
-
             player.servant = servant;
         }
 
