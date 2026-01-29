@@ -15,7 +15,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/bdTYD2w.png"
             },
             {
@@ -26,7 +26,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/VDQCbs1.png"
             },
             {
@@ -37,7 +37,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/i7lN19t.png"
             },
             {
@@ -48,7 +48,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/z27AaK9.png"
             },
             {
@@ -59,7 +59,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/m0P6UXh.png"
             },
             {
@@ -70,7 +70,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/jbzFWs9.png"
             },
             {
@@ -81,7 +81,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/IZONsfN.png"
             },
             {
@@ -92,7 +92,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/o9U7kYZ.png"
             },
             {
@@ -103,7 +103,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/rN2vx2r.png"
             },
             {
@@ -114,7 +114,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/nI8grLm.png"
             },
             {
@@ -125,7 +125,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/t6G3tae.png"
             },
             {
@@ -136,7 +136,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/8qkG3wM.png"
             },
             {
@@ -147,7 +147,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/VeVjKaE.png"
             },
             {
@@ -158,7 +158,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/ShODTcZ.png"
             },
             {
@@ -169,7 +169,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/rz9yJH9.png"
             },
             {
@@ -180,7 +180,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/7v2pihQ.png"
             },
             {
@@ -191,7 +191,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/rdvdLXX.png"
             },
             {
@@ -202,7 +202,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/ZJSD2OV.png"
             },
             {
@@ -213,7 +213,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/xDT2YhG.png"
             },
             {
@@ -224,7 +224,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/kKavYXL.png"
             },
             {
@@ -235,7 +235,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/5KYVUOi.png"
             },
             {
@@ -246,7 +246,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/M4AOMP0.png"
             },
             {
@@ -257,7 +257,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/9svYzO5.png"
             },
             {
@@ -268,7 +268,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/xhfqHZc.png"
             },
             {
@@ -279,7 +279,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/GE0rz9Y.png"
             },
             {
@@ -290,7 +290,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/ToShCmI.png"
             },
             {
@@ -301,7 +301,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/BpD9TX5.png"
             },
             {
@@ -312,7 +312,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/DhUyHJ1.png"
             },
             {
@@ -323,7 +323,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/zp8U0ju.png"
             },
             {
@@ -334,7 +334,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/0XVgtO1.png"
             },
             {
@@ -345,7 +345,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/AydH6Cv.png"
             },
             {
@@ -356,7 +356,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/VEG1b4Y.png"
             },
             {
@@ -367,7 +367,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/Ok95AKi.png"
             },
             {
@@ -378,7 +378,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/nKk0OLq.png"
             },
             {
@@ -389,7 +389,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/R8tRpQT.png"
             },
             {
@@ -400,7 +400,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/5dAsqfx.png"
             },
             {
@@ -411,7 +411,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/4UKEZDj.png"
             },
             {
@@ -422,7 +422,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/dfa5LOV.png"
             },
             {
@@ -433,7 +433,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/e1misJz.png"
             },
             {
@@ -444,7 +444,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/7uAVKnk.png"
             },
             {
@@ -455,7 +455,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/IfUaKLN.png"
             },
             {
@@ -466,7 +466,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/aLCrb5i.png"
             },
             {
@@ -477,7 +477,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/1itUwoZ.png"
             },
             {
@@ -488,7 +488,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/tYKdx8X.png"
             },
             {
@@ -499,7 +499,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/hi1oBeP.png"
             },
             {
@@ -510,7 +510,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/lkIns4W.png"
             },
             {
@@ -521,7 +521,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/Kf4PehT.png"
             },
             {
@@ -532,7 +532,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/nEtYNSN.png"
             },
             {
@@ -543,7 +543,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/GjvESk5.png"
             },
             {
@@ -554,7 +554,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/nPEXEL1.png"
             },
             {
@@ -565,7 +565,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/V87yvoL.png"
             },
             {
@@ -576,7 +576,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/u8q3stJ.png"
             },
             {
@@ -587,7 +587,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/oQ1V588.png"
             },
             {
@@ -598,7 +598,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/EHZ86HQ.png"
             },
             {
@@ -609,7 +609,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/GkbmeDY.png"
             },
             {
@@ -620,7 +620,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/hhYWOTZ.png"
             },
             {
@@ -631,7 +631,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/axQkEyd.png"
             },
             {
@@ -642,7 +642,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/IQ1AgQM.png"
             },
             {
@@ -653,7 +653,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/lbzXP2O.png"
             },
             {
@@ -664,7 +664,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/GTV4UQ6.png"
             },
             {
@@ -675,7 +675,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/TbJOAK3.png"
             },
             {
@@ -686,7 +686,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/3QUtElu.png"
             },
             {
@@ -697,7 +697,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/qwGKsvo.png"
             },
             {
@@ -708,7 +708,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/21LBma1.png"
             },
             {
@@ -719,7 +719,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/9u2BT52.png"
             },
             {
@@ -730,7 +730,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/idcfGg9.png"
             },
             {
@@ -741,7 +741,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/gaoc3hK.png"
             },
             {
@@ -752,7 +752,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/Nj04aB1.png"
             },
             {
@@ -763,7 +763,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/49EcdkF.png"
             },
             {
@@ -774,7 +774,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/6pqLNNx.png"
             },
             {
@@ -785,7 +785,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/iUcbXSO.png"
             },
             {
@@ -796,7 +796,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/cAAdZHF.png"
             },
             {
@@ -807,7 +807,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/veNIm1P.png"
             },
             {
@@ -818,7 +818,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/PnhHqrW.png"
             },
             {
@@ -829,7 +829,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/uaE8WFR.png"
             },
             {
@@ -840,7 +840,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/Wujff9Y.png"
             },
             {
@@ -851,7 +851,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/fBWCcJh.png"
             },
             {
@@ -862,7 +862,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/HTFOVOe.png"
             },
             {
@@ -873,7 +873,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/6KAvals.png"
             },
             {
@@ -884,7 +884,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/zmW2wBT.png"
             },
             {
@@ -895,7 +895,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/0u1bVkJ.png"
             },
             {
@@ -906,7 +906,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/AaVrEvE.png"
             },
             {
@@ -917,7 +917,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/TnI8OTo.png"
             },
             {
@@ -928,7 +928,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/1b1DsD7.png"
             },
             {
@@ -939,7 +939,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/Th1W4Lo.png"
             },
             {
@@ -950,7 +950,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/Gk3cYv0.png"
             },
             {
@@ -961,7 +961,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/giAO0ab.png"
             },
             {
@@ -972,7 +972,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/STBS8DP.png"
             },
             {
@@ -983,7 +983,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/GMaVbRz.png"
             },
             {
@@ -994,7 +994,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/u8bajyx.png"
             },
             {
@@ -1005,7 +1005,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/DL75zxT.png"
             },
             {
@@ -1016,7 +1016,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/k9v634N.png"
             },
             {
@@ -1027,7 +1027,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/2htHbs9.png"
             },
             {
@@ -1038,7 +1038,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/Z4w9GOG.png"
             },
             {
@@ -1060,7 +1060,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/9uwxBAS.png"
             },
             {
@@ -1071,7 +1071,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/WMM1bCb.png"
             },
             {
@@ -1082,7 +1082,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/8ADA3N8.png"
             },
             {
@@ -1093,7 +1093,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/RWYZypm.png"
             },
             {
@@ -1104,7 +1104,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/f2V5sHh.png"
             },
             {
@@ -1115,7 +1115,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/JzZrJSS.png"
             },
             {
@@ -1126,7 +1126,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/WRSI3Oy.png"
             },
             {
@@ -1137,7 +1137,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/VXPYla8.png"
             },
             {
@@ -1148,7 +1148,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/CZdLmQa.png"
             },
             {
@@ -1159,7 +1159,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/zcp0oub.png"
             },
             {
@@ -1170,7 +1170,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/npPDiq5.png"
             },
             {
@@ -1181,7 +1181,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/kXLiQjP.png"
             },
             {
@@ -1192,7 +1192,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/WLFAuOw.png"
             },
             {
@@ -1203,7 +1203,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/OfAkmex.png"
             },
             {
@@ -1214,7 +1214,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/EdZ8Mbu.png"
             },
             {
@@ -1225,7 +1225,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/IgDFhAn.png"
             },
             {
@@ -1236,7 +1236,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/F0hmREg.png"
             },
             {
@@ -1247,7 +1247,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/Ogs77uz.png"
             },
             {
@@ -1258,7 +1258,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/yDNW98y.png"
             },
             {
@@ -1269,7 +1269,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/F0t0n1a.png"
             },
             {
@@ -1280,7 +1280,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/e3XLbRm.png"
             },
             {
@@ -1291,7 +1291,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/PVRgkGA.png"
             },
             {
@@ -1302,7 +1302,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/2wrvEZZ.png"
             },
             {
@@ -1313,7 +1313,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/WLAqgdO.png"
             },
             {
@@ -1324,7 +1324,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/jCEDQC7.png"
             },
             {
@@ -1335,7 +1335,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/uh2yR43.png"
             },
             {
@@ -1346,7 +1346,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/2Vqrpee.png"
             },
             {
@@ -1357,7 +1357,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/UembZLC.png"
             },
             {
@@ -1368,7 +1368,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/OUdrlFJ.png"
             },
             {
@@ -1379,7 +1379,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/j5QTlaD.png"
             },
             {
@@ -1390,7 +1390,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/EwcTeYn.png"
             },
             {
@@ -1401,7 +1401,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/K0u9wfo.png"
             },
             {
@@ -1412,7 +1412,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/jk0xQb8.png"
             },
             {
@@ -1423,7 +1423,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/CeWdiiy.png"
             },
             {
@@ -1434,7 +1434,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/4SG74o2.png"
             },
             {
@@ -1445,7 +1445,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/4DOo1ud.png"
             },
             {
@@ -1456,7 +1456,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/B5I0A46.png"
             },
             {
@@ -1467,7 +1467,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/JJUf5mL.png"
             },
             {
@@ -1478,7 +1478,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/n6Dy5K7.png"
             },
             {
@@ -1489,7 +1489,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/noIMgHT.png"
             },
             {
@@ -1500,7 +1500,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/4UpuHKx.png"
             },
             {
@@ -1511,7 +1511,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/lj22eqO.png"
             },
             {
@@ -1522,7 +1522,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/5mVfOoZ.png"
             },
             {
@@ -1533,7 +1533,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/uaatRw6.png"
             },
             {
@@ -1544,7 +1544,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/w5SfZaW.png"
             },
             {
@@ -1555,7 +1555,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/DXuIfVk.png"
             },
             {
@@ -1566,7 +1566,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/QdUC7cB.png"
             },
             {
@@ -1577,7 +1577,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/OEvpVf2.png"
             },
             {
@@ -1588,7 +1588,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/sSWI9ek.png"
             },
             {
@@ -1599,7 +1599,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/x0xKDOK.png"
             },
             {
@@ -1610,7 +1610,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/UB3VWgg.png"
             },
             {
@@ -1621,7 +1621,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/D1DaD7e.png"
             },
             {
@@ -1632,7 +1632,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/SjZtqMb.png"
             },
             {
@@ -1643,7 +1643,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/cPw7wmR.png"
             },
             {
@@ -1654,7 +1654,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/W1BrJPI.png"
             },
             {
@@ -1665,7 +1665,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/iegnu4j.png"
             },
             {
@@ -1676,7 +1676,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/G7lqvy6.png"
             },
             {
@@ -1687,7 +1687,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/ERGHVPO.png"
             },
             {
@@ -1698,7 +1698,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/SBmJLtB.png"
             },
             {
@@ -1709,7 +1709,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/khUhsGb.png"
             },
             {
@@ -1720,7 +1720,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/Y88ikbq.png"
             },
             {
@@ -1731,7 +1731,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/8GkK7CI.png"
             },
             {
@@ -1742,7 +1742,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/2hAZV2v.png"
             },
             {
@@ -1753,7 +1753,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/AAQNnPt.png"
             },
             {
@@ -1764,7 +1764,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/zpcaFjb.png"
             },
             {
@@ -1775,7 +1775,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/vKU3Huu.png"
             },
             {
@@ -1786,7 +1786,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/HwReCUG.png"
             },
             {
@@ -1797,7 +1797,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/b2GWUcq.png"
             },
             {
@@ -1808,7 +1808,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/ERmZDAe.png"
             },
             {
@@ -1819,7 +1819,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/6JmPBFk.png"
             },
             {
@@ -1830,7 +1830,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/JmOrqzt.png"
             },
             {
@@ -1841,7 +1841,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/G4qka79.png"
             },
             {
@@ -1852,7 +1852,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/Y7SLCjh.png"
             },
             {
@@ -1863,7 +1863,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/yNhxr4m.png"
             },
             {
@@ -1874,7 +1874,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/GivsytL.png"
             },
             {
@@ -1885,7 +1885,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/NSl2n6q.png"
             },
             {
@@ -1896,7 +1896,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/eKUWpip.png"
             },
             {
@@ -1907,7 +1907,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/tW74pzL.png"
             },
             {
@@ -1918,7 +1918,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/Any1FjL.png"
             },
             {
@@ -1929,7 +1929,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/LEqnOUd.png"
             },
             {
@@ -1940,7 +1940,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/eNtZ5NC.png"
             },
             {
@@ -1951,7 +1951,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/Fb3k4GY.png"
             },
             {
@@ -1962,7 +1962,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/aykwbSw.png"
             },
             {
@@ -1973,7 +1973,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/sWdQrJT.png"
             },
             {
@@ -1984,7 +1984,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/Usp77y6.png"
             },
             {
@@ -1995,7 +1995,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/bMQWMaQ.png"
             },
             {
@@ -2006,7 +2006,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/sviiOZ1.png"
             },
             {
@@ -2017,7 +2017,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/Fk54ld6.png"
             },
             {
@@ -2028,7 +2028,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/fYdhK2k.png"
             },
             {
@@ -2039,7 +2039,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/GIzaxyG.png"
             }
         ]
@@ -2060,7 +2060,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/pNYZgBz.png"
             },
             {
@@ -2071,7 +2071,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/owPXnSd.png"
             },
             {
@@ -2082,7 +2082,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/ycUdS92.png"
             },
             {
@@ -2093,7 +2093,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/jlcmIp5.png"
             },
             {
@@ -2104,7 +2104,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/bJFGMsX.png"
             },
             {
@@ -2115,7 +2115,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/oH2Lghq.png"
             },
             {
@@ -2126,7 +2126,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/KLcemvi.png"
             },
             {
@@ -2137,7 +2137,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/sa7PKip.png"
             },
             {
@@ -2148,7 +2148,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/rXkF34k.png"
             },
             {
@@ -2159,7 +2159,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/XMeuYPd.png"
             },
             {
@@ -2170,7 +2170,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/uaPdq4A.png"
             },
             {
@@ -2181,7 +2181,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/wX1H9ce.png"
             },
             {
@@ -2192,7 +2192,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/BWH6f8C.png"
             },
             {
@@ -2203,7 +2203,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/P9q9SPF.png"
             },
             {
@@ -2214,7 +2214,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/tA1fFBa.png"
             },
             {
@@ -2225,7 +2225,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/YVeutxw.png"
             },
             {
@@ -2236,7 +2236,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/X75pQ4A.png"
             },
             {
@@ -2247,7 +2247,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/x8VK5iK.png"
             },
             {
@@ -2258,7 +2258,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/mTerhYA.png"
             },
             {
@@ -2269,7 +2269,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/f5rRAmE.png"
             },
             {
@@ -2280,7 +2280,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/x8R9XYm.png"
             },
             {
@@ -2291,7 +2291,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/rJWJQoE.png"
             },
             {
@@ -2302,7 +2302,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/O9pAhC4.png"
             },
             {
@@ -2313,7 +2313,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/HlK6IQq.png"
             },
             {
@@ -2324,7 +2324,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/oRk1eoL.png"
             },
             {
@@ -2335,7 +2335,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/cADN3Jt.png"
             },
             {
@@ -2346,7 +2346,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/lf0ztRB.png"
             },
             {
@@ -2357,7 +2357,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/ko8wDhu.png"
             },
             {
@@ -2368,7 +2368,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/Hn6yrJm.png"
             },
             {
@@ -2379,7 +2379,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/7pjUy3s.png"
             },
             {
@@ -2390,7 +2390,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/93i37QE.png"
             },
             {
@@ -2401,7 +2401,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/JhhVx9f.png"
             },
             {
@@ -2412,7 +2412,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/5JQwcU4.png"
             },
             {
@@ -2423,7 +2423,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/POc8Lya.png"
             },
             {
@@ -2434,7 +2434,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/UfkJpPX.png"
             },
             {
@@ -2445,7 +2445,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/arSlB1n.png"
             },
             {
@@ -2456,7 +2456,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/X2SztKm.png"
             },
             {
@@ -2467,7 +2467,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/i4vX0yK.png"
             },
             {
@@ -2478,7 +2478,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/j6pPjfm.png"
             },
             {
@@ -2489,7 +2489,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/JBMiHGg.png"
             },
             {
@@ -2500,7 +2500,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/vC3Wv9d.png"
             },
             {
@@ -2511,7 +2511,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/xfScowO.png"
             },
             {
@@ -2522,7 +2522,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/FrYitjn.png"
             },
             {
@@ -2533,7 +2533,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/qQsMU0w.png"
             },
             {
@@ -2544,7 +2544,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/V2iZpW7.png"
             },
             {
@@ -2555,7 +2555,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/dVwx4iT.png"
             },
             {
@@ -2566,7 +2566,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/cYj5JZG.png"
             },
             {
@@ -2577,7 +2577,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/hex4iVa.png"
             },
             {
@@ -2588,7 +2588,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/1mXrBw5.png"
             },
             {
@@ -2599,7 +2599,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/YsVHRjC.png"
             },
             {
@@ -2610,7 +2610,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/LmdOc4L.png"
             },
             {
@@ -2621,7 +2621,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/VZfZJcJ.png"
             },
             {
@@ -2632,7 +2632,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/qBjrk4k.png"
             },
             {
@@ -2643,7 +2643,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/Z14fJdi.png"
             },
             {
@@ -2654,7 +2654,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/0Zfp3Ym.png"
             },
             {
@@ -2665,7 +2665,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/zur21da.png"
             },
             {
@@ -2676,7 +2676,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/k2FBAGi.png"
             },
             {
@@ -2687,7 +2687,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/RRv4XL5.png"
             },
             {
@@ -2698,7 +2698,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/KHoO7Sl.png"
             },
             {
@@ -2709,7 +2709,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/SPMGMF8.png"
             },
             {
@@ -2720,7 +2720,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/RJhCpz3.png"
             },
             {
@@ -2731,7 +2731,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/39wRmTP.png"
             },
             {
@@ -2742,7 +2742,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/CR1MZTJ.png"
             },
             {
@@ -2753,7 +2753,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/M8JssGy.png"
             },
             {
@@ -2764,7 +2764,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/oH614nX.png"
             },
             {
@@ -2775,7 +2775,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/OydihdE.png"
             },
             {
@@ -2786,7 +2786,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/I4TMbgM.png"
             },
             {
@@ -2797,7 +2797,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/MOyQHaX.png"
             },
             {
@@ -2808,7 +2808,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/pbwtVrc.png"
             },
             {
@@ -2819,7 +2819,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/ZcWKbOu.png"
             },
             {
@@ -2830,7 +2830,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/KSIIKiW.png"
             },
             {
@@ -2841,7 +2841,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/TohyCJ6.png"
             },
             {
@@ -2852,7 +2852,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/7pxfN2Q.png"
             },
             {
@@ -2863,7 +2863,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/ZrYD1ub.png"
             },
             {
@@ -2874,7 +2874,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/JGKBpOq.png"
             },
             {
@@ -2885,7 +2885,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/BfMlApS.png"
             },
             {
@@ -2896,7 +2896,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/FXchwcz.png"
             },
             {
@@ -2907,7 +2907,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/HYegZwx.png"
             },
             {
@@ -2918,7 +2918,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/FbAEinn.png"
             },
             {
@@ -2929,7 +2929,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/KXCpFXV.png"
             },
             {
@@ -2940,7 +2940,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/c7AX4an.png"
             },
             {
@@ -2951,7 +2951,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/r1ztH0F.png"
             },
             {
@@ -2962,7 +2962,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/gffxNZA.png"
             },
             {
@@ -2973,7 +2973,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/ZYxBrE9.png"
             },
             {
@@ -2984,7 +2984,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/HWN4xRV.png"
             },
             {
@@ -2995,7 +2995,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/HhrEKCf.png"
             },
             {
@@ -3006,7 +3006,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/WWyi70Q.png"
             },
             {
@@ -3017,7 +3017,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/MGB3fB9.png"
             },
             {
@@ -3028,7 +3028,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/qECPI0s.png"
             },
             {
@@ -3039,7 +3039,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/kexSlFh.png"
             },
             {
@@ -3050,7 +3050,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/RbSai5b.png"
             },
             {
@@ -3061,7 +3061,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/nA2YHAY.png"
             },
             {
@@ -3072,7 +3072,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/gxqYILw.png"
             },
             {
@@ -3083,7 +3083,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/UkpWtYo.png"
             },
             {
@@ -3094,7 +3094,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/VQrNQwe.png"
             },
             {
@@ -3105,7 +3105,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/AWwJB8j.png"
             },
             {
@@ -3116,7 +3116,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/1lMj1p5.png"
             },
             {
@@ -3127,7 +3127,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "gray",
                 "imgpath": "https://i.imgur.com/HGxUIN0.png"
             },
             {
@@ -3138,7 +3138,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/Y0OynEU.png"
             },
             {
@@ -3149,7 +3149,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/cMR7gNR.png"
             },
             {
@@ -3160,7 +3160,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/qeptThQ.png"
             },
             {
@@ -3171,7 +3171,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/DzXTQrn.png"
             },
             {
@@ -3182,7 +3182,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/M3DesaG.png"
             },
             {
@@ -3193,7 +3193,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/o0fNTHH.png"
             },
             {
@@ -3204,7 +3204,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/ha9fB6a.png"
             },
             {
@@ -3215,7 +3215,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/CzWEU7w.png"
             },
             {
@@ -3226,7 +3226,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/klbjNgV.png"
             },
             {
@@ -3237,7 +3237,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/PnYqRMR.png"
             },
             {
@@ -3248,7 +3248,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/AClFtK4.png"
             },
             {
@@ -3259,7 +3259,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/PWTdU9H.png"
             },
             {
@@ -3270,7 +3270,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/jbts1Lm.png"
             },
             {
@@ -3281,7 +3281,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/Pt4bGfD.png"
             },
             {
@@ -3292,7 +3292,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/stkGtHP.png"
             },
             {
@@ -3303,7 +3303,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/iFEeaSa.png"
             },
             {
@@ -3314,7 +3314,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/bHZcJi6.png"
             },
             {
@@ -3325,7 +3325,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/3G2LxLb.png"
             },
             {
@@ -3336,7 +3336,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/uvO1amY.png"
             },
             {
@@ -3347,7 +3347,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/Pf8lkp7.png"
             },
             {
@@ -3358,7 +3358,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/2xGPm4D.png"
             },
             {
@@ -3369,7 +3369,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/sKIKJYC.png"
             },
             {
@@ -3380,7 +3380,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/TmyLZQF.png"
             },
             {
@@ -3391,7 +3391,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/1LICEHv.png"
             },
             {
@@ -3402,7 +3402,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/qXcAIv6.png"
             },
             {
@@ -3413,7 +3413,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/43FbLDu.png"
             },
             {
@@ -3424,7 +3424,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "busted",
                 "imgpath": "https://i.imgur.com/osStLLM.png"
             },
             {
@@ -3435,7 +3435,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/bLLACUJ.png"
             },
             {
@@ -3446,7 +3446,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/c2qP00k.png"
             },
             {
@@ -3457,7 +3457,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/l9q7EX6.png"
             },
             {
@@ -3468,7 +3468,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/2j3AtdF.png"
             },
             {
@@ -3479,7 +3479,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/AvL1eVU.png"
             },
             {
@@ -3490,7 +3490,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/hahvExA.png"
             },
             {
@@ -3501,7 +3501,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/h2VOVIg.png"
             },
             {
@@ -3512,7 +3512,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/DQfYfFX.png"
             },
             {
@@ -3523,7 +3523,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/gpLrRC5.png"
             },
             {
@@ -3534,7 +3534,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/PBxja3r.png"
             },
             {
@@ -3545,7 +3545,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/SHQLj5l.png"
             },
             {
@@ -3556,7 +3556,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/r529xoI.png"
             },
             {
@@ -3567,7 +3567,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/IWY2LjM.png"
             },
             {
@@ -3578,7 +3578,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/RacZb9v.png"
             },
             {
@@ -3589,7 +3589,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/ibrygWd.png"
             },
             {
@@ -3600,7 +3600,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/7Rs3Rpq.png"
             },
             {
@@ -3611,7 +3611,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/ub2gQ6P.png"
             },
             {
@@ -3622,7 +3622,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/0LgW1uK.png"
             },
             {
@@ -3633,7 +3633,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/ZneeQmM.png"
             },
             {
@@ -3644,7 +3644,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/BtxWwUg.png"
             },
             {
@@ -3655,7 +3655,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/a2WhWDV.png"
             },
             {
@@ -3666,7 +3666,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/UyCIHL3.png"
             },
             {
@@ -3677,7 +3677,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/WTk3z6C.png"
             },
             {
@@ -3688,7 +3688,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/3Q2dHnB.png"
             },
             {
@@ -3699,7 +3699,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "low",
                 "imgpath": "https://i.imgur.com/ORCqLoo.png"
             },
             {
@@ -3710,7 +3710,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/9RMYzgZ.png"
             },
             {
@@ -3721,7 +3721,7 @@
                 "maxcopy": 5,
                 "stype": 0,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/shpOQ6c.png"
             },
             {
@@ -3732,7 +3732,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/DoZr4zO.png"
             },
             {
@@ -3743,7 +3743,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/gFaTFSV.png"
             },
             {
@@ -3754,7 +3754,7 @@
                 "maxcopy": 5,
                 "stype": 2,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/CSFUzUU.png"
             },
             {
@@ -3765,7 +3765,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/lP74dkz.png"
             },
             {
@@ -3776,7 +3776,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/tKsosQ5.png"
             },
             {
@@ -3787,7 +3787,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/IhICg6P.png"
             },
             {
@@ -3798,7 +3798,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/8JrB5dt.png"
             },
             {
@@ -3809,7 +3809,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/xp1Ykff.png"
             },
             {
@@ -3820,7 +3820,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "meh",
                 "imgpath": "https://i.imgur.com/BiXkXkh.png"
             },
             {
@@ -3831,7 +3831,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/TE9T44b.png"
             },
             {
@@ -3842,7 +3842,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "mid",
                 "imgpath": "https://i.imgur.com/og9v1St.png"
             },
             {
@@ -3853,7 +3853,7 @@
                 "maxcopy": 5,
                 "stype": 3,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/2PEPJft.png"
             },
             {
@@ -3864,7 +3864,7 @@
                 "maxcopy": 5,
                 "stype": 4,
                 "img": true, 
-                "tier": "",
+                "tier": "high",
                 "imgpath": "https://i.imgur.com/6Xmur3V.png"
             },
             {
