@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabletop Holy Grail War (debug system)</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #610000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            background: #000000;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: fit-content;
+            border: 3px solid #9c9c9c;
+        }
+
+        h1 {
+            text-align: center;
+            color: #F8A818;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        td, input {
+            text-align: center;
+            align-content: center;
+        }
+        td, th {
+            padding: 5px;
+        }
+
+        button {
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        /**************************************
+         * Grail War Setup Engine
+         * Logic-only, UI-agnostic
+         **************************************/
+
+        /* ---------- Utility ---------- */
+
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function weightedPickFromRoll(pool, roll) {
+            let totalWeight = pool.reduce((sum, e) => sum + e.weight, 0);
+            let target = scaleRoll(roll, totalWeight);
+            let cumulative = 0;
+            for (let entry of pool) {
+                cumulative += entry.weight;
+                if (target <= cumulative) {
+                    return entry;
+                }
+            }
+            // Fallback safety
+            return pool[pool.length - 1];
+        }
+        function scaleRoll(roll, totalWeight) {
+            return Math.ceil((roll / 100) * totalWeight);
+        }
+
+        /* ---------- Normalization ---------- */
+        /*
+        * Accepts ANY reasonable checklist structure and
+        * returns a flat array of servants usable by this app.
+        */
+        function normalizeServants(rawData) {
+            const flat = [];
+
+            function walk(node) {
+                if (Array.isArray(node)) {
+                    node.forEach(walk);
+                } else if (node && typeof node === "object") {
+                    if (node.name && node.class && node.id) {
+                        const rarity = Number(node.id.split("-")[0]);
+                        flat.push({
+                            name: node.name,
+                            class: node.class,
+                            rarity,
+                            stype: node.stype,
+                            tier: node.tier || "mid"
+                        });
+                    } else {
+                        Object.values(node).forEach(walk);
+                    }
+                }
+            }
+
+            walk(rawData);
+            return flat;
+        }
+
+        /* ---------- Class Rolling ---------- */
+
+        let classPool = [];
+
+        function resetClassPool() {
+            classPool = [
+                { value: "saber", weight: 1 },
+                { value: "berserker", weight: 1 },
+                { value: "caster", weight: 1 },
+                { value: "archer", weight: 2 },
+                { value: "lancer", weight: 2 },
+                { value: "rider", weight: 2 },
+                { value: "assassin", weight: 3 }
+            ];
+            console.log("Class pool reinitialized.");
+        }
+        function resolveClass(roll) {
+            const chosen = weightedPickFromRoll(classPool, roll);
+            classPool = classPool.filter(c => c.value !== chosen.value);
+            return chosen.value;
+        }
+
+        /* ---------- Extra Class Mutation ---------- */
+
+        const extraClassPool = [
+            { value: "avenger", weight: 3 },
+            { value: "ruler", weight: 2 },
+            { value: "alterego", weight: 2 },
+            { value: "foreigner", weight: 1 },
+            { value: "pretender", weight: 1 },
+            { value: "mooncancer", weight: 1 }
+        ];
+
+        function resolveExtraMutation(triggerRoll, extraRoll) {
+            if (triggerRoll >= 99) {
+                const chosen = weightedPickFromRoll(extraClassPool, extraRoll);
+                return chosen.value;
+        }
+            return null;
+        }
+
+        /* ---------- Rarity ---------- */
+
+        function resolveRarity(roll) {
+            if (roll === 1) return { angra: true };
+            if (roll === 20) return { nat20: true };
+
+            if (roll >= 17) return { rarity: 5 };
+            if (roll >= 13) return { rarity: 4 };
+            if (roll >= 9)  return { rarity: 3 };
+            if (roll >= 5)  return { rarity: 2 };
+            return { rarity: 1 };
+        }
+
+        /* ---------- Weight Calculation ---------- */
+
+        const availabilityBase = {
+            0: 5, // permanent
+            2: 2, // story-locked
+            3: 3, // limited
+            4: 7  // welfare
+        };
+
+        const tierModifier = {
+            low: 1,
+            meh: 0,
+            mid: -1,
+            high: -2,
+            busted: -3
+        };
+
+        function servantWeight(servant) {
+            const base = availabilityBase[servant.stype] ?? 1;
+            const mod = tierModifier[servant.tier] ?? 0;
+            return Math.max(1, Math.min(8, base + mod));
+        }
+
+        /* ---------- Summoning ---------- */
+
+        function buildSummonPool(servants, className, rarity) {
+            return servants
+                .filter(s => s.class === className && s.rarity === rarity)
+                .map(s => ({
+                    value: s,
+                    weight: servantWeight(s)
+                }));
+        }
+
+        function summon(pool, roll, nat20 = false) {
+            if (!nat20) return weightedPickFromRoll(pool, roll).servant;
+            if (!Array.isArray(pool)) {
+                console.error("Summon pool is not an array:", pool);
+                throw new Error("Invalid summon pool");
+                alert("Invalid summon pool. Check console for details.");
+            }
+            return [weightedPickFromRoll(pool, roll[0]).servant,
+                weightedPickFromRoll(pool, roll[1]).servant];
+        }
+
+        /* ---------- Public API ---------- */
+
+        const GrailWar = {
+            loadServants: async (url) => {
+                const raw = await fetch(url).then(r => r.json());
+                return normalizeServants(raw);
+            },
+            resetClassPool,
+            resolveClass,
+            resolveExtraMutation,
+            resolveRarity,
+            buildSummonPool,
+            summon
+        };
+
+        let servants = [];
+        
+        window.addEventListener("DOMContentLoaded", async () => {
+            try {
+                servants = await GrailWar.loadServants("servants.json");
+                console.log("Servants loaded:", servants.length);
+                GrailWar.resetClassPool();
+            } catch (err) {
+                console.error("Failed to load servants:", err);
+            }
+            for (let i = 0; i < 7; i++) {
+                players[i] = {
+                    name: null,
+                    class: null,
+                    rarity: null,
+                    jackpot: false,
+                    summonPool: []
+                };
+            }
+        });
+
+        /*
+        * Usage example (later, from UI):
+        *
+        * const servants = await GrailWar.loadServants("servants.json");
+        * GrailWar.resetClassPool();
+        * const cls = GrailWar.resolveClass();
+        * const mutation = GrailWar.resolveExtraMutation();
+        * const rarityResult = GrailWar.resolveRarity();
+        * ...
+        */
+        let players = [null, null, null, null, null, null, null];
+        function resolveClassForPlayer(n) {
+            const roll = Number(document.getElementById('class' + n).value);
+            const className = GrailWar.resolveClass(roll);
+            document.getElementById('class' + n + 'result').textContent = className.toUpperCase();
+            players[n - 1].class = className;
+            console.log("Player class:", className);
+        }
+        function resolveClassMutationForPlayer(n) {
+            var triggerRoll = document.getElementById('mutation' + n).value;
+            var extraRoll = document.getElementById('mutationroll' + n).value;
+            var result = GrailWar.resolveExtraMutation(triggerRoll, extraRoll);
+            if (result) {
+                document.getElementById('mutation' + n + 'result').textContent = result.toUpperCase();
+                players[n - 1].class = result;
+            } else {
+                document.getElementById('mutation' + n + 'result').textContent = "None";
+            }
+            console.log("Class mutation check: " + result);
+        }
+        function resolveRarityForPlayer(n) {
+            var roll = document.getElementById('rarity' + n).value;
+            var result = GrailWar.resolveRarity(roll);
+            if (result.angra) {
+                document.getElementById('rarity' + n + 'result').textContent = "Angra Mainyuu";
+                players[n - 1].servant = "Angra Mainyuu";
+                players[n - 1].rarity = 0;
+                players[n - 1].class = "Avenger";
+            } else if (result.nat20) {
+                document.getElementById('rarity' + n + 'result').textContent = "5★ x2";
+                players[n - 1].rarity = 5;
+                players[n - 1].jackpot = true;
+            } else {
+                document.getElementById('rarity' + n + 'result').textContent = result.rarity + "★";
+                players[n - 1].rarity = result.rarity;
+            }
+            players[n - 1].summonPool = GrailWar.buildSummonPool(
+                servants,
+                players[n - 1].class,
+                players[n - 1].rarity
+            );
+            console.log("Rarity roll: " + JSON.stringify(result));
+            console.log("Building pool for class " + players[n - 1].class + " and rarity " + players[n - 1].rarity);
+            console.log("Summon pool: " + JSON.stringify(players[n - 1].summonPool));
+        }
+        function summonServantForPlayer(n, roll) {
+            if (players[n].servant) {
+                alert("This player already summoned.");
+                return;
+            }
+            let servant = GrailWar.summon(players[n - 1].summonPool, roll, players[n - 1].jackpot);
+            let result = "";
+            if (Array.isArray(servant)) {
+                result = servant[0].name + " OR " + servant[1].name;
+                console.log("Player summoned jackpot: " + servant[0].name + " or " + servant[1].name);
+            } else {
+                result = servant.name;
+                console.log("Player summoned: " + servant.name);
+            }
+            document.getElementById('servant' + n + 'result').textContent = result;
+        }
+        function summonServantForPlayer(n) {
+            const player = players[n - 1];
+
+            if (player.servant) {
+                alert("This player already summoned.");
+                return;
+            }
+
+            const roll = Number(document.getElementById('servant' + n).value);
+
+            let servant;
+            if (player.jackpot) {
+                // UI should collect two rolls, example:
+                const roll2 = Number(document.getElementById('servant' + n + 'extra').value);
+                servant = GrailWar.summon(player.summonPool, [roll, roll2], true);
+            } else {
+                servant = GrailWar.summon(player.summonPool, roll, false);
+            }
+
+            if (Array.isArray(servant)) {
+                document.getElementById('servant' + n + 'result').textContent =
+                    servant[0].name + " OR " + servant[1].name;
+            } else {
+                document.getElementById('servant' + n + 'result').textContent =
+                    servant.name;
+            }
+
+            player.servant = servant;
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>The Holy Grail War<br>Tabletop Summoning Simulator<br>
+        (based on FGO's available roster)</h1>
+
+        <button onclick="GrailWar.resetClassPool(); alert('Class pool reset!')">Reinitialize class pool</button>
+        <br><br>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr>
+                <th>Player name</th>
+                <th>Class roll (d20)</th>
+                <th>Class mutation (d100, d10)</th>
+                <th>Rarity (d20)</th>
+                <th>Summoned Servant (d100)</th>
+            </tr>
+            <tr>
+                <td>Master 1:<br><input type="number" id="player1" /></td>
+                <td>
+                    <input type="number" min="1" max="12" size="2" id="class1" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(1)">Roll class</button>
+                    <br><span id="class1result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" id="mutation1" size="2" />
+                    <input type="number" min="1" max="10" id="mutationroll1" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(1)">Check class mutation</button>
+                    <br><span id="mutation1result">[Mutation]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="rarity1" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(1)">Roll rarity</button>
+                    <br><span id="rarity1result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" size="2" id="servant1" />
+                    <input type="number" min="1" max="100" size="2" id="servant1extra" /><br>
+                    <button onclick="summonServantForPlayer(1)">Roll Servant</button>
+                    <br><span id="servant1result">[Servant]</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Master 2: <br><input type="number" id="player2" /></td>
+                <td>
+                    <input type="number" min="1" max="12" size="2" id="class2" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(2)">Roll class</button>
+                    <br><span id="class2result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20"  size="2" id="mutation2" />
+                    <input type="number" min="1" max="10" id="mutationroll2" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(2)">Check class mutation</button>
+                    <br><span id="mutation2result">[Mutation]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20"  size="2" id="rarity2" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(2)">Roll rarity</button>
+                    <br><span id="rarity2result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100"  size="2" id="servant2" />
+                    <input type="number" min="1" max="100" size="2" id="servant2extra" /><br>
+                    <button onclick="summonServantForPlayer(2)">Roll Servant</button>
+                    <br><span id="servant2result">[Servant]</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Master 3: <br><input type="number" id="player3" /></td>
+                <td>
+                    <input type="number" min="1" max="12"  size="2" id="class3" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(3)">Roll class</button>
+                    <br><span id="class3result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="mutation3" />
+                    <input type="number" min="1" max="10" id="mutationroll3" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(3)">Check class mutation</button>
+                    <br><span id="mutation3result">[Mutation]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="rarity3" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(3)">Roll rarity</button>
+                    <br><span id="rarity3result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" size="2" id="servant3" />
+                    <input type="number" min="1" max="100" size="2" id="servant3extra" /><br>
+                    <button onclick="summonServantForPlayer(3)">Roll Servant</button>
+                    <br><span id="servant3result">[Servant]</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Master 4: <br><input type="number" id="player4" /></td>
+                <td>
+                    <input type="number" min="1" max="12"  size="2" id="class4" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(4)">Roll class</button>
+                    <br><span id="class4result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="mutation4" />
+                    <input type="number" min="1" max="10" id="mutationroll4" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(4)">Check class mutation</button>
+                    <br><span id="mutation4result">[Mutation]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="rarity4" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(4)">Roll rarity</button>
+                    <br><span id="rarity4result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" size="2" id="servant4" />
+                    <input type="number" min="1" max="100" size="2" id="servant4extra" /><br>
+                    <button onclick="summonServantForPlayer(4)">Roll Servant</button>
+                    <br><span id="servant4result">[Servant]</span>
+                </td>
+            </tr>
+            <tr>    
+                <td>Master 5: <br><input type="number" id="player5" /></td>
+                <td>
+                    <input type="number" min="1" max="12" size="2" id="class5" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(5)">Roll class</button>
+                    <br><span id="class5result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="mutation5" />
+                    <input type="number" min="1" max="10" id="mutationroll5" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(5)">Check class mutation</button>
+                    <br><span id="mutation5result">[Mutation]</span>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="rarity5" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(5)">Roll rarity</button>
+                    <br><span id="rarity5result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" size="2" id="servant5" />
+                    <input type="number" min="1" max="100" size="2" id="servant5extra" /><br>
+                    <button onclick="summonServantForPlayer(5)">Roll Servant</button>
+                    <br><span id="servant5result">[Servant]</span>
+                </td>
+            </tr>
+            <tr>    
+                <td>Master 6: <br><input type="number" id="player6" /></td>
+                <td>
+                    <input type="number" min="1" max="12" size="2" id="class6" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(6)">Roll class</button>
+                    <br><span id="class6result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="mutation6" />
+                    <input type="number" min="1" max="10" id="mutationroll6" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(6)">Check class mutation</button>
+                    <br><span id="mutation6result">[Mutation]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="rarity6" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(6)">Roll rarity</button>
+                    <br><span id="rarity6result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" size="2" id="servant6" />
+                    <input type="number" min="1" max="100" size="2" id="servant6extra" /><br>
+                    <button onclick="summonServantForPlayer(6)">Roll Servant</button>
+                    <br><span id="servant6result">[Servant]</span>
+                </td>
+            </tr>
+            <tr>    
+                <td>Master 7: <br><input type="number" id="player7" /></td>
+                <td>
+                    <input type="number" min="1" max="12" size="2" id="class7" /><br>
+                    <button onclick="javascript:resolveClassForPlayer(7)">Roll class</button>
+                    <br><span id="class7result">[Class]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="mutation7" />
+                    <input type="number" min="1" max="10" id="mutationroll7" size="2" /><br>
+                    <button onclick="javascript:resolveClassMutationForPlayer(7)">Check class mutation</button>
+                    <br><span id="mutation7result">[Mutation]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="20" size="2" id="rarity7" /><br>
+                    <button onclick="javascript:resolveRarityForPlayer(7)">Roll rarity</button>
+                    <br><span id="rarity7result">[Rarity]</span>
+                </td>
+                <td>
+                    <input type="number" min="1" max="100" size="2" id="servant7" />
+                    <input type="number" min="1" max="100" size="2" id="servant7extra" /><br>
+                    <button onclick="summonServantForPlayer(7)">Roll Servant</button>
+                    <br><span id="servant7result">[Servant]</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
