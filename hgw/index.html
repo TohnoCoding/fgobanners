@@ -51,6 +51,7 @@
         }
     </style>
     <script type="text/javascript">
+        console.log("HGW inline build loaded @", new Date().toISOString());
         /**************************************
          * Grail War Setup Engine
          * Logic-only, UI-agnostic
@@ -153,6 +154,7 @@
         /* ---------- Rarity ---------- */
 
         function resolveRarity(roll) {
+            console.log("resolveRarity roll:", roll, typeof roll);
             if (roll === 1) return { angra: true };
             if (roll === 20) return { nat20: true };
 
@@ -247,7 +249,7 @@
         };
 
         let servants = [];
-        
+
         window.addEventListener("DOMContentLoaded", async () => {
             try {
                 servants = await GrailWar.loadServants("servants.json");
@@ -266,7 +268,7 @@
                 };
             }
         });
-        
+
         // document.getElementById("grailForm").addEventListener("reset", () => {
         //     resetGrailWar();
         // });
@@ -303,29 +305,47 @@
             console.log("Class mutation check: " + result);
         }
         function resolveRarityForPlayer(n) {
-            var roll = document.getElementById('rarity' + n).value;
+            players[n - 1].jackpot = false;
+            var roll = parseInt(document.getElementById('rarity' + n).value, 10);
             var result = GrailWar.resolveRarity(roll);
+            console.log(result);
             if (result.angra) {
-                document.getElementById('rarity' + n + 'result').textContent = "Angra Mainyuu";
+                document.getElementById('class' + n + 'result').textContent = "OVERRIDDEN";
+                document.getElementById('rarity' + n + 'result').textContent = "1★ OVERRIDE";
+                document.getElementById('servant' + n + 'result').textContent = "Angra Mainyuu";
                 players[n - 1].servant = "Angra Mainyuu";
                 players[n - 1].rarity = 0;
                 players[n - 1].class = "Avenger";
+                console.log("Player triggered Angra");
             } else if (result.nat20) {
                 document.getElementById('rarity' + n + 'result').textContent = "5★ x2";
                 players[n - 1].rarity = 5;
                 players[n - 1].jackpot = true;
+                console.log("Player triggered jackpot");
+                console.log(players[n - 1].jackpot);
             } else {
                 document.getElementById('rarity' + n + 'result').textContent = result.rarity + "★";
                 players[n - 1].rarity = result.rarity;
             }
-            players[n - 1].summonPool = GrailWar.buildSummonPool(
-                servants,
-                players[n - 1].class,
-                players[n - 1].rarity
-            );
+            let fallbackRarity = -1;
+            let pool = [];
+            do
+            {
+                fallbackRarity++;
+                pool = GrailWar.buildSummonPool(
+                    servants,
+                    players[n - 1].class,
+                    players[n - 1].rarity + fallbackRarity
+                );
+
+            } while (pool.length === 0 && players[n - 1].rarity + fallbackRarity <= 5);
+            players[n - 1].summonPool = pool;
+            if (players[n - 1].summonPool.length === 0 && players[n - 1].rarity === 0) {
+                console.log("Angra has been triggered");
+            }
             console.log("Rarity roll: " + JSON.stringify(result));
             console.log("Building pool for class " + players[n - 1].class + " and rarity " + players[n - 1].rarity);
-            console.log("Summon pool: " + JSON.stringify(players[n - 1].summonPool));
+            console.log("Summon pool length: " + players[n - 1].summonPool.length);
         }
         function summonServantForPlayer(n) {
             const player = players[n - 1];
