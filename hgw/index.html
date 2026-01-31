@@ -62,9 +62,9 @@
         function randInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-        function weightedPickFromRoll(pool, roll) {
+        function weightedPickFromRoll(pool, roll, maxRoll) {
             let totalWeight = pool.reduce((sum, e) => sum + e.weight, 0);
-            let target = scaleRoll(roll, totalWeight);
+            let target = scaleRoll(roll, totalWeight, maxRoll);
             let cumulative = 0;
             for (let entry of pool) {
                 cumulative += entry.weight;
@@ -75,8 +75,8 @@
             // Fallback safety
             return pool[pool.length - 1];
         }
-        function scaleRoll(roll, totalWeight) {
-            return Math.ceil((roll / 100) * totalWeight);
+        function scaleRoll(roll, totalWeight, maxRoll) {
+            return Math.ceil((roll / maxRoll) * totalWeight);
         }
 
         /* ---------- Normalization ---------- */
@@ -127,7 +127,7 @@
             console.log("Class pool reinitialized.");
         }
         function resolveClass(roll) {
-            const chosen = weightedPickFromRoll(classPool, roll);
+            const chosen = weightedPickFromRoll(classPool, roll, 12);
             classPool = classPool.filter(c => c.value !== chosen.value);
             return chosen.value;
         }
@@ -145,7 +145,7 @@
 
         function resolveExtraMutation(triggerRoll, extraRoll) {
             if (triggerRoll >= 99) {
-                const chosen = weightedPickFromRoll(extraClassPool, extraRoll);
+                const chosen = weightedPickFromRoll(extraClassPool, extraRoll, 10);
                 return chosen.value;
         }
             return null;
@@ -200,14 +200,14 @@
         }
 
         function summon(pool, roll, nat20 = false) {
-            if (!nat20) return weightedPickFromRoll(pool, roll).value;
+            if (!nat20) return weightedPickFromRoll(pool, roll, 100).value;
             if (!Array.isArray(pool)) {
                 console.error("Summon pool is not an array:", pool);
                 throw new Error("Invalid summon pool");
                 alert("Invalid summon pool. Check console for details.");
             }
-            return [weightedPickFromRoll(pool, roll[0]).value,
-                weightedPickFromRoll(pool, roll[1]).value];
+            return [weightedPickFromRoll(pool, roll[0], 100).value,
+                weightedPickFromRoll(pool, roll[1], 100).value];
         }
 
         function resetGrailWar() {
