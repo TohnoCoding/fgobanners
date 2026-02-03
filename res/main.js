@@ -28,7 +28,8 @@ const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
 const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
         ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
         ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
-        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33] ]);
+        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33],
+        ["Un-Beast", 40] ]);
 
 
 /***********************/
@@ -358,7 +359,8 @@ function fetchAllServantsInClass(className) {
             classData = servantData
             .filter(servant => 
                 [classNumbers.get('Alter-Ego'), classNumbers.get('Foreigner'),
-                    classNumbers.get('Pretender'), classNumbers.get('Beast')]
+                    classNumbers.get('Pretender'), classNumbers.get('Beast'),
+                    classNumbers.get('Un-Beast')]
                 .includes(servant.sClass));
             break;
         default:
