@@ -241,7 +241,7 @@ function fetchServantsAndCategories() {
                     statusResponse.getDataTable(),
                     [0, 1]      // Servant ID, category (perma, limited, etc.)
                 ).filter(row => row[1] === 'FP' || row[1] === 'Welfare')
-                .map(row => row[0]), 83, 152]);     // includes Solomon IDs
+                .map(row => row[0]), 83, 152, 459]);   // includes Solomon IDs
             const filteredSvtData = 
                 servantData.slice(1).filter(row => !unwantedIds.has(row.id));
             const imgPromises = filteredSvtData.map(s => {
