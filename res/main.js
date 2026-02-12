@@ -25,11 +25,30 @@ Object.defineProperty(window, 'globalThreshold',
 const spreadsheetLink = 'https://docs.google.com/spreadsheets/d/' +
     '1rKtRX3WK9ZpbEHhDTy7yGSxYWIav1Hr_KhNM0jWN2wc/gviz/tq';
 const atlasLink = 'https://apps.atlasacademy.io/db/REGION/servant/';
-const classNumbers = new Map([ ["Saber", 1], ["Archer", 2], ["Lancer", 3],
-        ["Rider", 4], ["Caster", 5], ["Assassin", 6], ["Berserker", 7],
-        ["Ruler", 9], ["Alter-Ego", 10], ["Avenger", 11], ["Moon-Cancer", 23],
-        ["Foreigner", 25], ["Pretender", 28], ["Beast", 33],
-        ["Un-Beast", 40] ]);
+
+/**
+ * Maps servant class names to their game IDs.
+ * IMPORTANT: When new classes are added to the game, they must be added here
+ * with their corresponding ID from the Atlas Academy API. This map is referenced
+ * in event listeners and class filtering logic throughout the application.
+ */
+const classNumbers = new Map([
+    ["Saber", 1],
+    ["Archer", 2],
+    ["Lancer", 3],
+    ["Rider", 4],
+    ["Caster", 5],
+    ["Assassin", 6],
+    ["Berserker", 7],
+    ["Ruler", 9],
+    ["Alter-Ego", 10],
+    ["Avenger", 11],
+    ["Moon-Cancer", 23],
+    ["Foreigner", 25],
+    ["Pretender", 28],
+    ["Beast", 33],
+    ["Un-Beast", 40]
+]);
 
 
 /***********************/
