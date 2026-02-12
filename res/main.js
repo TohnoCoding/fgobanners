@@ -393,7 +393,6 @@ function fetchAllServantsInClass(className) {
 //#endregion
 
 
-
 //#region DISPLAY FUNCTIONS
 
 /********************************************/
